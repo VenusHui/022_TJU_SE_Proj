@@ -90,3 +90,7 @@
 - 文档使用Markdown编辑
 - 使用Git/Github作为版本管理工具，Youtrack作为团队协作工具
 - 需求分析阶段应绘制分析类图，设计类图可通过IntelliJ idea在编码时生成
+
+
+
+![image-20221126170238079](assets/image-20221126170238079.png)
