@@ -1,3 +1,4 @@
+<!-- 开屏页面 -->
 <template>
     <div class="flexbox">
         <div class="top">
@@ -5,9 +6,9 @@
         </div>
         <div class="bottom">
             <div style="padding-bottom:5%">
-                <nut-button size="large" type="primary" >创建账户</nut-button>
+                <nut-button size="large" type="primary" @click="JumpRegister">创建账户</nut-button>
             </div>
-            <nut-button size="large" type="primary" plain>登录</nut-button>
+            <nut-button size="large" type="primary" plain @click="JumpLogin">登录</nut-button>
         </div>
 
     </div>
@@ -21,7 +22,12 @@ export default {
 
     },
     methods: {
-
+        JumpRegister(){
+            this.$router.push('/register')
+        },
+        JumpLogin(){
+            this.$router.push('/login')
+        }
     }
 }
 </script>
