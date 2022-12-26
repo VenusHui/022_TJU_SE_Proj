@@ -11,16 +11,26 @@ const routes = [
     component: () => import('./views/HomeView.vue')
   },
   {
-    path:'/register',
-    component: () => import('./views/Register.vue')
-  },
-  {
-    path:'/login',
+    path: '/login',
     component: () => import('./views/Login.vue')
   },
   {
     path: '/show',
     component: () => import('./views/ShowView.vue')
+  },
+  {
+    path: '/tabbarViews',
+    component: () => import('./views/Tabbar.vue'),
+    redirect:'/main',
+    children: [
+      { path: '/main', component: () => import('./views/MainView.vue') },
+      { path: '/more', component: () => import('./views/IndexView.vue') },
+      { path: '/liked', component: () => import('./views/LikedView.vue') }
+    ],
+  },
+  {
+    path: '/menu',
+    component: () => import('./views/MenuView.vue')
   }
 ]
 

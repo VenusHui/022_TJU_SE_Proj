@@ -5,12 +5,11 @@
             <h1 style="font-size:60px;color:white;">Fander</h1>
         </div>
         <div class="bottom">
-            <div style="padding-bottom:5%">
-                <nut-button size="large" type="primary" @click="JumpRegister">创建账户</nut-button>
-            </div>
-            <nut-button size="large" type="primary" plain @click="JumpLogin">登录</nut-button>
+            <!-- <div class="tip">
+                <p>click to LOG IN!!</p>
+            </div> -->
+            <nut-button class="loginbutton" size="large" type="primary" plain @click="JumpLogin">CLick here to Log in!</nut-button>
         </div>
-
     </div>
 </template>
 
@@ -22,12 +21,9 @@ export default {
 
     },
     methods: {
-        JumpRegister(){
-            this.$router.push('/register')
-        },
         JumpLogin(){
             this.$router.push('/login')
-        }
+        },
     }
 }
 </script>
@@ -57,5 +53,16 @@ export default {
     justify-content: center;
     align-self: flex-start;
     padding-top: 30%;
+}
+.tip{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center ;
+}
+.loginbutton{
+    background-color:#e23c12;
+    color: white;
 }
 </style>
