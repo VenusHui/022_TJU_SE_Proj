@@ -2,10 +2,10 @@
   <div class="framebox">
     <div class="topbox">
       <div class="logotitle logocolor">
-        <b>Fander</b>
+        <b>Menu</b>
       </div>
       <nut-button class="searchbutton" size="normal" icon="search" plain type="default"
-        @click="JumpSearch">搜索</nut-button>
+        @click="JumpSearch">search</nut-button>
     </div>
 
     <div class="bodybox">

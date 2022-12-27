@@ -15,9 +15,29 @@
       </template>
     </nut-navbar>
     <div class="dishsuggest">
-      <div class="maskbox">
-        <div class="buttonbox">
-          <nut-icon name="heart" color="white"></nut-icon>
+      <div class="dishUIbox">
+        <div class="dishinfobox">
+          <div class="dishinfotextbox">
+            <div class="dishname">意面</div>
+            <div class="dishsubinfobox">
+              <div class="dishplace" style="margin-right:20px">小食堂二楼</div>
+              <div class="dishprice">￥20</div>
+            </div>
+            <div class="dishscorebox">
+              <nut-icon name="star" color="yellow"></nut-icon>
+              <nut-icon name="star" color="yellow"></nut-icon>
+              <nut-icon name="star" color="yellow"></nut-icon>
+              <nut-icon name="star" color="yellow"></nut-icon>
+              <nut-icon name="star" color="yellow"></nut-icon>
+              <div class="dishscore" style="margin-left:10px">4.5</div>
+            </div>
+          </div>
+          <div class="dishdetail" @click="JumpDetail">
+            <nut-icon name="right" color="white" size="30px"></nut-icon>
+          </div>
+        </div>
+        <div class="dishchoicebox">
+          <nut-icon name="heart" color="white" size="30px"></nut-icon>
           <nut-icon name="heart" color="white"></nut-icon>
           <nut-icon name="heart" color="white"></nut-icon>
         </div>
@@ -27,6 +47,18 @@
 </template>
 
 <script>
+export default {
+  data() {
+    // dish: {
+    //   name: '意面'
+    // }
+  },
+  methods: {
+    JumpDetail(){
+      this.$router.push('/detail')
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -43,8 +75,8 @@
 
 .dishsuggest {
   align-self: center;
-  height: 75%;
-  width: 95%;
+  height: 78%;
+  width: 98%;
   background-image: url("../assets/dish2.jpg");
   background-size: auto 100%;
   background-position: center center;
@@ -52,16 +84,54 @@
   align-items: flex-end;
 }
 
-.maskbox {
-  height: 30%;
+.dishUIbox {
+  height: 40%;
   width: 100%;
   background: linear-gradient(360deg, rgba(36, 31, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
   display: flex;
-  align-items: flex-end;
-  /* justify-content: center; */
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  padding: 10px;
 }
 
-.buttonbox{
+.dishinfobox {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  justify-content: space-between;
+}
 
+.dishinfotextbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.dishname {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.dishsubinfobox {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.dishscorebox {
+  display: flex;
+  flex-direction: row;
+}
+
+.dishdetail {
+  align-self: center;
+}
+
+.dishchoicebox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+  width: 100%;
 }
 </style>
