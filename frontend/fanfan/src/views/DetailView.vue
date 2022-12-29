@@ -1,5 +1,10 @@
 <template>
     <div class="detailframebox">
+        <div class="detailtopbox">
+            <div class="detailback" style="margin-right: 20px;"><nut-icon name="left"
+                    size="15px"></nut-icon></div>
+            <div class="detailtitle" style="font-size:25px">菜品详情</div>
+        </div>
         <div class="detailbox" style="margin-bottom: 10px;">
             <div class="detailtitle marginbottom">
                 章鱼小丸子
@@ -47,6 +52,12 @@ export default {
     padding: 10px;
 }
 
+.detailtopbox {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .detailbox {
     background-color: white;
     padding: 20px;

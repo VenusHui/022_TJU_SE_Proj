@@ -1,7 +1,7 @@
 <template>
   <div class="framebox">
     <div class="topbox">
-      <div class="logotitle logocolor">
+      <div class="logotitle logocolor" style="margin-left: 10px;margin-right: 20px;">
         <b>Menu</b>
       </div>
       <nut-button class="searchbutton" size="normal" icon="search" plain type="default"
@@ -58,17 +58,15 @@ export default {
 
 <style>
 .framebox {
-  background-color: rgb(237, 234, 234);
   height: 100%;
   width: 100%;
+  /* padding: 10px; */
 }
 
 .topbox {
-  width: 100%;
-  height: 50px;
   margin: 10px;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 }
 

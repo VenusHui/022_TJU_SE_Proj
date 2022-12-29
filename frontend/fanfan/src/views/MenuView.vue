@@ -1,13 +1,13 @@
 <template>
-    <div class="framebox">
+    <div class="menuframebox">
         <div class="menutopbox">
-            <div class="menuback" style="margin-top:5px"><nut-icon name="left" size="20px"></nut-icon></div>
-            <div class="menutitle" style="font-size:20px">菜单</div>
+            <div class="menuback" style="margin-right: 20px;"><nut-icon name="left"
+                    size="15px"></nut-icon></div>
+            <div class="menutitle" style="font-size:25px">菜单</div>
         </div>
-        <div class="menubodybox">
+        <div class="menulist">
             <div class="menuitem" @click="JumpDetail">
-                <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price"
-                    :shopName="state.shopName">
+                <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :shopName="state.shopName">
                     <template #prolist>
                         <div class="customize">不辣</div>
                     </template>
@@ -72,6 +72,9 @@ export default {
 </script>
 
 <style>
+.menuframebox{
+    padding: 10px;
+}
 .menutopbox {
     padding: 20px;
     display: flex;
