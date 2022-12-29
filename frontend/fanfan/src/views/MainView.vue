@@ -1,6 +1,6 @@
 <template>
   <div class="framebox">
-    <nut-navbar style="height:80px">
+    <nut-navbar style="height:80px;line-height: 20px;margin-bottom: 0%;padding-left: 0%;">
       <template #content>
         <div class="logotitle logocolor"><b>Fander</b></div>
       </template>
@@ -65,6 +65,7 @@ export default {
 .framebox {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .profileicon {
@@ -75,24 +76,27 @@ export default {
 
 .dishsuggest {
   align-self: center;
-  height: 78%;
-  width: 98%;
+  height: 100%;
+  width: 95%;
   background-image: url("../assets/dish2.jpg");
-  background-size: auto 100%;
+  background-size:cover;
   background-position: center center;
   display: flex;
   align-items: flex-end;
+  margin:5%;
+  border-radius: 10px;
 }
 
 .dishUIbox {
   height: 40%;
   width: 100%;
-  background: linear-gradient(360deg, rgba(36, 31, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(360deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   color: white;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .dishinfobox {
@@ -134,4 +138,6 @@ export default {
   height: 25%;
   width: 100%;
 }
+
+
 </style>

@@ -1,5 +1,7 @@
 <template>
-    <router-view></router-view>
+    <div class="top">
+        <router-view></router-view>
+    </div>
     <div class="tabbar">
         <nut-tabbar bottom @tab-switch="tabSwitch" v-model:visible="activeName">
             <nut-tabbar-item to="/more" tab-title="more" name="category" icon="category"></nut-tabbar-item>
@@ -26,4 +28,11 @@ export default {
 </script>
 
 <style>
+.top{
+    height:calc(100% - 50px);
+}
+.tabbar{
+    display: flex;
+    height:50px;
+}
 </style>
