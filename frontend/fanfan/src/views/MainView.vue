@@ -18,28 +18,24 @@
       <div class="dishUIbox">
         <div class="dishinfobox">
           <div class="dishinfotextbox">
-            <div class="dishname">意面</div>
+            <div style="font-size: 40px;margin-bottom: 10px;">意面</div>
             <div class="dishsubinfobox">
               <div class="dishplace" style="margin-right:20px">小食堂二楼</div>
               <div class="dishprice">￥20</div>
             </div>
             <div class="dishscorebox">
-              <nut-icon name="star" color="yellow"></nut-icon>
-              <nut-icon name="star" color="yellow"></nut-icon>
-              <nut-icon name="star" color="yellow"></nut-icon>
-              <nut-icon name="star" color="yellow"></nut-icon>
-              <nut-icon name="star" color="yellow"></nut-icon>
+              <nut-rate v-model="value" readonly />
               <div class="dishscore" style="margin-left:10px">4.5</div>
             </div>
           </div>
-          <div class="dishdetail" @click="JumpDetail">
+          <div @click="JumpDetail" style="align-self: center;">
             <nut-icon name="right" color="white" size="30px"></nut-icon>
           </div>
         </div>
         <div class="dishchoicebox">
-          <nut-icon name="heart" color="white" size="30px"></nut-icon>
-          <nut-icon name="heart" color="white"></nut-icon>
-          <nut-icon name="heart" color="white"></nut-icon>
+          <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
+          <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon>
+          <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
         </div>
       </div>
     </div>
@@ -47,6 +43,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
   data() {
     // dish: {
@@ -54,9 +51,13 @@ export default {
     // }
   },
   methods: {
-    JumpDetail(){
+    JumpDetail() {
       this.$router.push('/detail')
     }
+  },
+  setup() {
+    const value = ref(4.8);
+    return { value }
   }
 }
 </script>
@@ -107,11 +108,6 @@ export default {
   flex-direction: column;
 }
 
-.dishname {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
 .dishsubinfobox {
   display: flex;
   flex-direction: row;
@@ -121,10 +117,6 @@ export default {
 .dishscorebox {
   display: flex;
   flex-direction: row;
-}
-
-.dishdetail {
-  align-self: center;
 }
 
 .dishchoicebox {
