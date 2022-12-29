@@ -1,6 +1,6 @@
 <!-- 登录页面 -->
 <template>
-  <div class="framebox">
+  <!-- <div class="framebox">
     <div class="iconbox">
       <h1 style="font-size:60px;color:white;">Fander</h1>
     </div>
@@ -14,6 +14,27 @@
     </div>
     <div class="slogan">
       <p>slogan place holder</p>
+    </div>
+  </div> -->
+  <div class="framebox">
+    <div class="login-box">
+      <h1 style="font-size:60px;color:white;">Fander</h1>
+      <form>
+        <div class="user-box">
+          <input type="text" name="" required="">
+          <label>Student ID</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="" required="">
+          <label>Password</label>
+        </div>
+      </form>
+    </div>
+    <div class="bottom">
+
+      <div class="confirmbutton">
+        <nut-button size="large" type="primary" @click="ConfirmLogin">Confirm</nut-button>
+      </div>
     </div>
   </div>
 </template>
@@ -56,7 +77,7 @@ export default {
 .inputbox {
   display: flex;
   flex-direction: column;
-  background: #fcfcfc07;
+  margin: 10%;
 }
 
 .inputraw {
@@ -67,5 +88,69 @@ export default {
   margin-top: 20px;
   align-self: center;
   width: 80%;
+}
+
+.bottom {
+  width: 100%;
+  height: 20%;
+  margin-left: 10%;
+  align-self: flex-end;
+  padding-bottom: 10%;
+}
+
+
+
+
+.login-box {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 100%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
+  top: -20px;
+  left: 0;
+  color: #ffffff;
+  font-size: 12px;
 }
 </style>
