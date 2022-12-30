@@ -1,6 +1,7 @@
 package com.fan.backend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.fan.backend.mapper.UserMapper;
 import com.fan.backend.pojo.User;
 import com.fan.backend.service.UserService;
@@ -81,6 +82,33 @@ public class UserServiceImpl implements UserService {
             return new Response(ResponseCode.SUCCESS, "注册成功", data);
         }
         return new Response(ResponseCode.REGISTER_ERROR, "注册失败，用户名或学号已存在", new HashMap<>());
+    }
+
+    @Override
+    public Response setPassword(Integer userId, String newPassword) {
+        User user = userMapper.selectById(userId);
+        System.out.println("修改前");
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            System.out.println("相同");
+            return new Response(ResponseCode.SET_PASSWORD_ERROR, "密码与原密码相同", new HashMap<>());
+        }
+        else {
+            System.out.println("不同");
+        }
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.set("password", encodedPassword).eq("user_id", userId);
+        userMapper.update(user, userUpdateWrapper);
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", assembler.toModel(user));
+        System.out.println("修改后");
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            System.out.println("相同");
+        }
+        else {
+            System.out.println("不同");
+        }
+        return new Response(ResponseCode.SUCCESS, "修改密码成功", data);
     }
 
     @NotNull
