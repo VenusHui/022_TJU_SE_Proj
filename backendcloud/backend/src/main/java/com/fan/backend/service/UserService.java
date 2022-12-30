@@ -2,8 +2,6 @@ package com.fan.backend.service;
 
 import com.fan.backend.utils.Response;
 
-import java.util.Map;
-
 public interface UserService {
     public Response loginByUserName(String userName, String password);
     public Response loginByStudentId(Integer studentId, String password);
