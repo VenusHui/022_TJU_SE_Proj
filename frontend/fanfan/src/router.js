@@ -7,10 +7,6 @@ const routes = [
     redirect: '/show'
   },
   {
-    path: '/home',
-    component: () => import('./views/HomeView.vue')
-  },
-  {
     path: '/login',
     component: () => import('./views/Login.vue')
   },
@@ -25,7 +21,8 @@ const routes = [
     children: [
       { path: '/main', component: () => import('./views/MainView.vue') },
       { path: '/more', component: () => import('./views/IndexView.vue') },
-      { path: '/liked', component: () => import('./views/LikedView.vue') }
+      { path: '/liked', component: () => import('./views/LikedView.vue') },
+      { path: '/home',component: () => import('./views/HomeView.vue')}//飞牌测试
     ],
   },
   {
