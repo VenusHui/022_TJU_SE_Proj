@@ -43,38 +43,94 @@
 
     <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
       <!-- 遮罩层显示操作或动画 -->
-      <!-- <div v-if="actionName != ''" style="
-            color: #fff;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
-            font-size: 24px;
-            position: absolute;
-            z-index: 999;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-          ">
-        {{ actionName }}
-      </div> -->
+      <div v-if="actionName != ''" style="
+                  color: #fff;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 10px 20px;
+                  font-size: 24px;
+                  position: absolute;
+                  z-index: 999;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                ">
+              {{ actionName }}
+            </div>
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
-        :cardWidth= this.windowWidth*0.9 :throwTriggerDistance="100" dragDirection="horizontal" :hasShadow="true">
+        :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" dragDirection="horizontal" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
-          <div v-if="cards[0]" class="tantanCard">
-            <img :src="cards[0].img" style="width: 100%; height: 100%; object-fit:cover;" />
+          <div v-if="cards[0]" class="tantanCard" :style='{backgroundImage:"url("+cards[0].img+")"}'>
+            <div class="dishUIbox">
+              <div class="dishinfobox">
+                <div class="dishinfotextbox">
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[0].name}}</div>
+                  <div class="dishsubinfobox">
+                    <div class="dishplace" style="margin-right:20px">{{cards[0].place}}</div>
+                    <div class="dishprice">￥{{cards[0].price}}</div>
+                  </div>
+                  <div class="dishscorebox">
+                    <nut-rate v-model="cards[0].star" readonly />
+                    <div class="dishscore" style="margin-left:10px">{{cards[0].star}}</div>
+                  </div>
+                </div>
+                <div @click="JumpDetail" style="align-self: center;">
+                  <nut-icon name="right" color="white" size="30px"></nut-icon>
+                </div>
+              </div>
+              <div class="dishchoicebox">
+                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
+                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
+                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
+              </div>
+            </div>
           </div>
         </template>
         <template #secondCard style="width: 100%; height: 100%">
-          <div v-if="cards[1]" class="tantanCard">
-            <img :src="cards[1].img" style="width: 100%; height: 100%; object-fit:cover;" />
+          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].img+")"}'>
+      
+            <div class="dishUIbox">
+              <div class="dishinfobox">
+                <div class="dishinfotextbox">
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[1].name}}</div>
+                  <div class="dishsubinfobox">
+                    <div class="dishplace" style="margin-right:20px">{{cards[1].place}}</div>
+                    <div class="dishprice">￥{{cards[1].price}}</div>
+                  </div>
+                  <div class="dishscorebox">
+                    <nut-rate v-model="cards[1].star" readonly />
+                    <div class="dishscore" style="margin-left:10px">{{cards[1].star}}</div>
+                  </div>
+                </div>
+                <div @click="JumpDetail" style="align-self: center;">
+                  <nut-icon name="right" color="white" size="30px"></nut-icon>
+                </div>
+              </div>
+              <div class="dishchoicebox">
+                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
+                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
+                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
+              </div>
+            </div>
+
           </div>
         </template>
         <template #thirdCard style="width: 100%; height: 100%">
-          <div v-if="cards[2]" class="tantanCard">
-            <img :src="cards[2].img" style="width: 100%; height: 100%; object-fit:cover;" />
+          <div v-if="cards[2]" class="tantanCard" :style='{backgroundImage:"url("+cards[2].img+")"}'>
+
+            <div class="dishUIbox">
+              <div class="dishinfobox">
+              </div>
+              <div class="dishchoicebox">
+                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
+                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
+                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
+              </div>
+            </div>
+
           </div>
         </template>
       </fly-card>
-    </div>
+      </div>
 
 
 
@@ -83,11 +139,6 @@
 
 <script>
 import FlyCard from "../components/FlyCard.vue";
-import dish from "../assets/dish1.jpg";
-import dish2 from "../assets/dish2.jpg";
-import dish3 from "../assets/dish3.jpg";
-import dish4 from "../assets/dish4.jpg";
-import dish5 from "../assets/dish5.jpg";
 import { ref } from 'vue';
 export default {
   components: {
@@ -98,19 +149,39 @@ export default {
       actionName: "",
       cards: [
         {
-          img: dish2,
+          img: 'https://th.bing.com/th/id/R.5da8a70f4332d95724c9702788ce1e39?rik=l%2bvQUaqAPqAw9g&pid=ImgRaw&r=0',
+          name:'汉堡薯条',
+          place:'小食堂二楼',
+          price:'20',
+          star:4.5,
         },
         {
-          img: dish,
+          img: 'https://img.zcool.cn/community/01d38b5dad0fbda8012163ba8a0987.jpg@1280w_1l_2o_100sh.jpg',
+          name:'火锅',
+          place:'小食堂一楼',
+          price:'50',
+          star:3.5,
         },
         {
-          img: dish3,
+          img: 'https://img.zcool.cn/community/0133645d3d64f2a8012187f4b133d1.jpg@1280w_1l_2o_100sh.jpg',
+          name:'汉堡',
+          place:'小食堂二楼',
+          price:'20',
+          star:4.5,
         },
         {
-          img: dish4,
+          img: 'https://th.bing.com/th/id/R.f482633a7c0de55b8363f27179da5ca5?rik=ZkZqKhpA91mpCQ&pid=ImgRaw&r=0',
+          name:'麻辣烫',
+          place:'小食堂二楼',
+          price:'15~25',
+          star:4.8,
         },
         {
-          img: dish5,
+          img: 'https://th.bing.com/th/id/R.ed1ffb699a72c9d626044e7b540e8e6b?rik=BahrpmNgZBpM7g&pid=ImgRaw&r=0',
+          name:'热干面',
+          place:'小食堂二楼',
+          price:'20',
+          star:4.8,
         },
       ],
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
@@ -137,7 +208,10 @@ export default {
       this.cards.splice(0, 1);
     },
   },
-
+  setup() {
+    const value = ref(4.8);
+    return { value }
+  },
   watch: {
     windowHeight(val) {
       let that = this;
@@ -180,18 +254,6 @@ export default {
   border-radius: 50%;
 }
 
-.dishsuggest {
-  align-self: center;
-  height: 100%;
-  width: 95%;
-  background-image: url("../assets/dish2.jpg");
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  align-items: flex-end;
-  margin: 5%;
-  border-radius: 10px;
-}
 
 .dishUIbox {
   height: 40%;
@@ -201,7 +263,7 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   color: white;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
 }
 
@@ -244,5 +306,10 @@ div {
 .tantanCard {
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background: no-repeat center;
+  background-size:cover;
+  display: flex;
+  align-items: flex-end;
 }
 </style>

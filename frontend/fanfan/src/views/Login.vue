@@ -1,34 +1,36 @@
 <!-- 登录页面 -->
 <template>
-  <!-- <div class="framebox">
-    <div class="iconbox">
-      <h1 style="font-size:60px;color:white;">Fander</h1>
-    </div>
-    <div class="inputbox">
-      <nut-input class="inputraw" label="" placeholder="Student ID" max-length="7" v-model="state.number"
-        type="number" />
-      <nut-input class="inputraw" label="" placeholder="Password" v-model="state.password" type="password" />
-    </div>
-    <div class="confirmbutton">
-      <nut-button size="large" type="primary" @click="ConfirmLogin">确认</nut-button>
-    </div>
-    <div class="slogan">
-      <p>slogan place holder</p>
-    </div>
-  </div> -->
   <div class="framebox">
     <div class="login-box">
       <h1 style="font-size:60px;color:white;">Fander</h1>
-      <form>
-        <div class="user-box">
-          <input type="text" name="" required="">
-          <label>Student ID</label>
-        </div>
-        <div class="user-box">
-          <input type="password" name="" required="">
-          <label>Password</label>
-        </div>
-      </form>
+      <nut-tabs v-model="loginChoice" >
+        <nut-tabpane title="BY USER NAME" style="background-color:transparent;">
+          <form>
+            <div class="user-box">
+              <input type="text" v-model="userName" name="" required="">
+              <label>User Name</label>
+            </div>
+            <div class="user-box">
+              <input type="password" v-model="passwordName" name="" required="">
+              <label>Password</label>
+            </div>
+          </form>
+        </nut-tabpane>
+        <nut-tabpane title="BY STUDENT ID" style="background-color:transparent;">
+          <form>
+            <div class="user-box">
+              <input type="text" v-model="studentId" name="" required="">
+              <label>Student ID</label>
+            </div>
+            <div class="user-box">
+              <input type="password" v-model="passwordId" name="" required="">
+              <label>Password</label>
+            </div>
+          </form>
+        </nut-tabpane>
+      </nut-tabs>
+      
+
     </div>
     <div class="bottom">
 
@@ -40,22 +42,118 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import axios from 'axios'
+import { Toast } from '@nutui/nutui';
 export default {
-  methods: {
-    ConfirmLogin() {
-      this.$router.push('/tabbarViews')
+  data(){
+    return{
+      studentId:'',
+      passwordId:'',
+      passwordName:'',
+      userName:'',
+      loginChoice:'0',
     }
   },
-  setup() {
-    const state = reactive({
-      number: '',
-      password: '',
-    });
-    return {
-      state
-    };
-  }
+  methods: {
+    ConfirmLogin() {
+      // 注册或登录
+
+      if(this.loginChoice=='0')
+      {
+        // 用username登录
+        console.log('0 username 登录')
+        axios({
+          method: 'post',
+          params: {
+            filter:'userName'
+          },
+          data: {
+            userName: this.userName,
+            password: this.passwordName,
+          },
+          headers: {'Content-Type': 'multipart/form-data'},
+          url: 'http://124.220.158.211:7000/users/token/',
+        }).then((res) => {
+          console.log('result', res)
+          if(res.data.code==201){
+            // 未注册 因为是username登录所以不注册
+
+          }
+          else if(res.data.code==200)
+          {
+            // 登录成功
+            localStorage.setItem("token", res.data.data.token)
+            localStorage.setItem("userId", res.data.data.userId)
+            
+            this.$router.push('/home')
+          }
+
+        }, error => {
+          console.log('错误', error.message)
+        })
+      } else {
+        // 用studentid登录
+        console.log('1 studentid 登录')
+        axios({
+          method: 'post',
+          params: {
+            filter: 'studentId'
+          },
+          data: {
+            studentId: this.studentId,
+            password: this.passwordId,
+          },
+          headers: { 'Content-Type': 'multipart/form-data' },
+          url: 'http://124.220.158.211:7000/users/token/',
+        }).then((res) => {
+          console.log('result', res.data.code)
+
+          if (res.data.code == 201) {
+            // 未注册 id登录所以用id注册
+            axios({
+              method: 'post',
+              data: {
+                userName: this.studentId + '同学',
+                studentId : this.studentId,
+                password: this.passwordId,
+              },
+              headers: { 'Content-Type': 'multipart/form-data' },
+              url: 'http://124.220.158.211:7000/users/',
+            }).then((res) => {
+              
+              if(res.data.code==200){
+                // 登录成功
+                localStorage.setItem("token", res.data.data.token)
+                localStorage.setItem("userId", res.data.data.userId)
+
+                this.$router.push('/home')
+              }
+
+            }, error => {
+              console.log('错误', error.message)
+            })
+
+          }
+          else if(res.data.code==200)
+          {
+            // 登录成功
+            localStorage.setItem("token", res.data.data.token)
+            localStorage.setItem("userId", res.data.data.userId)
+            
+            this.$router.push('/home')
+          }
+
+        }, error => {
+          console.log('错误', error.message)
+        })
+      }
+
+
+
+
+    }
+  },
+
 }
 </script>
 <style scoped>
@@ -106,7 +204,7 @@ export default {
   top: 35%;
   left: 50%;
   width: 100%;
-  padding: 40px;
+  padding: 30px;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
 
@@ -126,7 +224,7 @@ export default {
 .login-box .user-box input {
   width: 100%;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 20px;
   color: #fff;
   margin-bottom: 30px;
   border: none;
@@ -152,5 +250,14 @@ export default {
   left: 0;
   color: #ffffff;
   font-size: 12px;
+}
+
+
+::v-deep .nut-tabs__titles{
+  background-color: transparent;
+}
+
+::v-deep .nut-tabs__titles-item{
+  color:#fff;
 }
 </style>

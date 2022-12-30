@@ -19,10 +19,10 @@ const routes = [
     component: () => import('./views/Tabbar.vue'),
     redirect:'/main',
     children: [
-      { path: '/main', component: () => import('./views/MainView.vue') },
+      { path: '/main', component: () => import('./views/MainView.vue') },//原有主页
       { path: '/more', component: () => import('./views/IndexView.vue') },
       { path: '/liked', component: () => import('./views/LikedView.vue') },
-      { path: '/home',component: () => import('./views/HomeView.vue')}//飞牌测试
+      { path: '/home',component: () => import('./views/HomeView.vue')}//新飞牌主页
     ],
   },
   {
@@ -33,6 +33,10 @@ const routes = [
     path: '/detail',
     component: () => import('./views/DetailView.vue')
   },
+  {
+    path: '/demo',
+    component: () => import('./views/AboutView.vue')
+  }
 ]
 
 const router = createRouter({

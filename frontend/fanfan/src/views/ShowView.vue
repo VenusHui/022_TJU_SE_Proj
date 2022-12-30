@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         JumpLogin(){
-            this.$router.push('/login')
+            this.$router.push('/login');
         },
     }
 }
