@@ -7,7 +7,7 @@ import com.fan.backend.pojo.User;
 import com.fan.backend.service.UserService;
 import com.fan.backend.service.utils.assembler.UserModelAssembler;
 import com.fan.backend.service.utils.UserDetailsImpl;
-import com.fan.backend.utils.DefaultIData;
+import com.fan.backend.utils.GlobalIData;
 import com.fan.backend.utils.JwtUtil;
 import com.fan.backend.utils.Response;
 import com.fan.backend.utils.ResponseCode;
@@ -71,12 +71,12 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<User> queryWrapperName = new QueryWrapper<>();
         QueryWrapper<User> queryWrapperId = new QueryWrapper<>();
         queryWrapperName.eq("user_name", userName);
-        queryWrapperName.eq("student_id", studentId);
-        if (userMapper.selectOne(queryWrapperName) == null && userMapper.selectOne(queryWrapperId) == null) {
+        queryWrapperId.eq("student_id", studentId);
+        if (!userMapper.exists(queryWrapperName) && !userMapper.exists(queryWrapperId)) {
             Map<String, Object> data = new HashMap<>();
             String encodedPassword = passwordEncoder.encode(password);
             Timestamp timestamp = new Timestamp(new Date().getTime());
-            User user = new User(null, userName, encodedPassword, studentId, timestamp, DefaultIData.AVATAR_URL);
+            User user = new User(null, userName, encodedPassword, studentId, timestamp, GlobalIData.AVATAR_URL);
             userMapper.insert(user);
             data.put("user", assembler.toModel(user));
             return new Response(ResponseCode.SUCCESS, "注册成功", data);
@@ -87,13 +87,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response setPassword(Integer userId, String newPassword) {
         User user = userMapper.selectById(userId);
-        System.out.println("修改前");
         if (passwordEncoder.matches(newPassword, user.getPassword())) {
-            System.out.println("相同");
             return new Response(ResponseCode.SET_PASSWORD_ERROR, "密码与原密码相同", new HashMap<>());
-        }
-        else {
-            System.out.println("不同");
         }
         String encodedPassword = passwordEncoder.encode(newPassword);
         UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
@@ -101,13 +96,6 @@ public class UserServiceImpl implements UserService {
         userMapper.update(user, userUpdateWrapper);
         Map<String, Object> data = new HashMap<>();
         data.put("user", assembler.toModel(user));
-        System.out.println("修改后");
-        if (passwordEncoder.matches(newPassword, user.getPassword())) {
-            System.out.println("相同");
-        }
-        else {
-            System.out.println("不同");
-        }
         return new Response(ResponseCode.SUCCESS, "修改密码成功", data);
     }
 

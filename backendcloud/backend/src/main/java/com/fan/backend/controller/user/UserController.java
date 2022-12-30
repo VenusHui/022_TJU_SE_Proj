@@ -71,6 +71,15 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}/password/")
+    /**
+     * @param userId: 
+     * @param form:
+     *            newPassword: 新密码
+     * @return: ResponseEntity<Response>
+     * @author: VenusHui
+     * @description: 修改密码
+     * @date: 2022/12/30 21:44
+     */
     public ResponseEntity<Response> setPassword(@PathVariable Integer userId,
                                                 @RequestParam Map<String, Object> form) {
         String newPassword = form.get("newPassword").toString();
