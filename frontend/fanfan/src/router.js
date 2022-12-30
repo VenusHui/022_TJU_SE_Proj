@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/detail',
     component: () => import('./views/DetailView.vue')
-  }
+  },
 ]
 
 const router = createRouter({

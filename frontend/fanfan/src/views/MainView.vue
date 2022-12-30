@@ -5,13 +5,15 @@
         <div class="logotitle logocolor"><b>Fander</b></div>
       </template>
       <template #left>
-        <nut-avatar size="normal"
+        <nut-avatar size="normal" @click="JumpProfile"
           icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"></nut-avatar>
       </template>
       <template #right>
-        <nut-badge :value="8">
-          <nut-icon name="notice"></nut-icon>
-        </nut-badge>
+        <div @click="JumpFaned">
+          <nut-badge :value="8">
+            <nut-icon name="notice"></nut-icon>
+          </nut-badge>
+        </div>
       </template>
     </nut-navbar>
     <div class="dishsuggest">
@@ -51,6 +53,12 @@ export default {
   methods: {
     JumpDetail() {
       this.$router.push('/detail')
+    },
+    JumpProfile() {
+      this.$router.push('/profile')
+    },
+    JumpFaned() {
+      this.$router.push('/faned')
     }
   },
   setup() {
@@ -78,11 +86,11 @@ export default {
   height: 100%;
   width: 95%;
   background-image: url("../assets/dish2.jpg");
-  background-size:cover;
+  background-size: cover;
   background-position: center center;
   display: flex;
   align-items: flex-end;
-  margin:5%;
+  margin: 5%;
   border-radius: 10px;
 }
 
@@ -128,6 +136,4 @@ export default {
   height: 25%;
   width: 100%;
 }
-
-
 </style>

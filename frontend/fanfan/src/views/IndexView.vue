@@ -40,7 +40,6 @@
 
 <script>
 import IndexBlock from '@/components/IndexBlock.vue'
-
 export default {
   components: {
     IndexBlock
