@@ -28,11 +28,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/test/")
-    public ResponseEntity<Object> test() {
-        return ResponseEntity.ok("success");
-    }
-
     @PostMapping("/users/token/")
     public ResponseEntity<Response> login(@RequestParam Map<String, Object> form,
                                           @RequestParam(value = "filter", defaultValue = "studentId") String filter) {
