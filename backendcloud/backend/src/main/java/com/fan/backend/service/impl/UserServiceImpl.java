@@ -67,13 +67,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response register(String userName, Integer studentId, String password) {
-        Map<String, Object> data = new HashMap<>();
-        String encodedPassword = passwordEncoder.encode(password);
-        Timestamp timestamp = new Timestamp(new Date().getTime());
-        User user = new User(null, userName, encodedPassword, studentId, timestamp, DefaultIData.AVATAR_URL);
-        userMapper.insert(user);
-        data.put("user", assembler.toModel(user));
-        return new Response(ResponseCode.SUCCESS, "注册成功", data);
+        QueryWrapper<User> queryWrapperName = new QueryWrapper<>();
+        QueryWrapper<User> queryWrapperId = new QueryWrapper<>();
+        queryWrapperName.eq("user_name", userName);
+        queryWrapperName.eq("student_id", studentId);
+        if (userMapper.selectOne(queryWrapperName) == null && userMapper.selectOne(queryWrapperId) == null) {
+            Map<String, Object> data = new HashMap<>();
+            String encodedPassword = passwordEncoder.encode(password);
+            Timestamp timestamp = new Timestamp(new Date().getTime());
+            User user = new User(null, userName, encodedPassword, studentId, timestamp, DefaultIData.AVATAR_URL);
+            userMapper.insert(user);
+            data.put("user", assembler.toModel(user));
+            return new Response(ResponseCode.SUCCESS, "注册成功", data);
+        }
+        return new Response(ResponseCode.REGISTER_ERROR, "注册失败，用户名或学号已存在", new HashMap<>());
     }
 
     @NotNull

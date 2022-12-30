@@ -9,5 +9,6 @@ package com.fan.backend.utils;
 public class ResponseCode {
     public final static Integer SUCCESS = 200;
     public final static Integer LOGIN_ERROR = 201;
+    public final static Integer REGISTER_ERROR = 202;
     public final static Integer ERROR = 500;
 }
