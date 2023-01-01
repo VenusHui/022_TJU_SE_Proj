@@ -2,7 +2,7 @@
   <div style="height:100%;width: 100%;">
     <div class="indextopbox">
       <div class="logotitle logocolor" style="margin-left: 10px;margin-right: 20px;">
-        <b>Menu</b>
+        <b>Index</b>
       </div>
       <nut-button class="searchbutton" size="normal" icon="search" plain type="default"
         @click="JumpSearch">search</nut-button>

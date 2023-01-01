@@ -45,10 +45,6 @@ const routes = [
     path: '/detail',
     component: () => import('./views/DetailView.vue')
   },
-  {
-    path: '/demo',
-    component: () => import('./views/AboutView.vue')
-  }
 ]
 
 const router = createRouter({

@@ -92,8 +92,6 @@
               <div class="dishinfobox">
               </div>
               <div class="dishchoicebox">
-                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
-                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
                 <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
               </div>
             </div>

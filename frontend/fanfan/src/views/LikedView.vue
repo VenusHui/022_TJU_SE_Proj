@@ -6,7 +6,7 @@
             </div>
         </div>
         <div style="margin-top:10px">
-            <nut-list :listData="likeditems" height="260" container-height="550" @scroll-bottom="likedhandleScroll">
+            <nut-list :listData="likeditems" height="260" container-height="530" @scroll-bottom="likedhandleScroll">
                 <template v-slot:default="{ item }">
                     <nut-row class="row" type="flex" justify="center" gutter="10">
                         <nut-col :span="11">
@@ -28,6 +28,13 @@ import LikedCard from '@/components/LikedCard.vue';
 export default {
     components: {
         LikedCard,
+    },
+    data() {
+        return {
+            // windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
+            // windowHeight: document.documentElement.clientHeight,//实时屏幕高度
+
+        }
     },
     setup() {
         const state = reactive({
@@ -95,7 +102,6 @@ export default {
             ]
         });
         const likedhandleScroll = () => {
-            console.log("already added new array");
             let arr = new Array(
                 {
                     left: {
@@ -117,11 +123,33 @@ export default {
                         url: 'https://img.zcool.cn/community/0185765ad628a8a801213867f67a04.jpg@1280w_1l_2o_100sh.jpg'
                     }
                 },
-                );
+            );
             state.likeditems = state.likeditems.concat(arr);
         };
         return { ...toRefs(state), likedhandleScroll };
     },
+    // watch: {
+    //     windowHeight(val) {
+    //         let that = this;
+    //         // console.log("实时屏幕高度：", val, that.windowHeight);
+    //     },
+    //     windowWidth(val) {
+    //         let that = this;
+    //         // console.log("实时屏幕宽度：", val, that.windowHeight);
+    //     }
+    // },
+    // mounted() {
+    //     var that = this;
+    //     // <!--把window.onresize事件挂在到mounted函数上-->
+    //     window.onresize = () => {
+    //         return (() => {
+    //             window.fullHeight = document.documentElement.clientHeight;
+    //             window.fullWidth = document.documentElement.clientWidth;
+    //             that.windowHeight = window.fullHeight;  // 高
+    //             that.windowWidth = window.fullWidth; // 宽
+    //         })()
+    //     };
+    // },
 }
 </script>
 

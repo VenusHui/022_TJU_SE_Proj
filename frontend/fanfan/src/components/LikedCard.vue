@@ -1,19 +1,20 @@
 <template>
     <div class="likeditem boxradius" @click="JumpDetail" :style="{ 'background-image': 'url(' + imgUrl + ')' }">
         <div class="likedinfobox boxradius">
-            <div style="color: white;">
+            <div style="color: white;margin-bottom: 5px;">
                 {{ name }}
             </div>
             <div class="likedicon">
-                <nut-icon name="heart-fill" size="25px" color="red" style="margin-right:5px"></nut-icon>
-                <img src="../assets/fander-icon.png" style="height:30px" />
-                <!-- <nut-icon name="star" size="20px" color="white"></nut-icon> -->
+                <img v-if="true" src="../assets/fander-icon-white.png" style="height:30px;margin-right:5px;" />
+                <img v-if="false" src="../assets/fander-icon-red.png" style="height:30px;margin-right:5px;" />
+                <nut-icon v-if="true" name="addfollow" color="white" size="20px"></nut-icon>
+                <nut-icon v-if="false" name="heart" color="red" size="20px"></nut-icon>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script>    
 export default {
     name: 'LikedCard',
     props: {

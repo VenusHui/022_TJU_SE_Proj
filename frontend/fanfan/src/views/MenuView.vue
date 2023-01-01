@@ -1,91 +1,113 @@
 <template>
-    <div class="menuframebox">
+    <div>
         <div class="menutopbox">
-            <div class="menuback" style="margin-right: 20px;"><nut-icon name="left"
-                    size="15px"></nut-icon></div>
+            <div class="menuback" style="margin-right: 20px;" @click="JumpBack">
+                <nut-icon name="left" size="15px"></nut-icon>
+            </div>
             <div class="menutitle" style="font-size:25px">菜单</div>
         </div>
-        <div class="menulist">
-            <div class="menuitem" @click="JumpDetail">
-                <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :shopName="state.shopName">
-                    <template #prolist>
-                        <div class="customize">不辣</div>
-                    </template>
-                    <!-- <template #price>
-                        <div class="customize">价格</div>
-                    </template> -->
-                    <template #origin>
-                        <div class="customize"></div>
-                    </template>
-                    <template #shop-tag>
-                        <div class="customize">大食堂二楼</div>
-                    </template>
-                    <template #footer>
-                        <div class="customize">评分</div>
-                    </template>
-                </nut-card>
-            </div>
-            <div class="menuitem">
-                <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :shopName="state.shopName">
-                    <template #prolist>
-                        <div class="customize">不辣</div>
-                    </template>
-                    <!-- <template #price>
-                        <div class="customize">价格</div>
-                    </template> -->
-                    <template #origin>
-                        <div class="customize"></div>
-                    </template>
-                    <template #shop-tag>
-                        <div class="customize">大食堂二楼</div>
-                    </template>
-                    <template #footer>
-                        <div class="customize">评分</div>
-                    </template>
-                </nut-card>
-            </div>
+        <div class="menulist" style="margin-top: 10px;background-color: white;">
+            <nut-list :listData="menuresults" height="125" container-height="1000" @scroll-bottom="menuhandleScroll">
+                <template v-slot:default="{ item }">
+                    <nut-card :img-url="item.imgUrl" :title="item.title" :price="item.price"
+                        :shopName="item.shopName" @click="JumpDetail">
+                        <template #prolist>
+                            <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
+                        </template>
+                        <template #origin>
+                        </template>
+                        <template #shop-tag>
+                            <nut-rate  active-color="#FFC800" v-model="item.rate" readonly spacing="10" style="height:20px" />
+                            <div style="color: gray;font-size: small;">{{ item.rate }}</div>
+                        </template>
+                    </nut-card>
+                </template>
+            </nut-list>
         </div>
     </div>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, toRefs } from 'vue';
 export default {
     setup() {
         const state = reactive({
-            imgUrl:
-                '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-            title: '阳澄湖大闸蟹',
-            shopName: '二楼',
-            price: 100,
+            menuresults: [
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+            ]
         });
-        return {
-            state
+        const menuhandleScroll = () => {
+            let arr = new Array(
+                {
+                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    title: '无骨凤爪',
+                    price: 20,
+                    rate: 4.8,
+                    shopName: '大食堂一楼',
+                },
+            );
+            state.menuresults = state.menuresults.concat(arr);
         };
+        return { ...toRefs(state), menuhandleScroll };
     },
     methods: {
         JumpDetail() {
             this.$router.push('/detail')
+        },
+        JumpBack() {
+            this.$router.back()
         }
     }
 }
 </script>
 
 <style>
-.menuframebox{
-    padding: 10px;
-}
 .menutopbox {
     padding: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-}
-
-.menuitem {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 3%;
     background-color: white;
 }
 </style>
