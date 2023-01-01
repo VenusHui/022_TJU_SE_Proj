@@ -36,7 +36,7 @@
           <img src="../assets/fander-icon-white.png" height="90" width="90" style="padding-left: 5px;padding-bottom: 10px;">
         </div>
       </div>
-            
+ 
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
         :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
@@ -172,13 +172,14 @@ export default {
       this.$router.push('/fanfan')
     },
     onCardDragMove(obj) {
-      if (obj.left < -10) {
-        this.actionName = "不喜欢";
-      } else if (obj.left > 10) {
-        this.actionName = "喜欢";
-      } else if (obj.top > 10 || obj.top<-10){
+      if(obj.top > 20 || obj.top<-20){
         this.actionName = "饭饭";
       }
+      else if (obj.left < -20) {
+        this.actionName = "不喜欢";
+      } else if (obj.left > 20) {
+        this.actionName = "喜欢";
+      } 
     },
     onCardDragStop(obj) {
       this.actionName = "";

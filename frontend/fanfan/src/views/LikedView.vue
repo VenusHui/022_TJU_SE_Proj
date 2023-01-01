@@ -1,14 +1,21 @@
 <template>
-    <div style="wwidth:100% height:100%">
-        <div style="margin: 10px;">
-            <div class="logotitle logocolor" style="margin-left: 10px;">
+    <div style="width:100%;height:100%;">
+        <div class="likedtopbox">
+            <div class="logotitle logocolor" style="margin-left: 10px;margin-right: 20px;">
                 <b>Liked</b>
             </div>
         </div>
-        <div class="likedlist">
-            <nut-list :listData="likeditems" height="100" container-height="1000" @scroll-bottom="handleScroll">
+        <div style="margin-top:10px">
+            <nut-list :listData="likeditems" height="260" container-height="550" @scroll-bottom="likedhandleScroll">
                 <template v-slot:default="{ item }">
-                    <LikedCard :imgUrl="item.url" :name="item.name"></LikedCard>
+                    <nut-row class="row" type="flex" justify="center" gutter="10">
+                        <nut-col :span="11">
+                            <LikedCard :name="item.left.name" :imgUrl="item.left.url"></LikedCard>
+                        </nut-col>
+                        <nut-col :span="11">
+                            <LikedCard :name="item.right.name" :imgUrl="item.right.url"></LikedCard>
+                        </nut-col>
+                    </nut-row>
                 </template>
             </nut-list>
         </div>
@@ -16,90 +23,119 @@
 </template>
 
 <script>
-import { onMounted, reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue';
 import LikedCard from '@/components/LikedCard.vue';
 export default {
     components: {
         LikedCard,
     },
-    data() {
-    },
     setup() {
         const state = reactive({
-            likeditems:[ {
-                    name: '团子',
-                    url: 'http://m.qpic.cn/psc?/V52GkrG44dJy6U3B701r1clpAh3TUGbg/ruAMsa53pVQWN7FLK88i5iun53s.f1wnujnx0VaGVMfsEDLlX3CydS08FyVnL7jY51bqg0tiQiBCpUak5jMKYihuYZyLROc2zstEa*65BTY!/b&bo=UwY4BAAAAAABF1k!&rf=viewer_4'
+            likeditems: [
+                {
+                    left: {
+                        name: '无骨凤爪',
+                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1'
+                    },
+                    right: {
+                        name: '蒸包',
+                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '牛肉',
-                    url: '../assets/dish2.jpg'
+                    left: {
+                        name: '沙拉',
+                        url: 'https://img.zcool.cn/community/0107ca5b0d69e4a8012181b0f47e48.jpg@1280w_1l_2o_100sh.jpg'
+                    },
+                    right: {
+                        name: '红烧肉',
+                        url: 'https://img.zcool.cn/community/0185765ad628a8a801213867f67a04.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '小丸子',
-                    url: '../assets/dish3.jpg'
+                    left: {
+                        name: '无骨凤爪',
+                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1'
+                    },
+                    right: {
+                        name: '蒸包',
+                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '牛肉',
-                    url: '../assets/dish2.jpg'
+                    left: {
+                        name: '沙拉',
+                        url: 'https://img.zcool.cn/community/0107ca5b0d69e4a8012181b0f47e48.jpg@1280w_1l_2o_100sh.jpg'
+                    },
+                    right: {
+                        name: '红烧肉',
+                        url: 'https://img.zcool.cn/community/0185765ad628a8a801213867f67a04.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '小丸子',
-                    url: '../assets/dish3.jpg'
+                    left: {
+                        name: '无骨凤爪',
+                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1'
+                    },
+                    right: {
+                        name: '蒸包',
+                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '牛肉',
-                    url: '../assets/dish2.jpg'
+                    left: {
+                        name: '沙拉',
+                        url: 'https://img.zcool.cn/community/0107ca5b0d69e4a8012181b0f47e48.jpg@1280w_1l_2o_100sh.jpg'
+                    },
+                    right: {
+                        name: '红烧肉',
+                        url: 'https://img.zcool.cn/community/0185765ad628a8a801213867f67a04.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
-                {
-                    name: '小丸子',
-                    url: '../assets/dish3.jpg'
-                }                
             ]
         });
-        const handleScroll = () => {
+        const likedhandleScroll = () => {
+            console.log("already added new array");
             let arr = new Array(
                 {
-                    name: '牛肉',
-                    url: '../assets/dish2.jpg'
+                    left: {
+                        name: '无骨凤爪',
+                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1'
+                    },
+                    right: {
+                        name: '蒸包',
+                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+                    }
                 },
                 {
-                    name: '小丸子',
-                    url: '../assets/dish3.jpg'
-                });
+                    left: {
+                        name: '沙拉',
+                        url: 'https://img.zcool.cn/community/0107ca5b0d69e4a8012181b0f47e48.jpg@1280w_1l_2o_100sh.jpg'
+                    },
+                    right: {
+                        name: '红烧肉',
+                        url: 'https://img.zcool.cn/community/0185765ad628a8a801213867f67a04.jpg@1280w_1l_2o_100sh.jpg'
+                    }
+                },
+                );
             state.likeditems = state.likeditems.concat(arr);
         };
-        return { ...toRefs(state), handleScroll };
+        return { ...toRefs(state), likedhandleScroll };
     },
 }
 </script>
 
 <style>
-.likedlist {
+.likedtopbox {
     padding: 10px;
-    width: 100%;
-    height: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
 }
 
 .boxradius {
     border-radius: 3%;
 }
-
-/* .likeditem {
-    width: 45%;
-    height: 260px;
-    margin: 5px;
-    background-size: auto 100%;
-    background-position: center center;
-    display: flex;
-    align-items: flex-end;
-}
-
-.likedinfobox {
-    height: 25%;
-    width: 100%;
-    background: linear-gradient(360deg, rgba(36, 31, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-} */
 </style>
