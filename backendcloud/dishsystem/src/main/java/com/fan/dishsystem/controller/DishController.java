@@ -44,10 +44,16 @@ public class DishController {
     @PostMapping("/dishes/")
     /**
      * @param form:
-     *            dishName:
-     *            description:
-     *            photoUrl:
-     *            position:
+     *            String dishName: 菜品名称
+     *            String description: 菜品描述
+     *            String photoUrl: 菜品图片链接
+     *            String position: 菜品位置
+     *            Map<String, Object> preference: 菜品口味
+     *                  spiciness: 辣
+     *                  sourness: 酸
+     *                  sweetness: 甜
+     *                  bitterness: 苦
+     *            List<String> ingredients: 原材料列表
      *
      * @return: ResponseEntity<Response>
      * @author: VenusHui
