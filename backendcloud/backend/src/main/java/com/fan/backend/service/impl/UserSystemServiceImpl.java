@@ -18,7 +18,22 @@ public class UserSystemServiceImpl implements UserSystemService {
     UserSystem userSystem;
 
     @Override
+    public Response getAll() {
+        return userSystem.getAll();
+    }
+
+    @Override
     public Response getUser(Integer userId) {
         return userSystem.getUser(userId);
+    }
+
+    @Override
+    public Response setUser(Integer userId, String filter, String param) {
+        return userSystem.setUser(userId, filter, param);
+    }
+
+    @Override
+    public Response deleteUser(Integer userId) {
+        return userSystem.deleteUser(userId);
     }
 }
