@@ -81,14 +81,14 @@ public class UserServiceImpl implements UserService {
             data.put("user", assembler.toModel(user));
             return new Response(ResponseCode.SUCCESS, "注册成功", data);
         }
-        return new Response(ResponseCode.REGISTER_ERROR, "注册失败，用户名或学号已存在", new HashMap<>());
+        return new Response(ResponseCode.REGISTER_ERROR, "注册失败，用户名或学号已存在", null);
     }
 
     @Override
     public Response setPassword(Integer userId, String newPassword) {
         User user = userMapper.selectById(userId);
         if (passwordEncoder.matches(newPassword, user.getPassword())) {
-            return new Response(ResponseCode.SET_PASSWORD_ERROR, "密码与原密码相同", new HashMap<>());
+            return new Response(ResponseCode.SET_PASSWORD_ERROR, "密码与原密码相同", null);
         }
         String encodedPassword = passwordEncoder.encode(newPassword);
         UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();

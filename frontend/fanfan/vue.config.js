@@ -3,7 +3,10 @@ const path = require('path')
 
 const { NODE_ENV, VUE_APP_TITLE = '' } = process.env
 
-const config = {
+var webpack = require('webpack');
+
+module.exports = {
+  publicPath:'./',
   transpileDependencies: false,
   productionSourceMap: NODE_ENV === 'production',
   chainWebpack: (setting) => {
@@ -21,14 +24,15 @@ const config = {
       }
     }
   },
-  pluginOptions: {
-    'style-resources-loader': {
-      preProcessor: 'less',
-      patterns: [
-        path.resolve(__dirname, 'src/styles/variable.less')
-      ]
-    }
-  },
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+      })
+    ]
+  }
+
   // devServer: {
   //   proxy: {
   //     '/api': {
@@ -40,8 +44,6 @@ const config = {
   //     }
   //   }
   // }
+
 }
-
-module.exports = defineConfig(config)
-
 

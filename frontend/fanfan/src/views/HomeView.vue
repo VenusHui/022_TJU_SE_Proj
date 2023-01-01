@@ -14,50 +14,29 @@
         </nut-badge>
       </template>
     </nut-navbar>
-    <!-- <div class="dishsuggest">
-      <div class="dishUIbox">
-        <div class="dishinfobox">
-          <div class="dishinfotextbox">
-            <div style="font-size: 40px;margin-bottom: 10px;">意面</div>
-            <div class="dishsubinfobox">
-              <div class="dishplace" style="margin-right:20px">小食堂二楼</div>
-              <div class="dishprice">￥20</div>
-            </div>
-            <div class="dishscorebox">
-              <nut-rate v-model="value" readonly />
-              <div class="dishscore" style="margin-left:10px">4.5</div>
-            </div>
-          </div>
-          <div @click="JumpDetail" style="align-self: center;">
-            <nut-icon name="right" color="white" size="30px"></nut-icon>
-          </div>
-        </div>
-        <div class="dishchoicebox">
-          <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
-          <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon>
-          <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
-        </div>
-      </div>
-    </div> -->
-
 
     <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
       <!-- 遮罩层显示操作或动画 -->
-      <div v-if="actionName != ''" style="
-                  color: #fff;
-                  background: rgba(0, 0, 0, 0.3);
-                  padding: 10px 20px;
-                  font-size: 24px;
-                  position: absolute;
-                  z-index: 999;
-                  left: 50%;
-                  top: 50%;
-                  transform: translate(-50%, -50%);
-                ">
-              {{ actionName }}
-            </div>
+      <div v-if="actionName == '不喜欢'" class="choice">
+        <div class="choiceicon">
+          <nut-icon name="close" color="white" size="40px" style="left: 20%;"></nut-icon>
+        </div>
+      </div>
+
+      <div v-if="actionName == '喜欢'" class="choice">
+        <div class="choiceicon">
+          <nut-icon name="follow" color="white" size="40px" style="left: 20%;"></nut-icon>
+        </div>
+      </div>
+
+      <div v-if="actionName == '饭饭'" class="choice">
+        <div class="fandericon">
+          <img src="../assets/fander-icon-white.png" height="90" width="90" style="padding-left: 5px;padding-bottom: 10px;">
+        </div>
+      </div>
+            
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
-        :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" dragDirection="horizontal" :hasShadow="true">
+        :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
           <div v-if="cards[0]" class="tantanCard" :style='{backgroundImage:"url("+cards[0].img+")"}'>
             <div class="dishUIbox">
@@ -76,11 +55,6 @@
                 <div @click="JumpDetail" style="align-self: center;">
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
-              </div>
-              <div class="dishchoicebox">
-                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
-                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
-                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
               </div>
             </div>
           </div>
@@ -105,11 +79,8 @@
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
               </div>
-              <div class="dishchoicebox">
-                <!-- <nut-icon name="close-little" color="gray" size="28px" style="margin:10px"></nut-icon>
-                <nut-icon name="star" color="yellow" size="30px" style="margin:10px"></nut-icon> -->
-                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
-              </div>
+            
+
             </div>
 
           </div>
@@ -200,8 +171,8 @@ export default {
         this.actionName = "不喜欢";
       } else if (obj.left > 10) {
         this.actionName = "喜欢";
-      } else {
-        this.actionName = "";
+      } else if (obj.top > 10 || obj.top<-10){
+        this.actionName = "饭饭";
       }
     },
     onCardDragStop(obj) {
@@ -245,6 +216,41 @@ export default {
 </script>
 
 <style scoped>
+.choice {
+  color: #fff;
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.choiceicon {
+  width: 70px;
+  height: 70px;
+  background-color: #e23c13;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 36px;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  display: flex;
+}
+
+.fandericon {
+  width: 100px;
+  height: 100px;
+  background-color: #e23c13;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 36px;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  display: flex;
+}
+
 .framebox {
   display: flex;
   flex-direction: column;
@@ -259,7 +265,7 @@ export default {
 
 
 .dishUIbox {
-  height: 40%;
+  height: 50%;
   width: 100%;
   background: linear-gradient(360deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%);
   display: flex;
@@ -275,6 +281,7 @@ export default {
   flex-direction: row;
   padding: 15px;
   justify-content: space-between;
+  padding-bottom: 5%;
 }
 
 .dishinfotextbox {
@@ -297,7 +304,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25%;
+  height: 35%;
   width: 100%;
 }
 
@@ -314,5 +321,14 @@ div {
   background-size:cover;
   display: flex;
   align-items: flex-end;
+	overflow: hidden;
+	box-shadow: 0px 5px 43px rgba( 0, 0, 0, 0.48 );
+	padding: 0;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
 }
+
 </style>
+
