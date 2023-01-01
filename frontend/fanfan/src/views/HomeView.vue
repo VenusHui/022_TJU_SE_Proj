@@ -14,7 +14,6 @@
         </nut-badge>
       </template>
     </nut-navbar>
-<<<<<<< Updated upstream
 
     <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
       <!-- 遮罩层显示操作或动画 -->
@@ -35,37 +34,7 @@
           <img src="../assets/fander-icon-white.png" height="90" width="90" style="padding-left: 5px;padding-bottom: 10px;">
         </div>
       </div>
-            
-=======
-    <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
-      <!-- 遮罩层显示操作或动画 -->
-      <div v-if="actionName == '不喜欢'" style="
-                  color: #fff;
-                  background: rgba(0, 0, 0, 0.3);
-                  padding: 10px 20px;
-                  font-size: 24px;
-                  position: absolute;
-                  z-index: 999;
-                  left: 50%;
-                  top: 50%;
-                  transform: translate(-50%, -50%);
-                ">
-              <nut-icon name="close" color="white" size="20px"></nut-icon>
-            </div>
-            <div v-if="actionName == '喜欢'" style="
-                  color: #fff;
-                  background: rgba(0, 0, 0, 0.3);
-                  padding: 10px 20px;
-                  font-size: 24px;
-                  position: absolute;
-                  z-index: 999;
-                  left: 50%;
-                  top: 50%;
-                  transform: translate(-50%, -50%);
-                ">
-              <nut-icon name="follow" color="white" size="20px"></nut-icon>
-            </div>
->>>>>>> Stashed changes
+ 
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
         :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
@@ -87,12 +56,6 @@
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
               </div>
-<<<<<<< Updated upstream
-=======
-              <div class="dishchoicebox">
-                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
-              </div>
->>>>>>> Stashed changes
             </div>
           </div>
         </template>
@@ -204,13 +167,14 @@ export default {
       this.$router.push('/info')
     },
     onCardDragMove(obj) {
-      if (obj.left < -10) {
-        this.actionName = "不喜欢";
-      } else if (obj.left > 10) {
-        this.actionName = "喜欢";
-      } else if (obj.top > 10 || obj.top<-10){
+      if(obj.top > 20 || obj.top<-20){
         this.actionName = "饭饭";
       }
+      else if (obj.left < -20) {
+        this.actionName = "不喜欢";
+      } else if (obj.left > 20) {
+        this.actionName = "喜欢";
+      } 
     },
     onCardDragStop(obj) {
       this.actionName = "";
