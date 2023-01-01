@@ -10,6 +10,7 @@ import com.fan.dishsystem.utils.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Integer> preferenceMap, List<Ingredient> ingredients) {
-        if (repository.existsByDishName(dishName)) {
+        if (repository.existsByDishName(dishName) && repository.existsDishByPosition(position)) {
             return new Response(ResponseCode.ADD_DISH_ERROR, "该菜品已存在", null);
         }
         Preference preference = new Preference(
@@ -54,7 +55,7 @@ public class DishServiceImpl implements DishService {
                 preferenceMap.get("sourness"),
                 preferenceMap.get("sweetness"),
                 preferenceMap.get("bitterness"));
-        Dish dish = new Dish(null, dishName, description, photoUrl, position, null, preference, ingredients);
+        Dish dish = new Dish(null, dishName, description, photoUrl, position, null, preference, ingredients, new ArrayList<>());
         repository.insert(dish);
         Map<String, Object> data = new HashMap<>();
         data.put("dish", dish);
