@@ -43,7 +43,7 @@
 
     <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
       <!-- 遮罩层显示操作或动画 -->
-      <div v-if="actionName != ''" style="
+      <div v-if="actionName == '不喜欢'" style="
                   color: #fff;
                   background: rgba(0, 0, 0, 0.3);
                   padding: 10px 20px;
@@ -54,7 +54,20 @@
                   top: 50%;
                   transform: translate(-50%, -50%);
                 ">
-              {{ actionName }}
+              <nut-icon name="close" color="white" size="20px"></nut-icon>
+            </div>
+            <div v-if="actionName == '喜欢'" style="
+                  color: #fff;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 10px 20px;
+                  font-size: 24px;
+                  position: absolute;
+                  z-index: 999;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                ">
+              <nut-icon name="follow" color="white" size="20px"></nut-icon>
             </div>
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
         :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" dragDirection="horizontal" :hasShadow="true">
