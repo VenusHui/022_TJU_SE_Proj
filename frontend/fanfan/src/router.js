@@ -26,6 +26,10 @@ const routes = [
     ],
   },
   {
+    path: '/fanfan',
+    component: () => import('./views/FanFanView.vue'),
+  },
+  {
     path: '/info',
     component: () => import('./views/InfoView.vue'),
   },
