@@ -49,7 +49,7 @@ public class UserController {
             String userName = form.get("userName").toString();
             return ResponseEntity.ok(userService.loginByUserName(userName, password));
         }
-        return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", new HashMap<>()));
+        return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
     }
 
     @PostMapping("/users/")

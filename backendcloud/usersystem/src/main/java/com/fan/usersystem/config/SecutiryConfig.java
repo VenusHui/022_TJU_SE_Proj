@@ -22,6 +22,12 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users/{userId}/").permitAll();
+                .antMatchers(HttpMethod.GET,
+                        "/users/",
+                        "/users/{userId}/").permitAll()
+                .antMatchers(HttpMethod.PUT,
+                        "/users/{userId}/").permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/users/{userId}/").permitAll();
     }
 }

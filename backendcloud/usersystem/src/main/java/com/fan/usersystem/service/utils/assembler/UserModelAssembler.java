@@ -1,5 +1,6 @@
 package com.fan.usersystem.service.utils.assembler;
 
+import com.fan.usersystem.controller.UserController;
 import com.fan.usersystem.pojo.User;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -22,7 +23,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserModelAssembler implements RepresentationModelAssembler<User, EntityModel<User>> {
     @Override
     public EntityModel<User> toModel(User user) {
-        return EntityModel.of(user);
+        return EntityModel.of(user,
+                linkTo(methodOn(UserController.class).getUser(user.getUserId())).withSelfRel(),
+                linkTo(methodOn(UserController.class).setUser(user.getUserId(), "userName", "")).withRel("set user name"),
+                linkTo(methodOn(UserController.class).setUser(user.getUserId(), "avatar", "")).withRel("set user avatar"),
+                linkTo(methodOn(UserController.class).deleteUser(user.getUserId())).withRel("delete"));
     }
 
     public CollectionModel<EntityModel<User>> toCollectionModel(List<User> userList) {
