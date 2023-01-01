@@ -26,6 +26,10 @@ const routes = [
     ],
   },
   {
+    path: '/info',
+    component: () => import('./views/InfoView.vue')
+  },
+  {
     path: '/menu',
     component: () => import('./views/MenuView.vue')
   },
