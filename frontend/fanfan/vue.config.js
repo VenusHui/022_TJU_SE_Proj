@@ -3,7 +3,8 @@ const path = require('path')
 
 const { NODE_ENV, VUE_APP_TITLE = '' } = process.env
 
-const config = {
+module.exports = {
+  publicPath:'./',
   transpileDependencies: false,
   productionSourceMap: NODE_ENV === 'production',
   chainWebpack: (setting) => {
@@ -28,7 +29,7 @@ const config = {
         path.resolve(__dirname, 'src/styles/variable.less')
       ]
     }
-  },
+  }
   // devServer: {
   //   proxy: {
   //     '/api': {
@@ -40,8 +41,6 @@ const config = {
   //     }
   //   }
   // }
+
 }
-
-module.exports = defineConfig(config)
-
 
