@@ -8,7 +8,7 @@
         @click="JumpSearch">search</nut-button>
     </div>
     <div style="margin-top:10px;">
-      <nut-list :listData="indexitems" height="125" container-height="1000" @scroll-bottom="handleScroll">
+      <nut-list :listData="indexitems" height="150" container-height="550" @scroll-bottom="handleScroll">
         <template v-slot:default="{ item }">
           <nut-row class="row" type="flex" justify="center" gutter="10">
             <nut-col :span="11">
@@ -69,16 +69,6 @@ export default {
         right: {
           name: '小食堂二楼',
           url: 'https://img.zcool.cn/community/0131105ff6c22811013fdcc726e15b.jpg@3000w_1l_0o_100sh.jpg'
-        }
-      },
-      {
-        left: {
-          name: '教师食堂',
-          url: 'https://pic.ntimg.cn/file/20141125/19138507_131708744000_2.jpg'
-        },
-        right: {
-          name: '清真食堂',
-          url: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.Z00-PiYWai4Eyh874rqrKAHaLH?pid=ImgDet&rs=1'
         }
       },
       {

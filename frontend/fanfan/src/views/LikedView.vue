@@ -6,7 +6,7 @@
             </div>
         </div>
         <div style="margin-top:10px">
-            <nut-list :listData="likeditems" height="260" container-height="600" @scroll-bottom="likedhandleScroll">
+            <nut-list :listData="likeditems" height="260" container-height="550" @scroll-bottom="likedhandleScroll">
                 <template v-slot:default="{ item }">
                     <nut-row class="row" type="flex" justify="center" gutter="10">
                         <nut-col :span="11">

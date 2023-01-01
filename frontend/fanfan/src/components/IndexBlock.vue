@@ -24,7 +24,7 @@ export default {
     /* background-image: url("/src/assets/dish1.jpg"); */
     background-size: cover;
     background-position: center center;
-    height: 125px;
+    height: 150px;
     width: 100%;
     background-color: rgb(255, 255, 255);
     /* box-shadow: 5px 5px 5px rgb(124, 124, 124); */
