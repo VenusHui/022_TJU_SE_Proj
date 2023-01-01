@@ -27,7 +27,15 @@ const routes = [
   },
   {
     path: '/info',
-    component: () => import('./views/InfoView.vue')
+    component: () => import('./views/InfoView.vue'),
+  },
+  {
+    path: '/revisePassword',
+    component: () => import('./views/PasswordView.vue'),
+  },
+  {
+    path: '/reviseInfo',
+    component: () => import('./views/InfoRevisionView.vue'),
   },
   {
     path: '/menu',

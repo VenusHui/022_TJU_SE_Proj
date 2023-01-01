@@ -3,9 +3,17 @@
         <div class="menuback" @click="JumpBack()">
             <nut-icon name="left" size="15px"></nut-icon>
         </div>
-        <div class="settings" @click="">
-            <nut-icon name="setting" size="15px"></nut-icon>
-        </div>
+        <nut-popover v-model:visible="visible.lightTheme" location="bottom-end">
+            <template #reference>
+                <nut-icon name="setting" size="15px"></nut-icon>
+            </template>
+            <template #content>
+                <div class="options" style="width: 76px;">
+                    <div @click="RevisePassword" style="margin: 10px;">修改密码</div>
+                    <div @click="ReviseInfo" style="margin: 10px;">修改信息</div>
+                </div>
+            </template>
+        </nut-popover>
     </div>
     <div class="container">
         <div class="image">
@@ -59,11 +67,20 @@ export default {
         const value2 = ref(5);
         const value3 = ref(3);
         const value4 = ref(5);
-        return { value1, value2, value3, value4 }
+        const visible = ref({
+            lightTheme: false,
+        })
+        return { value1, value2, value3, value4, visible }
     },
     methods: {
         JumpBack() {
             this.$router.back()
+        },
+        RevisePassword() {
+            this.$router.push('/revisePassword')
+        },
+        ReviseInfo() {
+            this.$router.push('/reviseInfo')
         }
     }
 }
