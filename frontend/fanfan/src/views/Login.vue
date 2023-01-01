@@ -43,7 +43,7 @@
 
 <script>
 import axios from 'axios'
-import { showNotify } from 'vant';
+import { Toast } from '@nutui/nutui';
 export default {
   data(){
     return{
@@ -77,7 +77,7 @@ export default {
           console.log('result', res)
           if(res.data.code==201){
             // 未注册 因为是username登录所以不注册
-            showNotify('登录失败，该用户名未注册');
+
           }
           else if(res.data.code==200)
           {
