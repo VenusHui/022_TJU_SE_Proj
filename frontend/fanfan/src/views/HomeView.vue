@@ -14,6 +14,7 @@
         </nut-badge>
       </template>
     </nut-navbar>
+<<<<<<< Updated upstream
 
     <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
       <!-- 遮罩层显示操作或动画 -->
@@ -35,6 +36,36 @@
         </div>
       </div>
             
+=======
+    <div id="cardBox" style="height:100%;padding:5%;padding-bottom: 13%;">
+      <!-- 遮罩层显示操作或动画 -->
+      <div v-if="actionName == '不喜欢'" style="
+                  color: #fff;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 10px 20px;
+                  font-size: 24px;
+                  position: absolute;
+                  z-index: 999;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                ">
+              <nut-icon name="close" color="white" size="20px"></nut-icon>
+            </div>
+            <div v-if="actionName == '喜欢'" style="
+                  color: #fff;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 10px 20px;
+                  font-size: 24px;
+                  position: absolute;
+                  z-index: 999;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                ">
+              <nut-icon name="follow" color="white" size="20px"></nut-icon>
+            </div>
+>>>>>>> Stashed changes
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
         :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
@@ -56,6 +87,12 @@
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
               </div>
+<<<<<<< Updated upstream
+=======
+              <div class="dishchoicebox">
+                <nut-icon name="heart" color="red" size="30px" style="margin:10px"></nut-icon>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
         </template>

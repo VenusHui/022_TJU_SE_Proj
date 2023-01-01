@@ -1,14 +1,13 @@
 <template>
-    <div class="likeditem boxradius" @click="JumpDetail">
-        <!-- <img class="boxradius" :src="imgUrl" style="object-fit: cover;margin-left:10px; width: 90px;height: 90px;" /> -->
-        <img class="boxradius" src="../assets/dish3.jpg" style="object-fit: cover;margin-left:10px;width: 90px;  height: 90px;" />
+    <div class="likeditem boxradius" @click="JumpDetail" :style="{ 'background-image': 'url(' + imgUrl + ')' }">
         <div class="likedinfobox boxradius">
-            <div style="color: black; font-size: 20px;">
+            <div style="color: white;">
                 {{ name }}
             </div>
-            <div>
-                <nut-icon name="heart-fill" size="40px" color="red" style="margin-right:20px"></nut-icon>
-                <nut-icon name="star-fill-n" size="40px" color="yellow"></nut-icon>
+            <div class="likedicon">
+                <nut-icon name="heart-fill" size="25px" color="red" style="margin-right:5px"></nut-icon>
+                <img src="../assets/fander-icon.png" style="height:30px" />
+                <!-- <nut-icon name="star" size="20px" color="white"></nut-icon> -->
             </div>
         </div>
     </div>
@@ -16,7 +15,7 @@
 
 <script>
 export default {
-    name: 'IndexBlock',
+    name: 'LikedCard',
     props: {
         name: String,
         imgUrl: String
@@ -35,18 +34,22 @@ export default {
 }
 
 .likeditem {
-    width: 98%;
-    height: 100px;
-    background: rgb(226, 60, 19);
-    background: linear-gradient(270deg, rgba(226, 60, 19, 1) 0%, rgba(255, 255, 255, 1) 61%);
+    width: 100%;
+    height: 260px;
+    /* background-image: url("../assets/dish6.jpg"); */
+    background-size: cover;
+    background-position: center center;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .likedinfobox {
+    height: 40%;
     width: 100%;
+    padding: 0 10px 10px 10px;
+    background: linear-gradient(360deg, rgba(36, 31, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 </style>

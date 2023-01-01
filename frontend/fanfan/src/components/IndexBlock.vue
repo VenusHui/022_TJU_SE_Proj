@@ -1,5 +1,5 @@
 <template>
-    <div class="indexblock radius" style="background-image:url({{ imgurl}})">
+    <div class="indexblock radius"  :style="{ 'background-image': 'url(' + imgUrl + ')' }">
         <div class="label radius">
             {{ msg }}
         </div>
@@ -21,12 +21,13 @@ export default {
     border-radius: 2%;
 }
 .indexblock {
-    background-image: url("/src/assets/dish1.jpg");
-    background-size: 100% 100%;
-    height: 120px;
-    width: 160px;
+    /* background-image: url("/src/assets/dish1.jpg"); */
+    background-size: cover;
+    background-position: center center;
+    height: 125px;
+    width: 100%;
     background-color: rgb(255, 255, 255);
-    box-shadow: 5px 5px 5px rgb(124, 124, 124);
+    /* box-shadow: 5px 5px 5px rgb(124, 124, 124); */
 }
 
 .label {
