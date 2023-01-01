@@ -3,6 +3,8 @@ const path = require('path')
 
 const { NODE_ENV, VUE_APP_TITLE = '' } = process.env
 
+var webpack = require('webpack');
+
 module.exports = {
   publicPath:'./',
   transpileDependencies: false,
@@ -22,6 +24,15 @@ module.exports = {
       }
     }
   },
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+      })
+    ]
+  }
+
   // devServer: {
   //   proxy: {
   //     '/api': {

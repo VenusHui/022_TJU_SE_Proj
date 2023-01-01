@@ -13,6 +13,8 @@ import "@nutui/nutui/dist/style.css";
 import { Notify } from 'vant';
 import 'vant/lib/index.css';
 
+import $ from 'jquery';
+
 
 const app = createApp(App);
 
@@ -20,6 +22,8 @@ app.use(router).use(NutUI)
 
 // vant组件
 app.use(Notify);
+
+app.use($);
 
 app.mount("#app");
 
