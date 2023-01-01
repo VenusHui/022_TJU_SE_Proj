@@ -9,9 +9,11 @@
           icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"></nut-avatar>
       </template>
       <template #right>
-        <nut-badge :value="8">
-          <nut-icon name="notice"></nut-icon>
-        </nut-badge>
+        <div @click="JumpFanFan()">
+          <nut-badge :value="8">
+            <nut-icon name="notice"></nut-icon>
+          </nut-badge>
+        </div>
       </template>
     </nut-navbar>
 
@@ -165,6 +167,9 @@ export default {
     },
     JumpInfo() {
       this.$router.push('/info')
+    },
+    JumpFanFan() {
+      this.$router.push('/fanfan')
     },
     onCardDragMove(obj) {
       if (obj.left < -10) {
