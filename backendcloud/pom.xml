@@ -5,6 +5,7 @@
     <modules>
         <module>backend</module>
         <module>usersystem</module>
+        <module>dishsystem</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
