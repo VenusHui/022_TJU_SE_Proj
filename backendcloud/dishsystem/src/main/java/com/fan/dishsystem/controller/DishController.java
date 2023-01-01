@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static java.lang.Double.parseDouble;
-
 @RestController
 /**
  * @author: VenusHui
@@ -30,11 +28,30 @@ public class DishController {
     DishService dishService;
 
     @GetMapping("/dishes/")
+    /**
+     * @param :
+     * @return: ResponseEntity<Response>
+     * @author: VenusHui
+     * @description: 查询所有菜品
+     * @date: 2023/1/1 23:04
+     */
     public ResponseEntity<Response> getAll() {
         return ResponseEntity.ok(dishService.getAll());
     }
 
     @PostMapping("/dishes/")
+    /**
+     * @param form:
+     *            dishName:
+     *            description:
+     *            photoUrl:
+     *            position:
+     *
+     * @return: ResponseEntity<Response>
+     * @author: VenusHui
+     * @description: 添加菜品
+     * @date: 2023/1/1 23:04
+     */
     public ResponseEntity<Response> addDish(@RequestParam Map<String, Object> form) {
         String dishName = form.get("dishName").toString();
         String description = form.get("description").toString();
@@ -61,6 +78,6 @@ public class DishController {
 
         List<Ingredient> ingredients = Stream.of(form.get("ingredients"))
                 .map(obj -> new Ingredient(obj.toString())).toList();
-
+        return ResponseEntity.ok(dishService.addDish(dishName, description, photoUrl, position, preferenceMap, ingredients));
     }
 }

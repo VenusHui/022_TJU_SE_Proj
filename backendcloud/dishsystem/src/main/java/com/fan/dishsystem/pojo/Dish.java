@@ -28,4 +28,5 @@ public class Dish {
     private Double score;
     private Preference preference;
     private List<Ingredient> ingredients;
+    private List<Comment> comments;
 }
