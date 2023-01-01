@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
+
 @Service
 /**
  * @author: VenusHui
@@ -46,15 +48,15 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Integer> preferenceMap, List<Ingredient> ingredients) {
+    public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Object> preferenceMap, List<Ingredient> ingredients) {
         if (repository.existsByDishName(dishName) && repository.existsDishByPosition(position)) {
             return new Response(ResponseCode.ADD_DISH_ERROR, "该菜品已存在", null);
         }
         Preference preference = new Preference(
-                preferenceMap.get("spiciness"),
-                preferenceMap.get("sourness"),
-                preferenceMap.get("sweetness"),
-                preferenceMap.get("bitterness"));
+                parseInt(preferenceMap.get("spiciness").toString()),
+                parseInt(preferenceMap.get("sourness").toString()),
+                parseInt(preferenceMap.get("sweetness").toString()),
+                parseInt(preferenceMap.get("bitterness").toString()));
         Dish dish = new Dish(null, dishName, description, photoUrl, position, null, preference, ingredients, new ArrayList<>());
         repository.insert(dish);
         Map<String, Object> data = new HashMap<>();

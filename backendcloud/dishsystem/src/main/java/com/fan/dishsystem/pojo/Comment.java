@@ -1,7 +1,14 @@
 package com.fan.dishsystem.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 /**
  * @author: VenusHui
  * @description: TODO
