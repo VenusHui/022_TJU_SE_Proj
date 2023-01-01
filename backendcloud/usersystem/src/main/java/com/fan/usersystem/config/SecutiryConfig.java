@@ -22,10 +22,8 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users/{userId}/").permitAll()
-                .antMatchers("/users/{userId}/").hasIpAddress("180.160.38.15")
-                .antMatchers("/users/{userId}/").hasIpAddress("124.220.158.211")
-                .antMatchers("/users/{userId}/").hasIpAddress("127.0.0.1")
+                .antMatchers(HttpMethod.GET, "/users/{userId}/").hasIpAddress("124.220.158.211")
+                .antMatchers(HttpMethod.GET, "/users/{userId}/").hasIpAddress("127.0.0.1")
                 .anyRequest().authenticated();
     }
 }

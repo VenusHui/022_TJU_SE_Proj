@@ -55,7 +55,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: backendcloud/backend/Dockerfile
+          file: backendcloud/usersystem/Dockerfile
   
   deploy:
     name: Deployment
