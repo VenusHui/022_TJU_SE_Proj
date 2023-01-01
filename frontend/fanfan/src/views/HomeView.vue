@@ -48,8 +48,8 @@
                     <div class="dishprice">￥{{cards[0].price}}</div>
                   </div>
                   <div class="dishscorebox">
-                    <nut-rate v-model="cards[0].star" readonly />
-                    <div class="dishscore" style="margin-left:10px">{{cards[0].star}}</div>
+                    <nut-rate v-model="cards[0].star" active-color="#FFC800" readonly />
+                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{cards[0].star}}</div>
                   </div>
                 </div>
                 <div @click="JumpDetail" style="align-self: center;">
