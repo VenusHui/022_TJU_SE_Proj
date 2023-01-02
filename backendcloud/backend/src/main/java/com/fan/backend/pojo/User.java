@@ -25,4 +25,6 @@ public class User {
     private Integer studentId;
     private Timestamp registerDate;
     private String avatar;
+    private String institute;
+    private String grade;
 }
