@@ -1,22 +1,29 @@
 package com.fan.dishsystem.service.utils.assembler;
 
-import com.fan.dishsystem.controller.CommentController;
-import com.fan.dishsystem.controller.DishController;
 import com.fan.dishsystem.pojo.Comment;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import java.util.List;
 
+@Component
 /**
- * @author climo
- * @version 1.0
- * @date 2023/1/2 11:40
+ * @author: VenusHui
+ * @description: TODO
+ * @date: 2023/1/2 19:41
+ * @version: 1.0
  */
 public class CommentModelAssembler implements RepresentationModelAssembler<Comment, EntityModel<Comment>> {
     @Override
     public EntityModel<Comment> toModel(Comment comment) {
-        return null;
+        return EntityModel.of(comment);
+    }
+
+    public CollectionModel<EntityModel<Comment>> toCollectionModel(List<Comment> commentList) {
+        List<EntityModel<Comment>> comments = commentList.stream()
+                .map(this::toModel).toList();
+        return CollectionModel.of(comments);
     }
 }

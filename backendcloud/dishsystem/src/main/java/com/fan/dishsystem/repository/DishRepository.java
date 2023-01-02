@@ -2,12 +2,13 @@ package com.fan.dishsystem.repository;
 
 import com.fan.dishsystem.pojo.Dish;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
+import java.util.List;
 
 public interface DishRepository extends MongoRepository<Dish, String> {
     public Boolean existsByDishName(String dishName);
-    public Boolean existsDishByPosition(String position);
-    public Dish findDishByDishName(String dishName);
-
-    public Dish findDishBy_id(String dishId);
+    public Boolean existsByPosition(String position);
+    @Query("{'comments': {$elemMatch: {'user_id': ?0}}}")
+    public List<Dish> findByCommentsUserId(Integer userId);
 }

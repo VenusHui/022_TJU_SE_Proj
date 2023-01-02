@@ -1,29 +1,24 @@
-package com.fan.dishsystem.controller;
+package com.fan.backend.controller.dish;
 
-import com.fan.dishsystem.service.CommentService;
-import com.fan.dishsystem.utils.Response;
-import com.fan.dishsystem.utils.ResponseCode;
+import com.fan.backend.service.DishSystemService;
+import com.fan.backend.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Objects;
-
-import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
 
 @RestController
 /**
  * @author: VenusHui
  * @description: TODO
- * @date: 2023/1/2 20:31
+ * @date: 2023/1/3 0:22
  * @version: 1.0
  */
 public class CommentController {
 
     @Autowired
-    CommentService commentService;
+    DishSystemService dishSystemService;
 
     @GetMapping("/comments/")
     /**
@@ -33,8 +28,8 @@ public class CommentController {
      * @description: 获取所有评论
      * @date: 2023/1/3 0:04
      */
-    public ResponseEntity<Response> getAll() {
-        return ResponseEntity.ok(commentService.getAll());
+    public ResponseEntity<Response> getAllComments() {
+        return ResponseEntity.ok(dishSystemService.getAllComments());
     }
 
     @GetMapping("/comments/{commentId}/")
@@ -46,7 +41,7 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> getComment(@PathVariable String commentId) {
-        return ResponseEntity.ok(commentService.getCommentById(commentId));
+        return ResponseEntity.ok(dishSystemService.getComment(commentId));
     }
 
     @PutMapping("/comments/{commentId}/")
@@ -60,14 +55,9 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> setComment(@PathVariable String commentId,
-                                               @RequestParam(value = "filter") String filter,
-                                               @RequestParam(value = "value") String value) {
-        if (Objects.equals(filter, "context")) {
-            return ResponseEntity.ok(commentService.setCommentByContext(commentId, value));
-        } else if (Objects.equals(filter, "score")) {
-            return ResponseEntity.ok(commentService.setCommentByScore(commentId, parseDouble(value)));
-        }
-        return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
+                               @RequestParam(value = "filter") String filter,
+                               @RequestParam(value = "value") String value) {
+        return ResponseEntity.ok(dishSystemService.setComment(commentId, filter, value));
     }
 
     @GetMapping("/dishes/{dishId}/comments/")
@@ -79,7 +69,7 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> getCommentsByDishId(@PathVariable String dishId) {
-        return ResponseEntity.ok(commentService.getCommentsByDishId(dishId));
+        return ResponseEntity.ok(dishSystemService.getCommentsByDishId(dishId));
     }
 
     @GetMapping("/users/{userId}/comments/")
@@ -91,7 +81,7 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> getCommentsByUserId(@PathVariable Integer userId) {
-        return ResponseEntity.ok(commentService.getCommentsByUserId(userId));
+        return ResponseEntity.ok(dishSystemService.getCommentsByUserId(userId));
     }
 
     @PostMapping("/dishes/{dishId}/comments/")
@@ -104,11 +94,8 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> addComment(@PathVariable String dishId,
-                                               @RequestParam Map<String, Object> form) {
-        Integer userId = parseInt(form.get("userId").toString());
-        String context = form.get("context").toString();
-        Double score = parseDouble(form.get("score").toString());
-        return ResponseEntity.ok(commentService.addComment(dishId, userId, context, score));
+                               @RequestParam Map<String, Object> form) {
+        return ResponseEntity.ok(dishSystemService.addComment(dishId, form));
     }
 
     @DeleteMapping("/comments/{commentId}/")
@@ -120,7 +107,6 @@ public class CommentController {
      * @date: 2023/1/3 0:04
      */
     public ResponseEntity<Response> deleteComment(@PathVariable String commentId) {
-        return ResponseEntity.ok(commentService.deleteComment(commentId));
+        return ResponseEntity.ok(dishSystemService.deleteComment(commentId));
     }
-
 }

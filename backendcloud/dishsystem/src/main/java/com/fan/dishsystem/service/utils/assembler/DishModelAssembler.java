@@ -4,10 +4,12 @@ import com.fan.dishsystem.controller.DishController;
 import com.fan.dishsystem.pojo.Dish;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Component
 /**
  * @author: VenusHui
  * @description: TODO
