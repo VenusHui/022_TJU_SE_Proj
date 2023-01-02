@@ -4,11 +4,9 @@
     </div>
     <div class="tabbar">
         <nut-tabbar :bottom="true" :safe-area-inset-bottom="true" @tab-switch="tabSwitch" v-model:visible="activeName">
-
             <nut-tabbar-item to="/more" tab-title="more" name="category" icon="category"></nut-tabbar-item>
-            <nut-tabbar-item to="/home" tab-title="Home" name="home" icon="home"></nut-tabbar-item>
-
-            <nut-tabbar-item to="/liked" tab-title="Liked" name="cart" icon="heart"></nut-tabbar-item>
+            <nut-tabbar-item to="/home" tab-title="home" name="home" icon="home"></nut-tabbar-item>
+            <nut-tabbar-item to="/liked" tab-title="liked" name="cart" icon="heart"></nut-tabbar-item>
         </nut-tabbar>
     </div>
 </template>
@@ -16,6 +14,8 @@
 <script>
 import { ref } from 'vue';
 export default {
+    data(){
+    },
     setup() {
         const activeName = ref("home");
         function tabSwitch(item, index) {

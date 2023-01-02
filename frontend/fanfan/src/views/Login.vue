@@ -33,7 +33,6 @@
 
     </div>
     <div class="bottom">
-
       <div class="confirmbutton">
         <nut-button size="large" type="primary" @click="ConfirmLogin">Confirm</nut-button>
       </div>
@@ -128,11 +127,9 @@ export default {
 
                 this.$router.push('/home')
               }
-
             }, error => {
               console.log('错误', error.message)
             })
-
           }
           else if(res.data.code==200)
           {
@@ -142,15 +139,10 @@ export default {
             
             this.$router.push('/home')
           }
-
         }, error => {
           console.log('错误', error.message)
         })
       }
-
-
-
-
     }
   },
 

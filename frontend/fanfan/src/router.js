@@ -49,6 +49,10 @@ const routes = [
     path: '/detail',
     component: () => import('./views/DetailView.vue')
   },
+  {
+    path: '/commentedit',
+    component: () => import('./views/CommentEdit.vue')
+  },
 ]
 
 const router = createRouter({
