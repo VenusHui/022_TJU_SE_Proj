@@ -25,26 +25,49 @@
 <script>
 import { reactive, toRefs } from 'vue';
 import LikedCard from '@/components/LikedCard.vue';
+import axios from 'axios'
 export default {
     components: {
         LikedCard,
     },
     data() {
         return {
-            // windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
-            // windowHeight: document.documentElement.clientHeight,//实时屏幕高度
-
         }
     },
     setup() {
+        // axios({
+        //     method: 'get',
+        //     params: {
+        //         filter: 'userName'
+        //     },
+        //     data: {
+        //         userName: this.userName,
+        //         password: this.passwordName,
+        //     },
+        //     headers: { 'Content-Type': 'multipart/form-data' },
+        //     url: 'http://124.220.158.211:7000/users/token/',
+        // }).then((res) => {
+        //     console.log('result', res)
+        //     if (res.data.code == 201) {
+        //         // 未获取 因为是username登录所以不注册
+        //     }
+        //     else if (res.data.code == 200) {
+        //         // 获取成功
+        //         localStorage.setItem("token", res.data.data.token)
+        //         localStorage.setItem("userId", res.data.data.userId)                
+        //         this.$router.push('/home')
+        //     }
+        // }, error => {
+        //     console.log('错误', error.message)
+        // });
         const state = reactive({
             likeditems: [
                 {
                     left: {
                         name: '无骨凤爪',
                         url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                        isFaned:true,
-                        isLiked:true,
+                        isFaned: true,
+                        isLiked: true,
                     },
                     right: {
                         name: '蒸包',
@@ -130,28 +153,6 @@ export default {
         };
         return { ...toRefs(state), likedhandleScroll };
     },
-    // watch: {
-    //     windowHeight(val) {
-    //         let that = this;
-    //         // console.log("实时屏幕高度：", val, that.windowHeight);
-    //     },
-    //     windowWidth(val) {
-    //         let that = this;
-    //         // console.log("实时屏幕宽度：", val, that.windowHeight);
-    //     }
-    // },
-    // mounted() {
-    //     var that = this;
-    //     // <!--把window.onresize事件挂在到mounted函数上-->
-    //     window.onresize = () => {
-    //         return (() => {
-    //             window.fullHeight = document.documentElement.clientHeight;
-    //             window.fullWidth = document.documentElement.clientWidth;
-    //             that.windowHeight = window.fullHeight;  // 高
-    //             that.windowWidth = window.fullWidth; // 宽
-    //         })()
-    //     };
-    // },
 }
 </script>
 

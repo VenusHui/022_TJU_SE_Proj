@@ -62,8 +62,7 @@
           </div>
         </template>
         <template #secondCard style="width: 100%; height: 100%">
-          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].img+")"}'>
-      
+          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].img+")"}'>      
             <div class="dishUIbox">
               <div class="dishinfobox">
                 <div class="dishinfotextbox">

@@ -8,7 +8,7 @@
             <div class="detailtopbox">
                 <div class="detailinfobox marginbottom">
                     <div class="marginbottom" style="font-size:28px">
-                        章鱼小丸子
+                        {{ dishname }}
                     </div>
                     <div style="display: flex; font-size: small;">
                         <div style="margin-right:20px">小食堂二楼</div>
@@ -31,13 +31,14 @@
                     </div>
                 </div>
                 <div>
-                    <img v-if="false" src="../assets/fander-icon-black.png" style="height:40px;margin-right:20px" />
-                    <img v-if="true" src="../assets/fander-icon-red.png" style="height:40px;margin-right:20px" />
+                    <img @click="showPopup" src="../assets/fander-icon-black.png"
+                        style="height:40px;margin-right:20px" />
                     <nut-icon v-if="true" name="addfollow" color="black" size="30px"></nut-icon>
                     <nut-icon v-if="false" name="heart" color="red" size="30px"></nut-icon>
+                    <FanPop v-if="show" :name="dishname" :imgUrl="dishimg"></FanPop>
                 </div>
             </div>
-            <img style="height: 25%;width: 100%;border-radius: 3%;" src="../assets/dish4.jpg" />
+            <img style="height: 250px;width: 100%;border-radius: 3%;object-fit:cover;" :src="dishimg" />
         </div>
         <div class="detailbox">
             <div class="marginbottom" style="font-size: 20px;">
@@ -83,10 +84,30 @@
 
 <script>
 import { ref } from 'vue';
+import LikedCard from '@/components/LikedCard.vue';
+import FanPop from '@/components/FanPop.vue';
 export default {
+    components: {
+        LikedCard,
+        FanPop,
+    },
+    data() {
+        return {
+            dishname: "章鱼小丸子",
+            dishimg: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg',
+        }
+    },
     setup() {
         const value = ref(3);
-        return { value }
+        const show = ref(false);
+        const showPopup = () => {
+            show.value = true;
+        };
+        return {
+            value,
+            show,
+            showPopup,
+        };
     },
     methods: {
         JumpBack() {
@@ -135,5 +156,18 @@ export default {
 
 .commentrightbox {
     font-size: small;
+}
+
+
+.popup {
+    height: 60%;
+    width: 70%;
+    background-color: rgba(5, 119, 220, 0);
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 </style>
