@@ -3,17 +3,15 @@
         <router-view></router-view>
     </div>
     <div class="tabbar">
-        <nut-tabbar :bottom="true" :safe-area-inset-bottom="true" @tab-switch="tabSwitch" v-model:visible="activeName"
-            unactive-color="#7d7e80" active-color="#e23c13">
-            <nut-tabbar-item to="/more" tab-title="more" name="category" icon="category"></nut-tabbar-item>
-            <nut-tabbar-item to="/home" tab-title="home" name="home" icon="home" :dot="homedotflag"></nut-tabbar-item>
-            <nut-tabbar-item to="/liked" tab-title="liked" name="cart" icon="heart"></nut-tabbar-item>
-        </nut-tabbar>
+        <van-tabbar v-model="activeName" route active-color="#e23c13">
+            <van-tabbar-item to="/more" icon="apps-o">More</van-tabbar-item>
+            <van-tabbar-item to="/home" icon="home-o" :dot="homedotflag">Home</van-tabbar-item>
+            <van-tabbar-item to="/liked" icon="like-o">Liked</van-tabbar-item>
+        </van-tabbar>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue';
 export default {
     data() {
         return {
@@ -22,14 +20,7 @@ export default {
         }
     },
     setup() {
-        // const activeName = ref("home");
-        function tabSwitch(item, index) {
-            console.log('item:', item, 'index:', index);
-            this.activeName = index;
-        }
         return {
-            tabSwitch,
-            // activeName,
         };
     },
 }
