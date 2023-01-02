@@ -19,5 +19,5 @@ public class Comment {
     private Integer userId;
     private String context;
     private Double score;
-    private Date commentData;
+    private Date commentDate;
 }

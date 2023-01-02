@@ -170,12 +170,12 @@ export default {
       this.$router.push('/fanfan')
     },
     onCardDragMove(obj) {
-      if(obj.top > 20 || obj.top<-20){
+      if(obj.top > 20 && obj.top>Math.abs(obj.left) || obj.top < -20 && obj.top<-Math.abs(obj.left)){
         this.actionName = "饭饭";
       }
-      else if (obj.left < -20) {
+      else if (obj.left < -20 && obj.top>obj.left && obj.top<-obj.left) {
         this.actionName = "不喜欢";
-      } else if (obj.left > 20) {
+      } else if (obj.left > 20 && obj.top<obj.left && obj.top>-obj.left) {
         this.actionName = "喜欢";
       } 
     },
