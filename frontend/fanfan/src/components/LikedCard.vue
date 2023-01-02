@@ -12,31 +12,14 @@
                 <div style="color: white;font-size: 20px;display: flex;padding:0 0 10px 10px;">
                     {{ name }}
                 </div>
-                <div style="padding-right: 5px;">
+                <div style="padding-right: 8px;">
                     <div @click="UpdateLiked" style="width: 30px;height: 30px;">
-                        <nut-icon v-if="!isliked" name="addfollow" color="white" size="25px"></nut-icon>
                         <nut-icon v-if="isliked" name="heart-fill" color="red" size="30px"></nut-icon>
+                        <nut-icon v-else name="addfollow" color="white" size="30px"></nut-icon>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="blackmask boxradius">
-            <div v-if="readonly == false" @click="JumpDetail" style="height:100%;width:100%;"></div>
-            <div v-if="readonly" style="color: white;font-size: 35px;">
-                {{ name }}
-            </div>
-            <div v-else class="boxradius" style="width: 100%;display: flex;justify-content: space-between;">
-                <div style="color: white;font-size: 20px;display: flex;padding:0 0 10px 10px;">
-                    {{ name }}
-                </div>
-                <div style="padding-right: 5px;">
-                    <div @click="UpdateLiked" style="width: 30px;height: 30px;">
-                        <nut-icon v-if="!isliked" name="addfollow" color="white" size="25px"></nut-icon>
-                        <nut-icon v-if="isliked" name="heart-fill" color="red" size="30px"></nut-icon>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -65,6 +48,7 @@ export default {
         },
         UpdateLiked() {
             this.isliked = !this.isliked;
+            console.log('update the liked info')
             // 后端更新liked数据
         },
     }

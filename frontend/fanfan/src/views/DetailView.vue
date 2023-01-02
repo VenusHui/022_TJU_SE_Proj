@@ -30,12 +30,14 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div style="display: flex;">
                     <img @click="showPopup" src="../assets/fander-icon-black.png"
-                        style="height:40px;margin-right:20px" />
-                    <nut-icon v-if="true" name="addfollow" color="black" size="30px"></nut-icon>
-                    <nut-icon v-if="false" name="heart" color="red" size="30px"></nut-icon>
+                        style="height:40px;margin-right:10px" />
                     <FanPop v-if="show" :name="dishname" :imgUrl="dishimg"></FanPop>
+                    <div @click="UpdateLiked">
+                        <nut-icon v-if="isliked" name="heart-fill" color="red" size="40px"></nut-icon>
+                        <nut-icon v-else name="addfollow" color="black" size="40px"></nut-icon>
+                    </div>
                 </div>
             </div>
             <img style="height: 250px;width: 100%;border-radius: 3%;object-fit:cover;" :src="dishimg" />
@@ -95,6 +97,7 @@ export default {
         return {
             dishname: "章鱼小丸子",
             dishimg: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg',
+            isliked: true,
         }
     },
     setup() {
@@ -112,7 +115,12 @@ export default {
     methods: {
         JumpBack() {
             this.$router.back();
-        }
+        },
+        UpdateLiked() {
+            this.isliked = !this.isliked;
+            console.log('update the liked info')
+            // 后端更新liked数据
+        },
     }
 }
 </script>
