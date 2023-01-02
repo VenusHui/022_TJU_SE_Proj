@@ -1,16 +1,21 @@
 <template>
   <div style="height:100%;width: 100%;">
     <div class="indextopbox">
+      <div style="width: 60%;">
+        <nut-searchbar v-model="searchValue" input-background="#d7d7d7">
+          <template v-slot:leftin>
+            <nut-icon size="14" name="search2"></nut-icon>
+          </template>
+        </nut-searchbar>
+      </div>
       <div class="logotitle logocolor" style="margin-left: 10px;margin-right: 20px;">
         <b>Index</b>
       </div>
-      <nut-button class="searchbutton" size="normal" icon="search" plain type="default"
-        @click="JumpSearch">search</nut-button>
     </div>
     <div style="margin-top:10px;">
       <nut-list :listData="indexitems" height="150" container-height="530" @scroll-bottom="handleScroll">
         <template v-slot:default="{ item }">
-          <nut-row class="row" type="flex" justify="center" gutter="10">
+          <nut-row style="margin-bottom: 20px;" type="flex" justify="center" gutter="10">
             <nut-col :span="11">
               <IndexBlock :msg="item.left.name" :imgUrl="item.left.url"></IndexBlock>
             </nut-col>
@@ -41,6 +46,7 @@ export default {
   },
   setup() {
     const state = reactive({
+      searchValue: "",
       indexitems: [{
         left: {
           name: '热门推荐',
@@ -108,9 +114,5 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: white;
-}
-
-.row {
-  margin-bottom: 20px;
 }
 </style>
