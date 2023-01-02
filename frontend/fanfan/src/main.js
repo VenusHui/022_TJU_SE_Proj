@@ -15,7 +15,6 @@ import 'vant/lib/index.css';
 
 import $ from 'jquery';
 
-
 const app = createApp(App);
 
 app.use(router).use(NutUI)
@@ -29,12 +28,4 @@ app.mount("#app");
 
 App.config.globalProperties.$axios=axios;  //配置axios的全局引用
 
-// 每次请求前 有token就带上
-axios.interceptors.request.use( config => {
-    const token = localStorage.getItem("token");
-    if(token !== null && token !== ""){
-        config.headers.token = token;
-    }
-    return config
-  })
 

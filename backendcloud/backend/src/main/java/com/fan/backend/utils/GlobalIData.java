@@ -8,4 +8,6 @@ package com.fan.backend.utils;
  */
 public class GlobalIData {
     public final static String AVATAR_URL = "https://pic.imgdb.cn/item/63aea6fc08b68301634f4ba8.jpg";
+    public final static String INSTITUTE = "软件学院";
+    public final static String GRADE = "2020级";
 }

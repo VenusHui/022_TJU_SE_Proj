@@ -82,6 +82,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Response setUserInstitute(Integer userId, String institute) {
+        User user = userMapper.selectById(userId);
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("institute", institute).eq("user_id", userId);
+        userMapper.update(user, updateWrapper);
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", assembler.toModel(user));
+        return new Response(ResponseCode.SUCCESS, "修改学院成功", data);
+    }
+
+    @Override
+    public Response setUserGrade(Integer userId, String grade) {
+        User user = userMapper.selectById(userId);
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("grade", grade).eq("user_id", userId);
+        userMapper.update(user, updateWrapper);
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", assembler.toModel(user));
+        return new Response(ResponseCode.SUCCESS, "修改年级成功", data);
+    }
+
+    @Override
     public Response deleteUser(Integer userId) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);

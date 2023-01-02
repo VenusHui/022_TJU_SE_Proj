@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
             Map<String, Object> data = new HashMap<>();
             String encodedPassword = passwordEncoder.encode(password);
             Timestamp timestamp = new Timestamp(new Date().getTime());
-            User user = new User(null, userName, encodedPassword, studentId, timestamp, GlobalIData.AVATAR_URL);
+            User user = new User(null, userName, encodedPassword, studentId, timestamp, GlobalIData.AVATAR_URL, GlobalIData.INSTITUTE, GlobalIData.GRADE);
             userMapper.insert(user);
             data.put("user", assembler.toModel(user));
             return new Response(ResponseCode.SUCCESS, "注册成功", data);

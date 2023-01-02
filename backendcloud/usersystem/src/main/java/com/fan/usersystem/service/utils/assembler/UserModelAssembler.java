@@ -7,7 +7,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -27,6 +26,8 @@ public class UserModelAssembler implements RepresentationModelAssembler<User, En
                 linkTo(methodOn(UserController.class).getUser(user.getUserId())).withSelfRel(),
                 linkTo(methodOn(UserController.class).setUser(user.getUserId(), "userName", "")).withRel("set user name"),
                 linkTo(methodOn(UserController.class).setUser(user.getUserId(), "avatar", "")).withRel("set user avatar"),
+                linkTo(methodOn(UserController.class).setUser(user.getUserId(), "institute", "")).withRel("set user institute"),
+                linkTo(methodOn(UserController.class).setUser(user.getUserId(), "grade", "")).withRel("set user grade"),
                 linkTo(methodOn(UserController.class).deleteUser(user.getUserId())).withRel("delete"));
     }
 

@@ -51,6 +51,8 @@ public class UserController {
      * @param filter:
      *              userName: 修改用户名
      *              avatar: 修改用户头像
+     *              institute: 修改用户学院
+     *              grade: 修改用户年级
      * @param param: 新用户名称 / 新头像链接
      * @return: ResponseEntity<Response>
      * @author: VenusHui
@@ -65,6 +67,12 @@ public class UserController {
         }
         else if (Objects.equals(filter, "avatar")) {
             return ResponseEntity.ok(userService.setUserAvatar(userId, param));
+        }
+        else if (Objects.equals(filter, "institute")) {
+            return ResponseEntity.ok(userService.setUserInstitute(userId, param));
+        }
+        else if (Objects.equals(filter, "grade")) {
+            return ResponseEntity.ok(userService.setUserGrade(userId, param));
         }
         return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
     }

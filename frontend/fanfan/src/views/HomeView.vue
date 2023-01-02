@@ -5,8 +5,8 @@
         <div class="logotitle logocolor"><b>Fander</b></div>
       </template>
       <template #left>
-        <nut-avatar @click="JumpInfo" size="normal"
-          icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"></nut-avatar>
+        
+        <nut-avatar @click="JumpInfo" size="normal" :icon = avatar ></nut-avatar>
       </template>
       <template #right>
         <div @click="JumpFanFan()">
@@ -106,6 +106,7 @@
 <script>
 import FlyCard from "../components/FlyCard.vue";
 import { ref } from 'vue';
+import axios from 'axios';
 export default {
   components: {
     FlyCard,
@@ -152,6 +153,8 @@ export default {
       ],
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
+      avatar:'',
+      times:9,
     };
   },
   methods: {
@@ -179,6 +182,15 @@ export default {
     },
     onCardThrowDone(obj) {
       this.cards.splice(0, 1);
+      console
+      if(this.times>0)
+      {
+        this.times = this.times - 1;
+      }
+      else{
+        this.times = 9;
+        console.log('10次');
+      }
     },
   },
   setup() {
@@ -206,6 +218,17 @@ export default {
         that.windowWidth = window.fullWidth; // 宽
       })()
     };
+
+    axios({
+      method: 'get',
+      headers: { 'Authorization': 'Bearer '+ localStorage.token },
+      url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
+    }).then((res) => {
+      // console.log('user info:',  res.data.data.user.avatar)
+      this.$data.avatar = res.data.data.user.avatar;
+    }, error => {
+      console.log('错误', error.message)
+    })
   },
   setup() {
     const value = ref(4.8);
@@ -329,5 +352,8 @@ div {
 	transform: translate(-50%,-50%);
 }
 
+::v-deep .nut-icon__img{
+  object-fit: cover;
+}
 </style>
 

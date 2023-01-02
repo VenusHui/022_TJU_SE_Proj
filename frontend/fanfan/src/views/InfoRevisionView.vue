@@ -10,13 +10,13 @@
                 <nut-uploader url="uploadUrl"></nut-uploader>
             </nut-form-item>
             <nut-form-item label="昵称">
-                <input class="nut-input-text" placeholder="请输入昵称" type="text" />
+                <input class="nut-input-text" v-model="basicData.userName" placeholder="请输入昵称" type="text" />
             </nut-form-item>
             <nut-form-item label="年级">
-                <input class="nut-input-text" placeholder="请输入年级" type="text" />
+                <input class="nut-input-text" v-model="basicData.grade" placeholder="请输入年级" type="text" />
             </nut-form-item>
             <nut-form-item label="学院">
-                <input class="nut-input-text" placeholder="请输入学院" type="text" />
+                <input class="nut-input-text" v-model="basicData.institute" placeholder="请输入学院" type="text" />
             </nut-form-item>
             <nut-form-item label="酸">
                 <nut-rate active-color="yellow" v-model="formData.value1" />
@@ -50,7 +50,19 @@
 
 <script>
 import { reactive, ref } from 'vue';
+import axios from 'axios';
 export default {
+    data(){
+        return{
+
+            basicData:{
+            userName: '',
+            avatar: '',
+            grade: '',
+            institute: ''
+            }
+        }
+    },
     setup() {
         const desc = ref('');
         const formData = reactive({
@@ -82,6 +94,54 @@ export default {
             this.$router.back();
         },
         Save() {
+            console.log(this.basicData);
+            if (this.basicData.userName != '') {
+                axios({
+                    method: 'put',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
+                    params: {
+                        filter: 'userName',
+                        param: this.basicData.userName
+                    }
+                }).then((res) => {
+                    console.log('PUT userName res:', res.data)
+                }, error => {
+                    console.log('错误', error.message)
+                })
+            }
+            if(this.basicData.grade!='')
+            {
+                axios({
+                    method: 'put',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
+                    params: {
+                        filter: 'grade',
+                        param: this.basicData.grade
+                    }
+                }).then((res) => {
+                    console.log('PUT grade res:', res.data)
+                }, error => {
+                    console.log('错误', error.message)
+                })
+            }
+            if(this.basicData.institute!='')
+            {
+                axios({
+                    method: 'put',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
+                    params: {
+                        filter: 'institute',
+                        param: this.basicData.institute
+                    }
+                }).then((res) => {
+                    console.log('PUT institute res:', res.data)
+                }, error => {
+                    console.log('错误', error.message)
+                })
+            }
             this.$router.back();
         }
     }
