@@ -9,14 +9,14 @@
             <nut-input 
                 label="新密码" 
                 placeholder="请输入新密码" 
-                v-model="state.password1" 
+                v-model="password1" 
                 type="password"
             >
             </nut-input>
             <nut-input 
                 label="确认密码" 
                 placeholder="请再次输入新密码"
-                v-model="state.password2"
+                v-model="password2"
                 type="password"
             >
             </nut-input>
@@ -30,20 +30,38 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import axios from 'axios';
 export default {
-    setup() {
-        const state = reactive({
+    data()
+    {
+        return{
             password1: '',
             password2: '',
-        })
-        return { state }
+        }
+    },
+    setup() {
     },
     methods: {
         JumpBack() {
             this.$router.back();
         },
         Save() {
+            axios({
+                method: 'put',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token,
+                            'Content-Type': 'multipart/form-data'},
+                params: {
+                    userId: localStorage.userId
+                },
+                data: {
+                    newPassword: this.password2,
+                },
+                url: `http://124.220.158.211:7000/users/${localStorage.userId}/password/`,
+            }).then((res) => {
+                console.log('user info:', res.data)
+            }, error => {
+                console.log('错误', error.message)
+            })
             this.$router.back();
         }
     }

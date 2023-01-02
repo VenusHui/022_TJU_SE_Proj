@@ -42,7 +42,6 @@
 
 <script>
 import axios from 'axios'
-import { Toast } from '@nutui/nutui';
 export default {
   data(){
     return{
