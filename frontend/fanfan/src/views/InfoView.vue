@@ -22,9 +22,10 @@
                 icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"
             ></nut-avatar>
         </div>
-        <div class="basic">
+        <div style="width:180px">
             <div style="margin-bottom: 3px;">昵称： 烫烫烫</div>
-            <div style="margin-top: 3px;">学号： 205XXXX</div>
+            <div style="margin-bottom: 3px;">学号： 205XXXX</div>
+            <div style="">余额： 50￥</div>
         </div>
     </div>
     <div class="info">
@@ -99,15 +100,11 @@ export default {
     background-color: white;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .image {
     margin: 20px;
-}
-
-.basic {
-    margin-top: 30px;
-    margin-right: 60px;
 }
 
 .info {

@@ -33,7 +33,7 @@
 
       <div v-if="actionName == '饭饭'" class="choice">
         <div class="fandericon">
-          <img src="../assets/fander-icon-white.png" height="90" width="90" style="padding-left: 5px;padding-bottom: 10px;">
+          <img src="../assets/fander-icon-white.png" height="80" width="80" style="padding-left: 10px;padding-bottom: 10px;">
         </div>
       </div>
  
@@ -80,11 +80,8 @@
                 <div @click="JumpDetail" style="align-self: center;">
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
-              </div>
-            
-
+              </div>   
             </div>
-
           </div>
         </template>
         <template #thirdCard style="width: 100%; height: 100%">
@@ -102,8 +99,6 @@
         </template>
       </fly-card>
       </div>
-
-
 
   </div>
 </template>

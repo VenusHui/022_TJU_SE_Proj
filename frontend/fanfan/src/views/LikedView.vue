@@ -42,7 +42,9 @@ export default {
                 {
                     left: {
                         name: '无骨凤爪',
-                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1'
+                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                        isFaned:true,
+                        isLiked:true,
                     },
                     right: {
                         name: '蒸包',
