@@ -2,7 +2,8 @@
   <div style="height:100%;width: 100%;">
     <div class="indextopbox">
       <div style="width: 60%;">
-        <nut-searchbar v-model="searchValue" input-background="#d7d7d7">
+        <nut-searchbar v-model="searchValue" input-background="#d7d7d7" :clearable="false"
+          :focus-style="{ 'background-color': 'white', 'border': 'solid' }">
           <template v-slot:leftin>
             <nut-icon size="14" name="search2"></nut-icon>
           </template>
