@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface CommentService {
-    public Response addComment(Integer userId, String context, Double score, Date commentDate);
+    public Response addComment(String dishId, Integer userId, String context, Double score, Date commentDate);
 }

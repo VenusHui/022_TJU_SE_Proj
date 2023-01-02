@@ -25,12 +25,14 @@ public class CommentController {
 
     @PostMapping("/comment/")
     public ResponseEntity<Response> addComment(@RequestParam Map<String, Object> form) throws ParseException {
+
+        String dishId = form.get("dishId").toString();
         Integer userId = parseInt(form.get("userId").toString());
         String context = form.get("context").toString();
         Double score = (Double) form.get("score");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date commentDate = simpleDateFormat.parse(form.get("commentDate").toString());
 
-        return ResponseEntity.ok(commentService.addComment(userId, context, score, commentDate));
+        return ResponseEntity.ok(commentService.addComment(dishId,userId, context, score, commentDate));
     }
 }
