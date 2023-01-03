@@ -31,8 +31,18 @@ public class DishController {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> getAll() {
-        return ResponseEntity.ok(dishService.getAll());
+    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", defaultValue = "all") String filter,
+                                              @RequestParam(value = "value", defaultValue = "") String value) {
+        if (Objects.equals(filter, "all")) {
+            return ResponseEntity.ok(dishService.getAll());
+        }
+        else if (filter.equals("dishName")) {
+            return ResponseEntity.ok(dishService.getDishesByName(value));
+        }
+        else if (filter.equals("position")) {
+            return ResponseEntity.ok(dishService.getDishesByPosition(value));
+        }
+        return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
     }
 
     @GetMapping("/dishes/{dishId}/")

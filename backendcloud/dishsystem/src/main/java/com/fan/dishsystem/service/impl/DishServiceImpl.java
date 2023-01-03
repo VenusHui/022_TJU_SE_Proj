@@ -53,6 +53,22 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    public Response getDishesByName(String dishName) {
+        List<Dish> dishes = repository.findByDishName(dishName);
+        Map<String, Object> data = new HashMap<>();
+        data.put("dishes", assembler.toCollectionModel(dishes));
+        return new Response(ResponseCode.SUCCESS, "查询菜品成功", data);
+    }
+
+    @Override
+    public Response getDishesByPosition(String position) {
+        List<Dish> dishes = repository.findByPosition(position);
+        Map<String, Object> data = new HashMap<>();
+        data.put("dishes", assembler.toCollectionModel(dishes));
+        return new Response(ResponseCode.SUCCESS, "查询菜品成功", data);
+    }
+
+    @Override
     public Response setDishName(String dishId, String dishName) {
         Optional<Dish> dish = repository.findById(dishId);
         if (dish.isEmpty()) {
@@ -151,7 +167,7 @@ public class DishServiceImpl implements DishService {
                 parseInt(preferenceMap.get("sourness").toString()),
                 parseInt(preferenceMap.get("sweetness").toString()),
                 parseInt(preferenceMap.get("bitterness").toString()));
-        Dish dish = new Dish(null, dishName, description, photoUrl, position, null, preference, ingredients, new ArrayList<>());
+        Dish dish = new Dish(null, dishName, description, photoUrl, position, 0.0, preference, ingredients, new ArrayList<>());
         repository.insert(dish);
         Map<String, Object> data = new HashMap<>();
         data.put("dish", dish);
