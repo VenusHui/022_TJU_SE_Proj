@@ -5,6 +5,8 @@ import com.fan.preference.service.UserPreferenceService;
 import com.fan.preference.utils.Response;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 /**
  * @author: VenusHui
@@ -13,13 +15,14 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  */
 public class UserPreferenceServiceImpl implements UserPreferenceService {
+
     @Override
     public Response getAllUserPreferences() {
         return null;
     }
 
     @Override
-    public Response getUserPreference(String userPreferenceId) {
+    public Response getUserPreference(String preferenceId) {
         return null;
     }
 
@@ -29,47 +32,57 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
     }
 
     @Override
-    public Response setReligion(String userPreferenceId, String religion) {
+    public Response addUserPreference(Integer userId) {
         return null;
     }
 
     @Override
-    public Response setPreference(String userPreferenceId, Preference preference) {
+    public Response setReligion(String preferenceId, String religion) {
         return null;
     }
 
     @Override
-    public Response addLikedDish(String userPreferenceId, String dishId) {
+    public Response setPreference(String preferenceId, Map<String, Object> preferenceMap) {
         return null;
     }
 
     @Override
-    public Response addAteDishCommented(String userPreferenceId, String dishId) {
+    public Response addLikedDish(String preferenceId, String dishId) {
         return null;
     }
 
     @Override
-    public Response addAteDishNotCommented(String userPreferenceId, String dishId) {
+    public Response addAteDishCommented(String preferenceId, String dishId) {
         return null;
     }
 
     @Override
-    public Response addAllergen(String userPreferenceId, String ingredient) {
+    public Response addAteDishNotCommented(String preferenceId, String dishId) {
         return null;
     }
 
     @Override
-    public Response deleteAteDishCommented(String userPreferenceId, String dishId) {
+    public Response addAllergen(String preferenceId, String ingredient) {
         return null;
     }
 
     @Override
-    public Response deleteAteDishNotCommented(String userPreferenceId, String dishId) {
+    public Response deleteLikedDish(String preferenceId, String dishId) {
         return null;
     }
 
     @Override
-    public Response deleteAllergen(String userPreferenceId, String ingredient) {
+    public Response deleteAteDishCommented(String preferenceId, String dishId) {
+        return null;
+    }
+
+    @Override
+    public Response deleteAteDishNotCommented(String preferenceId, String dishId) {
+        return null;
+    }
+
+    @Override
+    public Response deleteAllergen(String preferenceId, String ingredient) {
         return null;
     }
 }

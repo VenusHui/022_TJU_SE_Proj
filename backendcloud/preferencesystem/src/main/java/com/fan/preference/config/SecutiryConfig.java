@@ -23,19 +23,22 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,
-                        "/preferences/",
+                        "/preference/",
                         "/users/{userId}/preference/",
-                        "/users/{userId}/preference/liked/",
-                        "/users/{userId}/preference/ate/",
-                        "/users/{userId}/preference/allergens/").permitAll()
+                        "/preference/{preferenceId}/",
+                        "/preference/{preferenceId}/liked/",
+                        "/preference/{preferenceId}/ate/",
+                        "/preference/{preferenceId}/allergens/").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/users/{userId}/preference/",
-                        "/users/{userId}/preference/liked/",
-                        "/users/{userId}/preference/ate/",
-                        "/users/{userId}/preference/allergens/").permitAll()
+                        "/preference/{preferenceId}/liked/",
+                        "/preference/{preferenceId}/ate/",
+                        "/preference/{preferenceId}/allergens/").permitAll()
+                .antMatchers(HttpMethod.PATCH,
+                        "/preference/{preferenceId}/ate/",
+                        "/preference/{preferenceId}/").permitAll()
                 .antMatchers(HttpMethod.DELETE,
-                        "/users/{userId}/preference/liked/",
-                        "/users/{userId}/preference/ate/",
-                        "/users/{userId}/preference/allergens/").permitAll();
+                        "/preference/{preferenceId}/liked/",
+                        "/preference/{preferenceId}/allergens/").permitAll();
     }
 }

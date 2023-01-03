@@ -21,6 +21,7 @@ import java.util.List;
 public class UserPreference {
     @Id
     private String _id;
+    private Integer userId;
     private String religion;
     private Preference preference;
     private List<String> likedDishes;
