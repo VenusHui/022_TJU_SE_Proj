@@ -108,16 +108,14 @@ export default {
             this.dishname = res.data.data.dish.dishName
             this.place = res.data.data.dish.position
             this.description = res.data.data.dish.description
-
             this.$data.comments =res.data.data.dish.comments
-            
         }, error => {
             console.log('错误', error.message)
         })
     },
     setup() {
-        const value = ref(3);
-        const show = ref(false);
+        const value = ref(3);//评分的值
+        const show = ref(false);//饭饭成功遮罩层标志
         const showPopup = () => {
             show.value = true;
         };
