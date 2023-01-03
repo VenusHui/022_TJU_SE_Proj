@@ -28,8 +28,8 @@ public class DishController {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", required = false) String filter,
-                                              @RequestParam(value = "value", required = false) String value) {
+    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", defaultValue = "all") String filter,
+                                              @RequestParam(value = "value", defaultValue = "") String value) {
         return ResponseEntity.ok(dishSystemService.getDishes(filter, value));
     }
 
