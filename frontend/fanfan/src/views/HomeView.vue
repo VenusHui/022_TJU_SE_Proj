@@ -142,9 +142,6 @@ export default {
     onCardDragMove(obj) {
       if (obj.top > 20 && obj.top > Math.abs(obj.left) || obj.top < -20 && obj.top < -Math.abs(obj.left)) {
         this.actionName = "饭饭";
-        this.fanPopItem.name = this.cards[0].dishName;
-        this.fanPopItem.imgUrl = this.cards[0].photoUrl;
-        this.fanPopFlag = true;
       }
       else if (obj.left < -20 && obj.top > obj.left && obj.top < -obj.left) {
         this.actionName = "不喜欢";
@@ -157,7 +154,12 @@ export default {
     },
     onCardThrowDone(obj) {
       this.cards.splice(0, 1);
-      console
+      if (this.actionName = '饭饭') {
+        this.actionName = '';
+        this.fanPopItem.name = this.cards[0].dishName;
+        this.fanPopItem.imgUrl = this.cards[0].photoUrl;
+        this.fanPopFlag = true;
+      }
       if (this.times > 0) {
         this.times = this.times - 1;
       }
