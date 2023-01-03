@@ -9,47 +9,52 @@
     </nut-navbar>
     <nut-tabs v-model="state.tab1value">
         <nut-tabpane title="待评价">
-            <nut-card :img-url="state.list[0].imgUrl" :title="state.list[0].title" :price="state.list[0].price"
-                :shopName="state.list[0].shopName">
-                <!-- <template #prolist>
-                    <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                </template> -->
-                <template #origin>
-                </template>
-                <template #shop-tag>
-                    <nut-rate active-color="#FFC800" v-model="state.list[0].rate" readonly spacing="10" style="height:20px" />
-                    <div style="color: gray;font-size: small;">{{ state.list[0].rate }}</div>
-                </template>
-                <template #footer>
-                    <div class="customize">
-                        <nut-button type="mini" @click="Comment()">评价</nut-button>
-                    </div>
-                </template>
-            </nut-card>
+            <div class="CardToComment" v-for="(item, index) in this.ListToComment" :key="index">
+                <nut-card :img-url="item.imgUrl" :title="item.title" :price="item.price"
+                    :shopName="item.shopName">
+                    <!-- <template #prolist>
+                        <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
+                    </template> -->
+                    <template #origin>
+                    </template>
+                    <template #shop-tag>
+                        <nut-rate active-color="#FFC800" v-model="item.rate" readonly spacing="10" style="height:20px" />
+                        <div style="color: gray;font-size: small;">{{ item.rate }}</div>
+                    </template>
+                    <template #footer>
+                        <div class="customize">
+                            <nut-button type="mini" @click="Comment()">评价</nut-button>
+                        </div>
+                    </template>
+                </nut-card>
+            </div>
         </nut-tabpane>
         <nut-tabpane title="已评价">
-            <nut-card :img-url="state.list[0].imgUrl" :title="state.list[0].title" :price="state.list[0].price"
-                :shopName="state.list[0].shopName">
-                <!-- <template #prolist>
-                    <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                </template> -->
-                <template #origin>
-                </template>
-                <template #shop-tag>
-                    <nut-rate active-color="#FFC800" v-model="state.list[0].rate" readonly spacing="10" style="height:20px" />
-                    <div style="color: gray;font-size: small;">{{ state.list[0].rate }}</div>
-                </template>
-                <template #footer>
-                    <div class="customize">
-                        <nut-button type="mini" @click="Comment()">评价</nut-button>
-                    </div>
-                </template>
-            </nut-card>
+            <div class="ListCommented" v-for="(item, index) in this.ListCommented" :key="index">
+                <nut-card :img-url="item.imgUrl" :title="item.title" :price="item.price"
+                    :shopName="item.shopName">
+                    <!-- <template #prolist>
+                        <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
+                    </template> -->
+                    <template #origin>
+                    </template>
+                    <template #shop-tag>
+                        <nut-rate active-color="#FFC800" v-model="item.rate" readonly spacing="10" style="height:20px" />
+                        <div style="color: gray;font-size: small;">{{ item.rate }}</div>
+                    </template>
+                    <template #footer>
+                        <div class="customize">
+                            <nut-button type="mini" @click="Comment()">评价</nut-button>
+                        </div>
+                    </template>
+                </nut-card>
+            </div>
         </nut-tabpane>
     </nut-tabs>
 </template>
 
 <script>
+import axios from 'axios';
 import { reactive } from 'vue';
 export default {
     setup() {
@@ -73,6 +78,41 @@ export default {
         Comment() {
             this.$router.push('/commentedit')
         }
+    },
+    data() {
+        return {
+            ListToComment : [
+                // {
+                // imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish12.jpg',
+                // title: '咕噜肉',
+                // shopName: '大食堂一楼',
+                // price: 5,
+                // rate: 4.5,
+                // }
+            ],
+            ListCommented : []
+        }
+    },
+    mounted() {
+        // axios({
+        //     method: 'get',
+        //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+        //     url: '',
+        // }).then((res) => {
+        //     this.$data.ListToComment = null;
+        // }, error => {
+        //     console.log("错误", error.message)
+        // })
+
+        // axios({
+        //     method: 'get',
+        //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+        //     url: '',
+        // }).then((res) => {
+        //     this.$data.ListCommented = null;
+        // }, error => {
+        //     console.log("错误", error.message)
+        // })
     }
 }
 </script>
