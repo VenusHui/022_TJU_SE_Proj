@@ -1,7 +1,6 @@
 package com.fan.dishsystem.service.impl;
 
 import com.fan.dishsystem.pojo.Dish;
-import com.fan.dishsystem.pojo.Ingredient;
 import com.fan.dishsystem.pojo.Preference;
 import com.fan.dishsystem.repository.DishRepository;
 import com.fan.dishsystem.service.DishService;
@@ -145,7 +144,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response setDishIngredients(String dishId, List<Ingredient> ingredients) {
+    public Response setDishIngredients(String dishId, List<String> ingredients) {
         Optional<Dish> dish = repository.findById(dishId);
         if (dish.isEmpty()) {
             return new Response(ResponseCode.UNDEFINED_DISH, "未知菜品", null);
@@ -158,7 +157,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response addDish(String dishName, String description, String photoUrl, String position, Double price, Map<String, Object> preferenceMap, List<Ingredient> ingredients) {
+    public Response addDish(String dishName, String description, String photoUrl, String position, Double price, Map<String, Object> preferenceMap, List<String> ingredients) {
         if (repository.existsByDishName(dishName) && repository.existsByPosition(position)) {
             return new Response(ResponseCode.REPLICATE_DISH, "该菜品已存在", null);
         }
