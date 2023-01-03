@@ -19,16 +19,16 @@
                 <input class="nut-input-text" v-model="basicData.institute" placeholder="请输入学院" type="text" />
             </nut-form-item>
             <nut-form-item label="酸">
-                <nut-rate active-color="yellow" v-model="formData.value1" />
+                <nut-rate active-color="yellow" v-model="this.sourness" />
             </nut-form-item>
             <nut-form-item label="甜">
-                <nut-rate active-color="pink" v-model="formData.value2" />
+                <nut-rate active-color="pink" v-model="this.sweetness" />
             </nut-form-item>
             <nut-form-item label="麻">
-                <nut-rate active-color="green" v-model="formData.value3" />
+                <nut-rate active-color="green" v-model="this.bitterness" />
             </nut-form-item>
             <nut-form-item label="辣">
-                <nut-rate active-color="red" v-model="formData.value4" />
+                <nut-rate active-color="red" v-model="this.spiciness" />
             </nut-form-item>
             <nut-cell title="地区" desc-text-align="left" :desc="desc" @click="()=>{formData.show=true}"></nut-cell>
             <nut-picker
@@ -52,15 +52,33 @@
 import { reactive, ref } from 'vue';
 import axios from 'axios';
 export default {
-    data(){
-        return{
-
+    mounted() {
+        // axios({
+        //     method: 'get',
+        //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+        //     url: '',
+        // }).then((res) => {
+        //     this.sourness = 0;
+        //     this.sweetness = 0;
+        //     this.bitterness = 0;
+        //     this.spiciness = 0;
+        // }, error => {
+        //     console.log('错误', error.message)
+        // })
+    },
+    data() {
+        return {
             basicData:{
             userName: '',
             avatar: '',
             grade: '',
             institute: ''
-            }
+            },
+            sourness: 5,
+            sweetness: 5,
+            bitterness: 5,
+            spiciness: 5,
+            region: ''
         }
     },
     setup() {
@@ -83,9 +101,11 @@ export default {
         ]);
         const change = ({ selectedValue, selectedOptions }) => {
             console.log(selectedValue);
+            console.log(desc.value)
         };
         const confirm = ( { selectedValue, selectedOptions })=>{
             desc.value = selectedValue.join(',');
+            console.log(desc.value)
         };
         return { desc, formData, columns, change, confirm }
     },
@@ -142,6 +162,33 @@ export default {
                     console.log('错误', error.message)
                 })
             }
+            if(this.desc.value != '') {
+                // axios({
+                //     method: 'put',
+                //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                //     url: '',
+                //     params: {
+
+                //     }
+                // }).then((res) => {
+                //     console.log('PUT')
+                // }, error => {
+                //     console.log('错误', error.message)
+                // })
+            }
+            // 更新口味偏好信息
+            // axios({
+            //     method: 'put',
+            //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+            //     url: '',
+            //     params: {
+
+            //     }
+            // }).then((res) => {
+            //     console.log('PUT')
+            // }, error => {
+            //     console.log('错误', error.message)
+            // })
             this.$router.back();
         }
     }
