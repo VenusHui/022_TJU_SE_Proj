@@ -28,6 +28,6 @@ public class Dish {
     private Double price;
     private Double score;
     private Preference preference;
-    private List<Ingredient> ingredients;
+    private List<String> ingredients;
     private List<Comment> comments;
 }
