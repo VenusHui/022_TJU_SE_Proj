@@ -4,7 +4,7 @@
             <div style="margin-right: 20px;" @click="JumpBack">
                 <nut-icon name="left" size="15px"></nut-icon>
             </div>
-            <div style="font-size:25px">菜单</div>
+            <div style="font-size:25px">{{ title }}</div>
         </div>
         <div style="margin-top: 10px;background-color: white;padding:10px 0 10px 10px;">
             <nut-list :listData="menuresults" height="125" container-height="1000" @scroll-bottom="menuhandleScroll">
@@ -14,8 +14,11 @@
                         <template #origin>
                         </template>
                         <template #shop-tag>
-                            <nut-rate  active-color="#FFC800" v-model="item.score" readonly spacing="10" style="height:20px" />
-                            <div style="color: gray;font-size: small;">{{ item.score }} ({{ item.comments==null?0: item.comments.length}})</div>
+                            <nut-rate active-color="#FFC800" v-model="item.score" readonly spacing="10"
+                                style="height:20px" />
+                            <div style="color: gray;font-size: small;">{{ item.score }} ({{ item.comments == null ? 0 :
+        item.comments.length
+                                }})</div>
                         </template>
                     </nut-card>
                 </template>
@@ -28,9 +31,10 @@
 import { reactive, toRefs } from 'vue';
 import axios from 'axios';
 export default {
-    data(){
-        return{
-            menuresults:[]
+    data() {
+        return {
+            menuresults: [],
+            title: '',
         }
     },
     setup() {
@@ -38,7 +42,7 @@ export default {
     },
     methods: {
         JumpDetail(dishId) {
-            this.$router.push({ path: "/detail", query: { dishId: dishId }});
+            this.$router.push({ path: "/detail", query: { dishId: dishId } });
         },
         JumpBack() {
             this.$router.back()
@@ -50,6 +54,7 @@ export default {
         // this.$route.query.position
         // get dishes 
         if (this.$route.query.kind == 'position') {
+            this.title = this.$route.query.param;
             axios({
                 method: 'get',
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
@@ -66,7 +71,8 @@ export default {
                 console.log('错误', error.message)
             })
         }
-        if(this.$route.query.kind == 'name'){
+        if (this.$route.query.kind == 'name') {
+            this.title = '搜索';
             axios({
                 method: 'get',
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
@@ -103,5 +109,4 @@ export default {
     max-width: 100%;  
     min-height: 100%;
 } */
-
 </style>

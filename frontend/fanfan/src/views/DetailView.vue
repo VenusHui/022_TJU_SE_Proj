@@ -101,7 +101,7 @@ export default {
             this.dishname = res.data.data.dish.dishName
             this.place = res.data.data.dish.position
             this.description = res.data.data.dish.description
-            this.$data.comments =res.data.data.dish.comments
+            this.$data.comments = res.data.data.dish.comments
             this.price = res.data.data.dish.price
             this.score = res.data.data.dish.score
         }, error => {

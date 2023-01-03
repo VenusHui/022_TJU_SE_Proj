@@ -116,12 +116,13 @@ export default {
   data() {
     return {
       actionName: "",
+      activeflag: false,//饭饭成功动画的控制标志，防止任何操作都可以触发
       cards: [],
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
       avatar: '',
       times: 9,
-      fanPopFlag: false,//饭饭成功遮罩层标志
+      fanPopFlag: false,//饭饭成功动画遮罩层显示标志
       fanPopItem: {
         name: '',
         imgUrl: '',
@@ -142,35 +143,40 @@ export default {
     onCardDragMove(obj) {
       if (obj.top > 20 && obj.top > Math.abs(obj.left) || obj.top < -20 && obj.top < -Math.abs(obj.left)) {
         this.actionName = "饭饭";
+        this.activeflag = 1;
       }
       else if (obj.left < -20 && obj.top > obj.left && obj.top < -obj.left) {
         this.actionName = "不喜欢";
+        this.activeflag = 2;
       } else if (obj.left > 20 && obj.top < obj.left && obj.top > -obj.left) {
         this.actionName = "喜欢";
+        this.activeflag = 3;
       }
     },
     onCardDragStop(obj) {
       this.actionName = "";
     },
     onCardThrowDone(obj) {
-      this.cards.splice(0, 1);
-      if (this.actionName = '饭饭') {
-        this.actionName = '';
+      console.log('actionName:', this.actionName)
+      if (this.activeflag == 1) {
+        this.activeName = '';
         this.fanPopItem.name = this.cards[0].dishName;
         this.fanPopItem.imgUrl = this.cards[0].photoUrl;
         this.fanPopFlag = true;
       }
+      this.cards.splice(0, 1);//删去顶部卡片
       if (this.times > 0) {
         this.times = this.times - 1;
       }
       else {
         this.times = 9;
-        console.log('10次');
+        console.log('您已经滑了很多啦！快下决定赶紧饭饭吧！');
+        // showNotify('您已经滑了很多啦！快下决定赶紧饭饭吧！');
       }
     },
     ActiveDecide() {//主动决策函数,后端返回一个菜品帮助用户饭饭
-      this.fanPopItem.name = '';
-      this.fanPopItem.imgUrl = '';
+      this.fanPopItem.name = '无骨凤爪';
+      this.fanPopItem.imgUrl = 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish11.jpg';
       this.fanPopFlag = true;//修改标志展示饭饭动画
     },
   },

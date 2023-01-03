@@ -2,7 +2,7 @@
     <div class="likeditem boxradius" :style="{ 'background-image': 'url(' + imgUrl + ')' }">
         <div v-if="readonly" class="blackmask boxradius"
             style="display: flex;align-items: flex-end;justify-content: center;">
-            <div style="color: white;font-size: 35px;padding-bottom:3px ;">
+            <div style="color: white;font-size: 30px;padding-bottom:3px ;">
                 {{ name }}
             </div>
         </div>
