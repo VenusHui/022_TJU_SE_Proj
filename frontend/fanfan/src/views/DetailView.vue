@@ -11,15 +11,15 @@
                         {{ dishname }}
                     </div>
                     <div style="display: flex; font-size: small;">
-                        <div style="margin-right:20px">小食堂二楼</div>
+                        <div style="margin-right:20px">{{ this.place }}</div>
                         <div style="margin-right:20px">￥20</div>
                         <div style="display: flex;align-items: center;">
                             <nut-icon name="star-fill" color="" size="10px" style="margin-right:5px"></nut-icon>
                             <div>4.5</div>
                         </div>
                     </div>
-                    <div style="display: flex; font-size: small;">
-                        <div style="margin:5px;">
+                    <div style="display: flex; font-size: small;color:grey; padding-top:4%">
+                        <!-- <div style="margin:5px;">
                             <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
                         </div>
                         <div style="margin:5px;">
@@ -27,7 +27,8 @@
                         </div>
                         <div style="margin:5px;">
                             <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                        </div>
+                        </div> -->
+                        {{ description }}
                     </div>
                 </div>
                 <div style="display: flex;">
@@ -44,40 +45,25 @@
         </div>
         <div class="detailbox">
             <div class="marginbottom" style="font-size: 20px;">
-                用户评价(103)
+                用户评价({{ comments.length }})
             </div>
-            <div class="commentitem marginbottom">
+            <!-- <li v-for="(item,index) in topbook " :key="item.bookName"> -->
+            <div v-for="(item) in comments" :key="item._id" class="commentitem marginbottom">
                 <div class="commentleftbox">
                     <nut-avatar size="normal" style="margin-right:0"
-                        icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png">
+                    icon="my">
                     </nut-avatar>
                     <div style="font-size: small;width: 65px;display: flex;justify-content: center;">
-                        同济大美壹
+                        {{item.userName}}
                     </div>
                 </div>
                 <div class="commentrightbox">
                     <div>
-                        <nut-rate active-color="#FFC800" v-model="value" readonly />
+                        <nut-rate active-color="#FFC800" v-model="item.score" readonly />
+                        <!-- {{ item.commentDate}} -->
                     </div>
                     <nut-ellipsis direction="end" expandText="展开" collapseText="收起" rows="3"
-                        content="NutUI3.0上线后我们研发团队也在不断的优化、测试、使用、迭代 Vue3 的相关组件，但是在跨端小程序的开发过程中，发现没有合适的组件库可以支持多端开发。为了填补这一空白，同时为了优化开发者体验，让 NutUI 能够为更多的开发者带来便利，我们决定在 NutUI 中增加小程序多端适配的能力。"></nut-ellipsis>
-                </div>
-            </div>
-            <div class="commentitem marginbottom">
-                <div class="commentleftbox">
-                    <nut-avatar size="normal" style="margin-right:0"
-                        icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png">
-                    </nut-avatar>
-                    <div style="font-size: small;width: 65px;display: flex;justify-content: center;">
-                        同济大
-                    </div>
-                </div>
-                <div class="commentrightbox">
-                    <div>
-                        <nut-rate active-color="#FFC800" v-model="value" readonly />
-                    </div>
-                    <nut-ellipsis direction="end" expandText="展开" collapseText="收起" rows="3"
-                        content="NutUI3.0上线后我们研发团队也在不断的优化、测试、使用、迭代 Vue3 的相关组件，但是在跨端小程序的开发过程中，发现没有合适的组件库可以支持多端开发。为了填补这一空白，同时为了优化开发者体验，让 NutUI 能够为更多的开发者带来便利，我们决定在 NutUI 中增加小程序多端适配的能力。"></nut-ellipsis>
+                        :content=item.context></nut-ellipsis>
                 </div>
             </div>
         </div>
@@ -88,6 +74,7 @@
 import { ref } from 'vue';
 import LikedCard from '@/components/LikedCard.vue';
 import FanPop from '@/components/FanPop.vue';
+import axios from 'axios';
 export default {
     components: {
         LikedCard,
@@ -95,10 +82,38 @@ export default {
     },
     data() {
         return {
-            dishname: "章鱼小丸子",
-            dishimg: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg',
+            dishname: '',
+            dishimg: '',
             isliked: true,
+            place:'',
+            dishId:'',
+            description:'',
+            comments:[
+                {
+                
+                }
+            ]
         }
+    },
+    mounted(){
+        // console.log(this.$route.query, 7777);
+        this.dishId = this.$route.query.dishId;
+        axios({
+            method: 'get',
+            headers: { 'Authorization': 'Bearer ' + localStorage.token },
+            url: `http://124.220.158.211:7000/dishes/${this.dishId}/`,
+        }).then((res) => {
+            console.log('dish info:', res.data.data.dish)
+            this.dishimg = res.data.data.dish.photoUrl
+            this.dishname = res.data.data.dish.dishName
+            this.place = res.data.data.dish.position
+            this.description = res.data.data.dish.description
+
+            this.$data.comments =res.data.data.dish.comments
+            
+        }, error => {
+            console.log('错误', error.message)
+        })
     },
     setup() {
         const value = ref(3);
@@ -177,5 +192,9 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.nut-icon__img{
+  object-fit: cover;
 }
 </style>
