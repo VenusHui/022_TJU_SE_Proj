@@ -11,7 +11,6 @@
                 <template v-if="menuresults" v-slot:default="{ item }">
                     <nut-card :img-url="item.photoUrl" :title="item.dishName" :price="item.price"
                         :shopName="item.position" @click="JumpDetail(item.dishId)">
-                        
                         <template #origin>
                         </template>
                         <template #shop-tag>
@@ -84,7 +83,6 @@ export default {
                 console.log('错误', error.message)
             })
         }
-        
     }
 }
 </script>

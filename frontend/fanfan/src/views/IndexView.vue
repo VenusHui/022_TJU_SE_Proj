@@ -45,9 +45,7 @@ export default {
   },
   methods: {
     JumpSearch() {
-      // console.log(this.$data.searchValue)
       this.$router.push({ path: '/menu', query: { param: this.$data.searchValue, kind: 'name' } });
-
     },
     JumpMenu(name) {
       this.$router.push({ path: '/menu', query: { param: name , kind:'position'} });
