@@ -40,21 +40,21 @@
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
         :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
-          <div v-if="cards[0]" class="tantanCard" :style='{backgroundImage:"url("+cards[0].img+")"}'>
+          <div v-if="cards[0]" class="tantanCard" :style='{backgroundImage:"url("+cards[0].photoUrl+")"}'>
             <div class="dishUIbox">
               <div class="dishinfobox">
                 <div class="dishinfotextbox">
-                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[0].name}}</div>
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[0].dishName}}</div>
                   <div class="dishsubinfobox">
-                    <div class="dishplace" style="margin-right:20px">{{cards[0].place}}</div>
-                    <div class="dishprice">￥{{cards[0].price}}</div>
+                    <div class="dishplace" style="margin-right:20px">{{cards[0].position}}</div>
+                    <div class="dishprice">￥20</div>
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[0].star" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{cards[0].star}}</div>
+                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{cards[0].score}}</div>
                   </div>
                 </div>
-                <div @click="JumpDetail" style="align-self: center;">
+                <div @click="JumpDetail(cards[0]._id)" style="align-self: center;">
                   <nut-icon name="right" color="white" size="30px"></nut-icon>
                 </div>
               </div>
@@ -62,18 +62,18 @@
           </div>
         </template>
         <template #secondCard style="width: 100%; height: 100%">
-          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].img+")"}'>      
+          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].photoUrl+")"}'>      
             <div class="dishUIbox">
               <div class="dishinfobox">
                 <div class="dishinfotextbox">
-                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[1].name}}</div>
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[1].dishName}}</div>
                   <div class="dishsubinfobox">
-                    <div class="dishplace" style="margin-right:20px">{{cards[1].place}}</div>
-                    <div class="dishprice">￥{{cards[1].price}}</div>
+                    <div class="dishplace" style="margin-right:20px">{{cards[1].position}}</div>
+                    <div class="dishprice">￥20</div>
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[1].star" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px">{{cards[1].star}}</div>
+                    <div class="dishscore" style="margin-left:10px">{{cards[1].score}}</div>
                   </div>
                 </div>
                 <div @click="JumpDetail" style="align-self: center;">
@@ -84,7 +84,7 @@
           </div>
         </template>
         <template #thirdCard style="width: 100%; height: 100%">
-          <div v-if="cards[2]" class="tantanCard" :style='{backgroundImage:"url("+cards[2].img+")"}'>
+          <div v-if="cards[2]" class="tantanCard" :style='{backgroundImage:"url("+cards[2].photoUrl+")"}'>
 
             <div class="dishUIbox">
               <div class="dishinfobox">
@@ -113,43 +113,7 @@ export default {
   data() {
     return {
       actionName: "",
-      cards: [
-        {
-          img: 'https://th.bing.com/th/id/R.5da8a70f4332d95724c9702788ce1e39?rik=l%2bvQUaqAPqAw9g&pid=ImgRaw&r=0',
-          name:'汉堡薯条',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.5,
-        },
-        {
-          img: 'https://img.zcool.cn/community/01d38b5dad0fbda8012163ba8a0987.jpg@1280w_1l_2o_100sh.jpg',
-          name:'火锅',
-          place:'小食堂一楼',
-          price:'50',
-          star:3.5,
-        },
-        {
-          img: 'https://img.zcool.cn/community/0133645d3d64f2a8012187f4b133d1.jpg@1280w_1l_2o_100sh.jpg',
-          name:'汉堡',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.5,
-        },
-        {
-          img: 'https://th.bing.com/th/id/R.f482633a7c0de55b8363f27179da5ca5?rik=ZkZqKhpA91mpCQ&pid=ImgRaw&r=0',
-          name:'麻辣烫',
-          place:'小食堂二楼',
-          price:'15~25',
-          star:4.8,
-        },
-        {
-          img: 'https://th.bing.com/th/id/R.ed1ffb699a72c9d626044e7b540e8e6b?rik=BahrpmNgZBpM7g&pid=ImgRaw&r=0',
-          name:'热干面',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.8,
-        },
-      ],
+      cards: [],
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
       avatar:'',
@@ -157,8 +121,9 @@ export default {
     };
   },
   methods: {
-    JumpDetail() {
-      this.$router.push('/detail')
+    JumpDetail(dishId) {
+      // console.log('dishId: '+dishId);
+      this.$router.push({ path: "/detail", query: { dishId: dishId } });
     },
     JumpInfo() {
       this.$router.push('/info')
@@ -225,6 +190,18 @@ export default {
     }).then((res) => {
       // console.log('user info:',  res.data.data.user.avatar)
       this.$data.avatar = res.data.data.user.avatar;
+    }, error => {
+      console.log('错误', error.message)
+    })
+
+    // get all dishes 
+    axios({
+      method: 'get',
+      headers: { 'Authorization': 'Bearer '+ localStorage.token },
+      url: 'http://124.220.158.211:7000/dishes/',
+    }).then((res) => {
+      console.log('dish info:',  res.data.data.dishes)
+      this.$data.cards = res.data.data.dishes;
     }, error => {
       console.log('错误', error.message)
     })
