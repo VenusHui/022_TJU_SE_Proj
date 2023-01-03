@@ -1,7 +1,6 @@
 package com.fan.dishsystem.service.impl;
 
 import com.fan.dishsystem.pojo.Dish;
-import com.fan.dishsystem.pojo.Ingredient;
 import com.fan.dishsystem.pojo.Preference;
 import com.fan.dishsystem.repository.DishRepository;
 import com.fan.dishsystem.service.DishService;
@@ -49,6 +48,22 @@ public class DishServiceImpl implements DishService {
         }
         Map<String, Object> data = new HashMap<>();
         data.put("dish", assembler.toModel(dish.get()));
+        return new Response(ResponseCode.SUCCESS, "查询菜品成功", data);
+    }
+
+    @Override
+    public Response getDishesByName(String dishName) {
+        List<Dish> dishes = repository.findByDishName(dishName);
+        Map<String, Object> data = new HashMap<>();
+        data.put("dishes", assembler.toCollectionModel(dishes));
+        return new Response(ResponseCode.SUCCESS, "查询菜品成功", data);
+    }
+
+    @Override
+    public Response getDishesByPosition(String position) {
+        List<Dish> dishes = repository.findByPosition(position);
+        Map<String, Object> data = new HashMap<>();
+        data.put("dishes", assembler.toCollectionModel(dishes));
         return new Response(ResponseCode.SUCCESS, "查询菜品成功", data);
     }
 
@@ -129,7 +144,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response setDishIngredients(String dishId, List<Ingredient> ingredients) {
+    public Response setDishIngredients(String dishId, List<String> ingredients) {
         Optional<Dish> dish = repository.findById(dishId);
         if (dish.isEmpty()) {
             return new Response(ResponseCode.UNDEFINED_DISH, "未知菜品", null);
@@ -142,7 +157,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Object> preferenceMap, List<Ingredient> ingredients) {
+    public Response addDish(String dishName, String description, String photoUrl, String position, Double price, Map<String, Object> preferenceMap, List<String> ingredients) {
         if (repository.existsByDishName(dishName) && repository.existsByPosition(position)) {
             return new Response(ResponseCode.REPLICATE_DISH, "该菜品已存在", null);
         }
@@ -151,7 +166,7 @@ public class DishServiceImpl implements DishService {
                 parseInt(preferenceMap.get("sourness").toString()),
                 parseInt(preferenceMap.get("sweetness").toString()),
                 parseInt(preferenceMap.get("bitterness").toString()));
-        Dish dish = new Dish(null, dishName, description, photoUrl, position, null, preference, ingredients, new ArrayList<>());
+        Dish dish = new Dish(null, dishName, description, photoUrl, position, price, 0.0, preference, ingredients, new ArrayList<>());
         repository.insert(dish);
         Map<String, Object> data = new HashMap<>();
         data.put("dish", dish);

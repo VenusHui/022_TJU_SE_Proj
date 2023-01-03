@@ -88,6 +88,7 @@ public class CommentServiceImpl implements CommentService {
         if (dish.isEmpty()) {
             return new Response(ResponseCode.UNDEFINED_DISH, "未知菜品", null);
         }
+        dish.get().setScore((dish.get().getScore() * dish.get().getComments().size() + score) / (dish.get().getComments().size() + 1));
         Comment comment = new Comment(null, userId, context, score, new Date());
         commentRepository.insert(comment);
         dish.get().getComments().add(comment);

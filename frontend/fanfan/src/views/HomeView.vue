@@ -2,11 +2,11 @@
   <div class="framebox">
     <nut-navbar style="height:80px;line-height: 20px;margin-bottom: 0%;padding-left: 0%;">
       <template #content>
-        <div class="logotitle logocolor"><b>Fander</b></div>
+        <div @click="ActiveDecide()" class="logotitle logocolor"><b>Fander</b></div>
+        <FanPop v-if="fanPopFlag" :name="fanPopItem.name" :imgUrl="fanPopItem.imgUrl"></FanPop>
       </template>
       <template #left>
-        
-        <nut-avatar @click="JumpInfo" size="normal" :icon = avatar ></nut-avatar>
+        <nut-avatar @click="JumpInfo()" size="normal" :icon=avatar></nut-avatar>
       </template>
       <template #right>
         <div @click="JumpFanFan()">
@@ -33,25 +33,48 @@
 
       <div v-if="actionName == '饭饭'" class="choice">
         <div class="fandericon">
-          <img src="../assets/fander-icon-white.png" height="80" width="80" style="padding-left: 10px;padding-bottom: 10px;">
+          <img src="../assets/fander-icon-white.png" height="80" width="80"
+            style="padding-left: 10px;padding-bottom: 10px;">
         </div>
       </div>
- 
+
       <fly-card @onDragMove="onCardDragMove" @onDragStop="onCardDragStop" @onThrowDone="onCardThrowDone"
-        :cardWidth=this.windowWidth*0.9 :throwTriggerDistance="100" :hasShadow="true">
+        :cardWidth='this.windowWidth * 0.9' :throwTriggerDistance="100" :hasShadow="true">
         <template #firstCard style="width: 100%; height: 100%">
-          <div v-if="cards[0]" class="tantanCard" :style='{backgroundImage:"url("+cards[0].img+")"}'>
+          <div v-if="cards[0]" class="tantanCard" :style='{ backgroundImage: "url(" + cards[0].photoUrl + ")" }'>
             <div class="dishUIbox">
               <div class="dishinfobox">
                 <div class="dishinfotextbox">
-                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[0].name}}</div>
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{ cards[0].dishName }}</div>
                   <div class="dishsubinfobox">
-                    <div class="dishplace" style="margin-right:20px">{{cards[0].place}}</div>
-                    <div class="dishprice">￥{{cards[0].price}}</div>
+                    <div class="dishplace" style="margin-right:20px">{{ cards[0].position }}</div>
+                    <div class="dishprice">￥20</div>
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[0].star" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{cards[0].star}}</div>
+                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{ cards[0].score }}</div>
+                  </div>
+                </div>
+                <div @click="JumpDetail(cards[0]._id)" style="align-self: center;">
+                  <nut-icon name="right" color="white" size="30px"></nut-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template #secondCard style="width: 100%; height: 100%">
+          <div v-if="cards[1]" class="tantanCard" :style='{ backgroundImage: "url(" + cards[1].photoUrl + ")" }'>
+            <div class="dishUIbox">
+              <div class="dishinfobox">
+                <div class="dishinfotextbox">
+                  <div style="font-size: 30px;margin-bottom: 10px;">{{ cards[1].dishName }}</div>
+                  <div class="dishsubinfobox">
+                    <div class="dishplace" style="margin-right:20px">{{ cards[1].position }}</div>
+                    <div class="dishprice">￥20</div>
+                  </div>
+                  <div class="dishscorebox">
+                    <nut-rate v-model="cards[1].star" active-color="#FFC800" readonly />
+                    <div class="dishscore" style="margin-left:10px">{{ cards[1].score }}</div>
                   </div>
                 </div>
                 <div @click="JumpDetail" style="align-self: center;">
@@ -61,30 +84,8 @@
             </div>
           </div>
         </template>
-        <template #secondCard style="width: 100%; height: 100%">
-          <div v-if="cards[1]" class="tantanCard" :style='{backgroundImage:"url("+cards[1].img+")"}'>      
-            <div class="dishUIbox">
-              <div class="dishinfobox">
-                <div class="dishinfotextbox">
-                  <div style="font-size: 30px;margin-bottom: 10px;">{{cards[1].name}}</div>
-                  <div class="dishsubinfobox">
-                    <div class="dishplace" style="margin-right:20px">{{cards[1].place}}</div>
-                    <div class="dishprice">￥{{cards[1].price}}</div>
-                  </div>
-                  <div class="dishscorebox">
-                    <nut-rate v-model="cards[1].star" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px">{{cards[1].star}}</div>
-                  </div>
-                </div>
-                <div @click="JumpDetail" style="align-self: center;">
-                  <nut-icon name="right" color="white" size="30px"></nut-icon>
-                </div>
-              </div>   
-            </div>
-          </div>
-        </template>
         <template #thirdCard style="width: 100%; height: 100%">
-          <div v-if="cards[2]" class="tantanCard" :style='{backgroundImage:"url("+cards[2].img+")"}'>
+          <div v-if="cards[2]" class="tantanCard" :style='{ backgroundImage: "url(" + cards[2].photoUrl + ")" }'>
 
             <div class="dishUIbox">
               <div class="dishinfobox">
@@ -97,68 +98,40 @@
           </div>
         </template>
       </fly-card>
-      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
 import FlyCard from "../components/FlyCard.vue";
+import FanPop from '@/components/FanPop.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 export default {
   components: {
     FlyCard,
+    FanPop,
   },
   data() {
     return {
       actionName: "",
-      cards: [
-        {
-          img: 'https://th.bing.com/th/id/R.5da8a70f4332d95724c9702788ce1e39?rik=l%2bvQUaqAPqAw9g&pid=ImgRaw&r=0',
-          name:'汉堡薯条',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.5,
-        },
-        {
-          img: 'https://img.zcool.cn/community/01d38b5dad0fbda8012163ba8a0987.jpg@1280w_1l_2o_100sh.jpg',
-          name:'火锅',
-          place:'小食堂一楼',
-          price:'50',
-          star:3.5,
-        },
-        {
-          img: 'https://img.zcool.cn/community/0133645d3d64f2a8012187f4b133d1.jpg@1280w_1l_2o_100sh.jpg',
-          name:'汉堡',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.5,
-        },
-        {
-          img: 'https://th.bing.com/th/id/R.f482633a7c0de55b8363f27179da5ca5?rik=ZkZqKhpA91mpCQ&pid=ImgRaw&r=0',
-          name:'麻辣烫',
-          place:'小食堂二楼',
-          price:'15~25',
-          star:4.8,
-        },
-        {
-          img: 'https://th.bing.com/th/id/R.ed1ffb699a72c9d626044e7b540e8e6b?rik=BahrpmNgZBpM7g&pid=ImgRaw&r=0',
-          name:'热干面',
-          place:'小食堂二楼',
-          price:'20',
-          star:4.8,
-        },
-      ],
+      cards: [],
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
-      avatar:'',
-      times:9,
+      avatar: '',
+      times: 9,
+      fanPopFlag: false,//饭饭成功遮罩层标志
+      fanPopItem: {
+        name: '',
+        imgUrl: '',
+      },
     };
   },
   methods: {
-    JumpDetail() {
-      this.$router.push('/detail')
+    JumpDetail(dishId) {
+      // console.log('dishId: '+dishId);
+      this.$router.push({ path: "/detail", query: { dishId: dishId } });
     },
     JumpInfo() {
       this.$router.push('/info')
@@ -167,14 +140,17 @@ export default {
       this.$router.push('/fanfan')
     },
     onCardDragMove(obj) {
-      if(obj.top > 20 && obj.top>Math.abs(obj.left) || obj.top < -20 && obj.top<-Math.abs(obj.left)){
+      if (obj.top > 20 && obj.top > Math.abs(obj.left) || obj.top < -20 && obj.top < -Math.abs(obj.left)) {
         this.actionName = "饭饭";
+        this.fanPopItem.name = this.cards[0].dishName;
+        this.fanPopItem.imgUrl = this.cards[0].photoUrl;
+        this.fanPopFlag = true;
       }
-      else if (obj.left < -20 && obj.top>obj.left && obj.top<-obj.left) {
+      else if (obj.left < -20 && obj.top > obj.left && obj.top < -obj.left) {
         this.actionName = "不喜欢";
-      } else if (obj.left > 20 && obj.top<obj.left && obj.top>-obj.left) {
+      } else if (obj.left > 20 && obj.top < obj.left && obj.top > -obj.left) {
         this.actionName = "喜欢";
-      } 
+      }
     },
     onCardDragStop(obj) {
       this.actionName = "";
@@ -182,19 +158,21 @@ export default {
     onCardThrowDone(obj) {
       this.cards.splice(0, 1);
       console
-      if(this.times>0)
-      {
+      if (this.times > 0) {
         this.times = this.times - 1;
       }
-      else{
+      else {
         this.times = 9;
         console.log('10次');
       }
     },
+    ActiveDecide() {//主动决策函数,后端返回一个菜品帮助用户饭饭
+      this.fanPopItem.name = '';
+      this.fanPopItem.imgUrl = '';
+      this.fanPopFlag = true;//修改标志展示饭饭动画
+    },
   },
   setup() {
-    const value = ref(4.8);
-    return { value }
   },
   watch: {
     windowHeight(val) {
@@ -220,11 +198,23 @@ export default {
 
     axios({
       method: 'get',
-      headers: { 'Authorization': 'Bearer '+ localStorage.token },
+      headers: { 'Authorization': 'Bearer ' + localStorage.token },
       url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
     }).then((res) => {
       // console.log('user info:',  res.data.data.user.avatar)
       this.$data.avatar = res.data.data.user.avatar;
+    }, error => {
+      console.log('错误', error.message)
+    })
+
+    // get all dishes 
+    axios({
+      method: 'get',
+      headers: { 'Authorization': 'Bearer ' + localStorage.token },
+      url: 'http://124.220.158.211:7000/dishes/',
+    }).then((res) => {
+      console.log('dish info:', res.data.data.dishes)
+      this.$data.cards = res.data.data.dishes;
     }, error => {
       console.log('错误', error.message)
     })
@@ -339,19 +329,19 @@ div {
   height: 100%;
   background-size: cover;
   background: no-repeat center;
-  background-size:cover;
+  background-size: cover;
   display: flex;
   align-items: flex-end;
-	overflow: hidden;
-	box-shadow: 0px 5px 43px rgba( 0, 0, 0, 0.48 );
-	padding: 0;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
+  overflow: hidden;
+  box-shadow: 0px 5px 43px rgba(0, 0, 0, 0.48);
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-::v-deep .nut-icon__img{
+::v-deep .nut-icon__img {
   object-fit: cover;
 }
 </style>

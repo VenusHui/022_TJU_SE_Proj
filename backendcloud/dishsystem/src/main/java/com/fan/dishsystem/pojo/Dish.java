@@ -25,8 +25,9 @@ public class Dish {
     private String description;
     private String photoUrl;
     private String position;
+    private Double price;
     private Double score;
     private Preference preference;
-    private List<Ingredient> ingredients;
+    private List<String> ingredients;
     private List<Comment> comments;
 }

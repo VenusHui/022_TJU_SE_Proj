@@ -19,7 +19,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class DishModelAssembler implements RepresentationModelAssembler<Dish, EntityModel<Dish>> {
     @Override
     public EntityModel<Dish> toModel(Dish dish) {
-        return EntityModel.of(dish,
-                linkTo(methodOn(DishController.class).getAll()).withRel("all dishes"));
+        return EntityModel.of(dish);
     }
 }

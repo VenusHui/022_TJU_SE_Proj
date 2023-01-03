@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 /**
@@ -29,8 +28,9 @@ public class DishController {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> getAllDishes() {
-        return ResponseEntity.ok(dishSystemService.getAllDishes());
+    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", defaultValue = "all") String filter,
+                                              @RequestParam(value = "value", defaultValue = "") String value) {
+        return ResponseEntity.ok(dishSystemService.getDishes(filter, value));
     }
 
     @GetMapping("/dishes/{dishId}/")

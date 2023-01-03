@@ -1,6 +1,5 @@
 package com.fan.dishsystem.controller;
 
-import com.fan.dishsystem.pojo.Ingredient;
 import com.fan.dishsystem.service.DishService;
 import com.fan.dishsystem.utils.Response;
 import com.fan.dishsystem.utils.ResponseCode;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.lang.Double.parseDouble;
 
 @RestController
 /**
@@ -31,8 +32,18 @@ public class DishController {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> getAll() {
-        return ResponseEntity.ok(dishService.getAll());
+    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", defaultValue = "all") String filter,
+                                              @RequestParam(value = "value", defaultValue = "") String value) {
+        if (Objects.equals(filter, "all")) {
+            return ResponseEntity.ok(dishService.getAll());
+        }
+        else if (filter.equals("dishName")) {
+            return ResponseEntity.ok(dishService.getDishesByName(value));
+        }
+        else if (filter.equals("position")) {
+            return ResponseEntity.ok(dishService.getDishesByPosition(value));
+        }
+        return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
     }
 
     @GetMapping("/dishes/{dishId}/")
@@ -66,20 +77,19 @@ public class DishController {
      * @date: 2023/1/1 23:04
      */
     public ResponseEntity<Response> addDish(@RequestParam Map<String, Object> form,
-                                            @RequestParam(value = "ingredients") List<String> ingredientList) {
+                                            @RequestParam List<String> ingredients) {
         String dishName = form.get("dishName").toString();
         String description = form.get("description").toString();
         String photoUrl = form.get("photoUrl").toString();
         String position = form.get("position").toString();
+        Double price = parseDouble(form.get("price").toString());
 
         Map<String, Object> preferenceMap = new HashMap<>();
         JSONObject jsonObject = new JSONObject(form.get("preference").toString());
         for (String key : jsonObject.keySet()) {
             preferenceMap.put(key, jsonObject.get(key));
         }
-        List<Ingredient> ingredients = ingredientList.stream()
-                .map(Ingredient::new).collect(Collectors.toList());
-        return ResponseEntity.ok(dishService.addDish(dishName, description, photoUrl, position, preferenceMap, ingredients));
+        return ResponseEntity.ok(dishService.addDish(dishName, description, photoUrl, position, price, preferenceMap, ingredients));
     }
 
     @PutMapping("/dishes/{dishId}")
@@ -112,8 +122,7 @@ public class DishController {
             return ResponseEntity.ok(dishService.setDishPreference(dishId, preferenceMap));
         } else if (Objects.equals(filter, "ingredients")) {
             String[] items = value.split(",");
-            List<Ingredient> ingredients = new ArrayList<>(Arrays.asList(items)).stream()
-                    .map(Ingredient::new).collect(Collectors.toList());
+            List<String> ingredients = Arrays.stream(items).collect(Collectors.toList());
             return ResponseEntity.ok(dishService.setDishIngredients(dishId, ingredients));
         }
         return ResponseEntity.badRequest().body(new Response(ResponseCode.REQUEST_PARAM_ERROR, "请求参数错误", null));
