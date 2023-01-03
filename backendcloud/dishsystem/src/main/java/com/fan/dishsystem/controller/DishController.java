@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.Double.parseDouble;
+
 @RestController
 /**
  * @author: VenusHui
@@ -81,6 +83,7 @@ public class DishController {
         String description = form.get("description").toString();
         String photoUrl = form.get("photoUrl").toString();
         String position = form.get("position").toString();
+        Double price = parseDouble(form.get("price").toString());
 
         Map<String, Object> preferenceMap = new HashMap<>();
         JSONObject jsonObject = new JSONObject(form.get("preference").toString());
@@ -89,7 +92,7 @@ public class DishController {
         }
         List<Ingredient> ingredients = ingredientList.stream()
                 .map(Ingredient::new).collect(Collectors.toList());
-        return ResponseEntity.ok(dishService.addDish(dishName, description, photoUrl, position, preferenceMap, ingredients));
+        return ResponseEntity.ok(dishService.addDish(dishName, description, photoUrl, position, price, preferenceMap, ingredients));
     }
 
     @PutMapping("/dishes/{dishId}")

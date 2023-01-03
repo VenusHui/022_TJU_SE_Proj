@@ -18,6 +18,6 @@ public interface DishService {
     public Response setDishPosition(String dishId, String position);
     public Response setDishPreference(String dishId, Map<String, Object> preferenceMap);
     public Response setDishIngredients(String dishId, List<Ingredient> ingredients);
-    public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Object> preference, List<Ingredient> ingredients);
+    public Response addDish(String dishName, String description, String photoUrl, String position, Double price, Map<String, Object> preference, List<Ingredient> ingredients);
     public Response deleteDish(String dishId);
 }

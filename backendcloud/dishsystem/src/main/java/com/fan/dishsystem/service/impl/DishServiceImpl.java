@@ -158,7 +158,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Response addDish(String dishName, String description, String photoUrl, String position, Map<String, Object> preferenceMap, List<Ingredient> ingredients) {
+    public Response addDish(String dishName, String description, String photoUrl, String position, Double price, Map<String, Object> preferenceMap, List<Ingredient> ingredients) {
         if (repository.existsByDishName(dishName) && repository.existsByPosition(position)) {
             return new Response(ResponseCode.REPLICATE_DISH, "该菜品已存在", null);
         }
@@ -167,7 +167,7 @@ public class DishServiceImpl implements DishService {
                 parseInt(preferenceMap.get("sourness").toString()),
                 parseInt(preferenceMap.get("sweetness").toString()),
                 parseInt(preferenceMap.get("bitterness").toString()));
-        Dish dish = new Dish(null, dishName, description, photoUrl, position, 0.0, preference, ingredients, new ArrayList<>());
+        Dish dish = new Dish(null, dishName, description, photoUrl, position, price, 0.0, preference, ingredients, new ArrayList<>());
         repository.insert(dish);
         Map<String, Object> data = new HashMap<>();
         data.put("dish", dish);
