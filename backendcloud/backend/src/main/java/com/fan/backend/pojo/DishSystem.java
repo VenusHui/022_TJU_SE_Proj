@@ -49,8 +49,7 @@ public interface DishSystem {
      * @description: 添加菜品
      * @date: 2023/1/1 23:04
      */
-    public Response addDish(@RequestParam Map<String, Object> form,
-                                            @RequestParam(value = "ingredients") List<String> ingredientList);
+    public Response addDish(@RequestParam Map<String, Object> form);
 
     @PutMapping("/dishes/{dishId}")
     /**

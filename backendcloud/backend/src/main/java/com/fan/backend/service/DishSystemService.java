@@ -10,7 +10,7 @@ import java.util.Map;
 public interface DishSystemService {
     public Response getDishes(String filter, String value);
     public Response getDish(String dishId);
-    public Response addDish(Map<String, Object> form, List<String> ingredientList);
+    public Response addDish(Map<String, Object> form);
     public Response setDish(String dishId, String filter, String value);
     public Response deleteDish(String dishId);
     public Response getAllComments();

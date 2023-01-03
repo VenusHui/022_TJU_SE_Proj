@@ -63,9 +63,8 @@ public class DishController {
      * @description: 添加菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> addDish(@RequestParam Map<String, Object> form,
-                                            @RequestParam(value = "ingredients") List<String> ingredientList) {
-        return ResponseEntity.ok(dishSystemService.addDish(form, ingredientList));
+    public ResponseEntity<Response> addDish(@RequestParam Map<String, Object> form) {
+        return ResponseEntity.ok(dishSystemService.addDish(form));
     }
 
     @PutMapping("/dishes/{dishId}")

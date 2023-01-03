@@ -33,8 +33,8 @@ public class DishSystemServiceImpl implements DishSystemService {
     }
 
     @Override
-    public Response addDish(Map<String, Object> form, List<String> ingredientList) {
-        return dishSystem.addDish(form, ingredientList);
+    public Response addDish(Map<String, Object> form) {
+        return dishSystem.addDish(form);
     }
 
     @Override
