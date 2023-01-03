@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DishSystemService {
-    public Response getAllDishes();
+    public Response getDishes(String filter, String value);
     public Response getDish(String dishId);
     public Response addDish(Map<String, Object> form, List<String> ingredientList);
     public Response setDish(String dishId, String filter, String value);

@@ -18,7 +18,8 @@ public interface DishSystem {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public Response getAllDishes();
+    public Response getDishes(@RequestParam(value = "filter", required = false) String filter,
+                                              @RequestParam(value = "value", required = false) String value);
 
     @GetMapping("/dishes/{dishId}/")
     /**

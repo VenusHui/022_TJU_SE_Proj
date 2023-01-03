@@ -23,8 +23,8 @@ public class DishSystemServiceImpl implements DishSystemService {
     DishSystem dishSystem;
 
     @Override
-    public Response getAllDishes() {
-        return dishSystem.getAllDishes();
+    public Response getDishes(String filter, String value) {
+        return dishSystem.getDishes(filter, value);
     }
 
     @Override

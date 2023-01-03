@@ -31,7 +31,14 @@ public class DishController {
      * @description: 查询所有菜品
      * @date: 2023/1/1 23:04
      */
-    public ResponseEntity<Response> getAll() {
+    public ResponseEntity<Response> getDishes(@RequestParam(value = "filter", required = false) String filter,
+                                              @RequestParam(value = "value", required = false) String value) {
+        if (filter.equals("dishName")) {
+            return ResponseEntity.ok(dishService.getDishesByName(value));
+        }
+        else if (filter.equals("position")) {
+            return ResponseEntity.ok(dishService.getDishesByPosition(value));
+        }
         return ResponseEntity.ok(dishService.getAll());
     }
 
