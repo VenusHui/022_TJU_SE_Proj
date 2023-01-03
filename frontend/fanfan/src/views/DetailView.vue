@@ -15,19 +15,10 @@
                         <div style="margin-right:20px">￥{{ this.price }}</div>
                         <div style="display: flex;align-items: center;">
                             <nut-icon name="star-fill" color="" size="10px" style="margin-right:5px"></nut-icon>
-                            <div>4.5</div>
+                            <div>{{ score }}</div>
                         </div>
                     </div>
                     <div style="display: flex; font-size: small;color:grey; padding-top:4%">
-                        <!-- <div style="margin:5px;">
-                            <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                        </div>
-                        <div style="margin:5px;">
-                            <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                        </div>
-                        <div style="margin:5px;">
-                            <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                        </div> -->
                         {{ description }}
                     </div>
                 </div>
@@ -89,6 +80,7 @@ export default {
             price:'',
             dishId:'',
             description:'',
+            score:0,
             comments:[
                 {
                 
@@ -111,6 +103,7 @@ export default {
             this.description = res.data.data.dish.description
             this.$data.comments =res.data.data.dish.comments
             this.price = res.data.data.dish.price
+            this.score = res.data.data.dish.score
         }, error => {
             console.log('错误', error.message)
         })

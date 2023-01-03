@@ -15,8 +15,8 @@
                         <template #origin>
                         </template>
                         <template #shop-tag>
-                            <nut-rate  active-color="#FFC800" v-model="item.rate" readonly spacing="10" style="height:20px" />
-                            <div style="color: gray;font-size: small;">{{ item.score }}({{ item.comments==null?0: item.comments.length}})</div>
+                            <nut-rate  active-color="#FFC800" v-model="item.score" readonly spacing="10" style="height:20px" />
+                            <div style="color: gray;font-size: small;">{{ item.score }} ({{ item.comments==null?0: item.comments.length}})</div>
                         </template>
                     </nut-card>
                 </template>

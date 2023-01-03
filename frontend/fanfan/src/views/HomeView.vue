@@ -51,7 +51,7 @@
                     <div class="dishprice">￥{{ cards[0].price }}</div>
                   </div>
                   <div class="dishscorebox">
-                    <nut-rate v-model="cards[0].star" active-color="#FFC800" readonly />
+                    <nut-rate v-model="cards[0].score" active-color="#FFC800" readonly />
                     <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{ cards[0].score }}</div>
                   </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="dishprice">￥{{ cards[1].price }}</div>
                   </div>
                   <div class="dishscorebox">
-                    <nut-rate v-model="cards[1].star" active-color="#FFC800" readonly />
+                    <nut-rate v-model="cards[1].score" active-color="#FFC800" readonly />
                     <div class="dishscore" style="margin-left:10px">{{ cards[1].score }}</div>
                   </div>
                 </div>

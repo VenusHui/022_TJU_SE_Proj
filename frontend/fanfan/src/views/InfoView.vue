@@ -111,6 +111,17 @@ export default {
         }, error => {
             console.log('错误', error.message)
         })
+
+        // get preference--------------------------------------------------
+        axios({
+            method: 'get',
+            headers: { 'Authorization': 'Bearer ' + localStorage.token },
+            url: `http://124.220.158.211:7000/users/${localStorage.userId}/preference/`,
+        }).then((res) => {
+            console.log('user info:',  res.data)
+        }, error => {
+            console.log('错误', error.message)
+        })
     }
 }
 </script>
