@@ -6,14 +6,15 @@
             </div>
         </div>
         <div style="margin-top:10px">
-            <nut-list :listData="likeditems" height="260" container-height="530">
-                <template v-slot:default="{ item }">
-                    <nut-row class="row" type="flex" justify="center" gutter="10">
+            <!-- <nut-list :listData="likeditems" height="260" container-height="530"> -->
+            <nut-list :listData="likedlist" height="260" container-height="530">
+                <template v-slot:default="{ index, item }">
+                    <nut-row v-if="index % 2 == 0" class="row" type="flex" justify="center" gutter="10">
                         <nut-col :span="11">
-                            <LikedCard :name="item.left.name" :imgUrl="item.left.url"></LikedCard>
+                            <LikedCard :name="item.name" :imgUrl="item.url"></LikedCard>
                         </nut-col>
                         <nut-col :span="11">
-                            <LikedCard :name="item.right.name" :imgUrl="item.right.url"></LikedCard>
+                            <LikedCard :name="likedlist[index + 1].name" :imgUrl="likedlist[index + 1].url"></LikedCard>
                         </nut-col>
                     </nut-row>
                 </template>
@@ -32,12 +33,21 @@ export default {
     },
     data() {
         return {
+            likedlist: [
+                {
+                    name: '无骨凤爪',
+                    url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                },
+                {
+                    name: '蒸包',
+                    url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+                },
+            ],
             likeditems: [
                 {
                     left: {
                         name: '无骨凤爪',
                         url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                        isLiked: true,
                     },
                     right: {
                         name: '蒸包',
@@ -47,7 +57,6 @@ export default {
                     left: {
                         name: '无骨凤爪',
                         url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                        isLiked: true,
                     },
                     right: {
                         name: '蒸包',
@@ -57,14 +66,14 @@ export default {
             ]
         }
     },
-    mounted(){
+    mounted() {
         // 获取liked list-------------------------------------------------
         axios({
             method: 'get',
             headers: { 'Authorization': 'Bearer ' + localStorage.token },
             // url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
         }).then((res) => {
-            console.log('liked list:',  res.data.data.user.avatar)
+            console.log('liked list:', res.data.data.user.avatar)
         }, error => {
             console.log('错误', error.message)
         })
