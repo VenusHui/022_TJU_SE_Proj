@@ -57,28 +57,11 @@ export default {
             tab1value: '0',
             list: [{
                 imgUrl:
-                    '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-                title: '阳澄湖大闸蟹',
-                shopName: '二楼',
-                price: 100,
-            }, {
-                imgUrl:
-                    '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-                title: '阳澄湖大闸蟹',
-                shopName: '二楼',
-                price: 100,
-            }, {
-                imgUrl:
-                    '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-                title: '阳澄湖大闸蟹',
-                shopName: '二楼',
-                price: 100,
-            }, {
-                imgUrl:
-                    '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-                title: '阳澄湖大闸蟹',
-                shopName: '二楼',
-                price: 100,
+                    'http://rntej2yad.hd-bkt.clouddn.com/assets/dish12.jpg',
+                title: '咕噜肉',
+                shopName: '大食堂一楼',
+                price: 5,
+                rate:4.5
             }]
         });
         return { state };
@@ -105,4 +88,6 @@ export default {
     margin-top: 20px;
     font-size: 10px;
 }
+
+
 </style>

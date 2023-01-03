@@ -98,12 +98,12 @@ export default {
     background-color: white;
 }
 
-.nut-card .nut-card__left>img{
+/* .nut-card .nut-card__left>img{
     width: auto;  
     height: auto;  
     min-width: 100%;
     max-width: 100%;  
     min-height: 100%;
-}
+} */
 
 </style>
