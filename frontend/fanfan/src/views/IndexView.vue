@@ -3,7 +3,7 @@
     <div class="indextopbox">
       <div style="width: 60%;">
         <nut-searchbar v-model="searchValue" input-background="#d7d7d7" :clearable="false"
-          :focus-style="{ 'background-color': 'white', 'border': 'solid' }">
+          :focus-style="{ 'background-color': 'white', 'border': 'solid' }" @keyup.enter="JumpSearch">
           <template v-slot:leftin>
             <nut-icon size="14" name="search2"></nut-icon>
           </template>
@@ -18,10 +18,10 @@
         <template v-slot:default="{ item }">
           <nut-row style="margin-bottom: 20px;" type="flex" justify="center" gutter="10">
             <nut-col :span="11">
-              <IndexBlock :msg="item.left.name" :imgUrl="item.left.url"></IndexBlock>
+              <IndexBlock :msg="item.left.name" :imgUrl="item.left.url" @click="JumpMenu(item.left.name)"></IndexBlock>
             </nut-col>
             <nut-col :span="11">
-              <IndexBlock :msg="item.right.name" :imgUrl="item.right.url"></IndexBlock>
+              <IndexBlock :msg="item.right.name" :imgUrl="item.right.url" @click="JumpMenu(item.right.name)"></IndexBlock>
             </nut-col>
           </nut-row>
         </template>
@@ -33,16 +33,24 @@
 <script>
 import { reactive, toRefs } from 'vue';
 import IndexBlock from '@/components/IndexBlock.vue'
+
 export default {
+  data(){
+    return{
+      searchValue:'',
+    }
+  },
   components: {
     IndexBlock
   },
   methods: {
     JumpSearch() {
-      this.$router.push('/search')
+      // console.log(this.$data.searchValue)
+      this.$router.push({ path: '/menu', query: { param: this.$data.searchValue, kind: 'name' } });
+
     },
-    JumpMenu() {
-      this.$router.push('/menu')
+    JumpMenu(name) {
+      this.$router.push({ path: '/menu', query: { param: name , kind:'position'} });
     },
   },
   setup() {
@@ -91,16 +99,16 @@ export default {
       ]
     });
     const handleScroll = () => {
-      let arr = new Array(
-        {
-          left: {
-            name: '西点部',
-            url: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish16.jpg'
-          },
-          right: {
-          }
-        });
-      state.indexitems = state.indexitems.concat(arr);
+      // let arr = new Array(
+      //   {
+      //     left: {
+      //       name: '西点部',
+      //       url: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish16.jpg'
+      //     },
+      //     right: {
+      //     }
+      //   });
+      // state.indexitems = state.indexitems.concat(arr);
     };
     return { ...toRefs(state), handleScroll };
   }

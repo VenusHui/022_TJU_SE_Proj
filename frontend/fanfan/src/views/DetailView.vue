@@ -12,7 +12,7 @@
                     </div>
                     <div style="display: flex; font-size: small;">
                         <div style="margin-right:20px">{{ this.place }}</div>
-                        <div style="margin-right:20px">￥20</div>
+                        <div style="margin-right:20px">￥{{ this.price }}</div>
                         <div style="display: flex;align-items: center;">
                             <nut-icon name="star-fill" color="" size="10px" style="margin-right:5px"></nut-icon>
                             <div>4.5</div>
@@ -86,6 +86,7 @@ export default {
             dishimg: '',
             isliked: true,
             place:'',
+            price:'',
             dishId:'',
             description:'',
             comments:[
@@ -109,6 +110,7 @@ export default {
             this.place = res.data.data.dish.position
             this.description = res.data.data.dish.description
             this.$data.comments =res.data.data.dish.comments
+            this.price = res.data.data.dish.price
         }, error => {
             console.log('错误', error.message)
         })

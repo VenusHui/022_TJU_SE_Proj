@@ -1,5 +1,5 @@
 <template>
-    <div class="indexblock radius"  :style="{ 'background-image': 'url(' + imgUrl + ')' }" @click="JumpMenu">
+    <div class="indexblock radius"  :style="{ 'background-image': 'url(' + imgUrl + ')' }">
         <div class="label radius">
             {{ msg }}
         </div>
@@ -14,9 +14,7 @@ export default {
         imgUrl: String
     },
     methods: {
-        JumpMenu() {
-            this.$router.push('/menu')
-        }
+
     }
 }
 </script>

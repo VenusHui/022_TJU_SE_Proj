@@ -48,7 +48,7 @@
                   <div style="font-size: 30px;margin-bottom: 10px;">{{ cards[0].dishName }}</div>
                   <div class="dishsubinfobox">
                     <div class="dishplace" style="margin-right:20px">{{ cards[0].position }}</div>
-                    <div class="dishprice">￥20</div>
+                    <div class="dishprice">￥{{ cards[0].price }}</div>
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[0].star" active-color="#FFC800" readonly />
@@ -70,7 +70,7 @@
                   <div style="font-size: 30px;margin-bottom: 10px;">{{ cards[1].dishName }}</div>
                   <div class="dishsubinfobox">
                     <div class="dishplace" style="margin-right:20px">{{ cards[1].position }}</div>
-                    <div class="dishprice">￥20</div>
+                    <div class="dishprice">￥{{ cards[1].price }}</div>
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[1].star" active-color="#FFC800" readonly />

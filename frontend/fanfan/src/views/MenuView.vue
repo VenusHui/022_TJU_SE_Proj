@@ -8,17 +8,15 @@
         </div>
         <div style="margin-top: 10px;background-color: white;padding:10px 0 10px 10px;">
             <nut-list :listData="menuresults" height="125" container-height="1000" @scroll-bottom="menuhandleScroll">
-                <template v-slot:default="{ item }">
-                    <nut-card :img-url="item.imgUrl" :title="item.title" :price="item.price"
-                        :shopName="item.shopName" @click="JumpDetail">
-                        <template #prolist>
-                            <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
-                        </template>
+                <template v-if="menuresults" v-slot:default="{ item }">
+                    <nut-card :img-url="item.photoUrl" :title="item.dishName" :price="item.price"
+                        :shopName="item.position" @click="JumpDetail(item.dishId)">
+                        
                         <template #origin>
                         </template>
                         <template #shop-tag>
                             <nut-rate  active-color="#FFC800" v-model="item.rate" readonly spacing="10" style="height:20px" />
-                            <div style="color: gray;font-size: small;">{{ item.rate }}(103)</div>
+                            <div style="color: gray;font-size: small;">{{ item.score }}({{ item.comments==null?0: item.comments.length}})</div>
                         </template>
                     </nut-card>
                 </template>
@@ -29,75 +27,64 @@
 
 <script>
 import { reactive, toRefs } from 'vue';
+import axios from 'axios';
 export default {
+    data(){
+        return{
+            menuresults:[]
+        }
+    },
     setup() {
-        const state = reactive({
-            menuresults: [
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-            ]
-        });
-        const menuhandleScroll = () => {
-            let arr = new Array(
-                {
-                    imgUrl: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    title: '无骨凤爪',
-                    price: 20,
-                    rate: 4.8,
-                    shopName: '大食堂一楼',
-                },
-            );
-            state.menuresults = state.menuresults.concat(arr);
-        };
-        return { ...toRefs(state), menuhandleScroll };
+
     },
     methods: {
-        JumpDetail() {
-            this.$router.push('/detail')
+        JumpDetail(dishId) {
+            this.$router.push({ path: "/detail", query: { dishId: dishId }});
         },
         JumpBack() {
             this.$router.back()
         }
+    },
+    mounted() {
+        // console.log(this.$route.query, 7777);
+        // this.dishId = this.$route.query.dishId;
+        // this.$route.query.position
+        // get dishes 
+        if (this.$route.query.kind == 'position') {
+            axios({
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                url: 'http://124.220.158.211:7000/dishes/',
+                params: {
+                    filter: 'position',
+                    value: this.$route.query.param
+                }
+            }).then((res) => {
+                console.log('dish info:', res)
+                this.menuresults = res.data.data.dishes.content
+                // this.$data.cards = res.data.data.dishes;
+            }, error => {
+                console.log('错误', error.message)
+            })
+        }
+        if(this.$route.query.kind == 'name'){
+            axios({
+                method: 'get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                url: 'http://124.220.158.211:7000/dishes/',
+                params: {
+                    filter: 'dishName',
+                    value: this.$route.query.param
+                }
+            }).then((res) => {
+                console.log('dish info:', res)
+                this.menuresults = res.data.data.dishes.content
+                // this.$data.cards = res.data.data.dishes;
+            }, error => {
+                console.log('错误', error.message)
+            })
+        }
+        
     }
 }
 </script>
@@ -110,4 +97,13 @@ export default {
     align-items: center;
     background-color: white;
 }
+
+.nut-card .nut-card__left>img{
+    width: auto;  
+    height: auto;  
+    min-width: 100%;
+    max-width: 100%;  
+    min-height: 100%;
+}
+
 </style>
