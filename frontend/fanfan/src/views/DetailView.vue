@@ -89,7 +89,7 @@ export default {
         }
     },
     mounted(){
-        // console.log(this.$route.query, 7777);
+        console.log(this.$route.query, 7777);
         this.dishId = this.$route.query.dishId;
         axios({
             method: 'get',

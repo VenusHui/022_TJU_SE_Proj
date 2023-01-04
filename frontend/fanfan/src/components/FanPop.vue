@@ -14,6 +14,7 @@
 
 <script>
 import LikedCard from '@/components/LikedCard.vue';
+import axios from 'axios';
 export default {
     name: 'FanPop',
     data() {
@@ -30,15 +31,15 @@ export default {
     },
     methods: {
         JumpFan() {
-            axios({//调用饭饭接口
-                method: 'post',
-                headers: { 'Authorization': 'Bearer ' + localStorage.token },
-                url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
-            }).then((res) => {
-                console.log('饭饭成功');
-            }, error => {
-                console.log('错误', error.message)
-            })
+            // axios({//调用饭饭接口
+            //     method: 'post',
+            //     headers: { 'Authorization': 'Bearer ' + localStorage.token },
+            //     url: `http://124.220.158.211:7000/users/${localStorage.userId}/`,
+            // }).then((res) => {
+            //     console.log('饭饭成功');
+            // }, error => {
+            //     console.log('错误', error.message)
+            // })
             this.$router.push('/fanfan');//跳转至饭饭添加评论界面
         }
     },

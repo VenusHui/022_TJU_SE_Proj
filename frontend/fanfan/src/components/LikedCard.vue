@@ -7,7 +7,7 @@
             </div>
         </div>
         <div v-else class="blackmask boxradius" style="display: flex;flex-direction: column;align-items: flex-end;">
-            <div @click="JumpDetail" style="height:100%;width:100%;"></div>
+            <div @click="JumpDetail(_id)" style="height:100%;width:100%;"></div>
             <div class="boxradius" style="width: 100%;display: flex;justify-content: space-between;">
                 <div style="color: white;font-size: 20px;display: flex;padding:0 0 10px 10px;">
                     {{ name }}
@@ -38,10 +38,12 @@ export default {
             type: Boolean,
             default: false,
         },
+        _id:String
     },
     methods: {
-        JumpDetail() {
-            this.$router.push('/detail')
+        JumpDetail(dishId) {
+            // this.$router.push('/detail')
+            this.$router.push({ path: "/detail", query: { dishId: dishId } });
         },
         FanDish() {
             // 后端更新fan的数据

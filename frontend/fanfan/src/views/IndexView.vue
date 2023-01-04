@@ -14,7 +14,7 @@
       </div>
     </div>
     <div style="margin-top:10px;">
-      <nut-list :listData="indexitems" height="150" container-height="530" @scroll-bottom="handleScroll">
+      <nut-list :listData="indexitems" height="150" :container-height="windowHeight-150" @scroll-bottom="handleScroll">
         <template v-slot:default="{ item }">
           <nut-row style="margin-bottom: 20px;" type="flex" justify="center" gutter="10">
             <nut-col :span="11">
@@ -38,6 +38,7 @@ export default {
   data(){
     return{
       searchValue:'',
+      windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
     }
   },
   components: {
@@ -109,6 +110,22 @@ export default {
       // state.indexitems = state.indexitems.concat(arr);
     };
     return { ...toRefs(state), handleScroll };
+  },
+  watch: {
+    windowHeight(val) {
+      let that = this;
+      // console.log("实时屏幕高度：", val, that.windowHeight);
+    },
+  },
+  mounted(){
+    var that = this;
+    // <!--把window.onresize事件挂在到mounted函数上-->
+    window.onresize = () => {
+      return (() => {
+        window.fullHeight = document.documentElement.clientHeight;
+        that.windowHeight = window.fullHeight;  // 高
+      })()
+    };
   }
 }
 </script>

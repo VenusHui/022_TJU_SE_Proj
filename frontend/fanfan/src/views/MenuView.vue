@@ -10,7 +10,7 @@
             <nut-list :listData="menuresults" height="125" container-height="1000" @scroll-bottom="menuhandleScroll">
                 <template v-if="menuresults" v-slot:default="{ item }">
                     <nut-card :img-url="item.photoUrl" :title="item.dishName" :price="item.price"
-                        :shopName="item.position" @click="JumpDetail(item.dishId)">
+                        :shopName="item.position" @click="JumpDetail(item._id)">
                         <template #origin>
                         </template>
                         <template #shop-tag>

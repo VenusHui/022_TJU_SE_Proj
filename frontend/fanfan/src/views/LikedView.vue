@@ -11,10 +11,10 @@
                 <template v-slot:default="{ index, item }">
                     <nut-row v-if="index % 2 == 0" class="row" type="flex" justify="center" gutter="10">
                         <nut-col :span="11">
-                            <LikedCard :name="item.name" :imgUrl="item.url"></LikedCard>
+                            <LikedCard :name="item.name" :imgUrl="item.url" :_id="item._id"></LikedCard>
                         </nut-col>
                         <nut-col :span="11">
-                            <LikedCard :name="likedlist[index + 1].name" :imgUrl="likedlist[index + 1].url"></LikedCard>
+                            <LikedCard :name="likedlist[index + 1].name" :imgUrl="likedlist[index + 1].url" :_id="likedlist[index + 1]._id"></LikedCard>
                         </nut-col>
                     </nut-row>
                 </template>
@@ -35,35 +35,37 @@ export default {
         return {
             likedlist: [
                 {
-                    name: '无骨凤爪',
+                    name: '无骨鸡爪',
                     url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+                    _id:'63b43b264215fc121e4f476f'
                 },
                 {
-                    name: '蒸包',
-                    url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
-                },
-            ],
-            likeditems: [
-                {
-                    left: {
-                        name: '无骨凤爪',
-                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    },
-                    right: {
-                        name: '蒸包',
-                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
-                    }
-                }, {
-                    left: {
-                        name: '无骨凤爪',
-                        url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
-                    },
-                    right: {
-                        name: '蒸包',
-                        url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
-                    }
+                    name: '济不理蒸包',
+                    url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg',
+                    _id:'63b49c094215fc121e4f4778'
                 }
-            ]
+            ],
+            // likeditems: [
+            //     {
+            //         left: {
+            //             name: '无骨凤爪',
+            //             url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+            //         },
+            //         right: {
+            //             name: '蒸包',
+            //             url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+            //         }
+            //     }, {
+            //         left: {
+            //             name: '无骨凤爪',
+            //             url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',
+            //         },
+            //         right: {
+            //             name: '蒸包',
+            //             url: 'https://img.zcool.cn/community/01a1e759be4dbda8012075340dcb6f.jpg@1280w_1l_2o_100sh.jpg'
+            //         }
+            //     }
+            // ]
         }
     },
     mounted() {
