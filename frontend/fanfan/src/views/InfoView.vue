@@ -96,7 +96,6 @@ export default {
         }
     },
     mounted(){
-
         axios({
             method: 'get',
             headers: { 'Authorization': 'Bearer ' + localStorage.token },
@@ -108,6 +107,8 @@ export default {
             this.$data.userName = res.data.data.user.userName;
             this.$data.grade = res.data.data.user.grade;
             this.$data.institute = res.data.data.user.institute;
+
+            this.reload()
         }, error => {
             console.log('错误', error.message)
         })
@@ -122,6 +123,7 @@ export default {
         }, error => {
             console.log('错误', error.message)
         })
+
     }
 }
 </script>

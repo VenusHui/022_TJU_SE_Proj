@@ -1,10 +1,17 @@
 package com.fan.preference.service.impl;
 
 import com.fan.preference.pojo.Preference;
+import com.fan.preference.pojo.UserPreference;
+import com.fan.preference.repository.UserPreferenceRepository;
 import com.fan.preference.service.UserPreferenceService;
+import com.fan.preference.service.utils.assembler.UserPreferenceModelAssembler;
 import com.fan.preference.utils.Response;
+import com.fan.preference.utils.ResponseCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -15,6 +22,15 @@ import java.util.Map;
  * @version: 1.0
  */
 public class UserPreferenceServiceImpl implements UserPreferenceService {
+
+    @Autowired
+    private UserPreferenceRepository userPreferenceRepository;
+
+    private UserPreferenceModelAssembler userPreferenceModelAssembler;
+
+    public UserPreferenceServiceImpl(UserPreferenceModelAssembler userPreferenceModelAssembler){
+        this.userPreferenceModelAssembler = userPreferenceModelAssembler;
+    }
 
     @Override
     public Response getAllUserPreferences() {
@@ -33,7 +49,12 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
 
     @Override
     public Response addUserPreference(Integer userId) {
-        return null;
+        Preference preference = new Preference(1,1,1,1);
+        UserPreference userPreference = new UserPreference(null,userId,"华东",preference,null,null,null,null);
+        userPreferenceRepository.insert(userPreference);
+        Map<String,Object> data = new HashMap<>();
+        data.put("preference",userPreferenceModelAssembler.toModel(userPreference));
+        return new Response(ResponseCode.SUCCESS,"添加用户偏好信息成功",data);
     }
 
     @Override

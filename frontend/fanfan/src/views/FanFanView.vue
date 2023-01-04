@@ -44,7 +44,7 @@
                     </template>
                     <template #footer>
                         <div class="customize">
-                            <nut-button type="mini" @click="Comment()">评价</nut-button>
+                            <nut-button type="mini" @click="Comment()">修改评价</nut-button>
                         </div>
                     </template>
                 </nut-card>
@@ -83,18 +83,11 @@ export default {
         return {
             ListToComment : [
                 {
-                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish12.jpg',
-                title: '咕噜肉',
-                shopName: '大食堂一楼',
-                price: 5,
-                rate: 4.5,
-                },
-                {
-                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish01.jpg',
-                title: '蔬菜沙拉',
-                shopName: '大食堂二楼',
-                price: 0.99,
-                rate: 3.5,
+                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish08.jpg',
+                title: '蛋酒小圆子',
+                shopName: '教师食堂',
+                price: 3,
+                rate: 5,
                 },
                 {
                 imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish11.jpg',
@@ -104,7 +97,15 @@ export default {
                 rate: 3.5,
                 },                
             ],
-            ListCommented : []
+            ListCommented : [
+            {
+                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish01.jpg',
+                title: '蔬菜沙拉',
+                shopName: '大食堂二楼',
+                price: 0.99,
+                rate: 3.5,
+                }
+            ]
         }
     },
     mounted() {
