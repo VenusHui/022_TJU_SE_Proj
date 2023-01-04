@@ -8,7 +8,7 @@
             <!-- <div class="tip">
                 <p>click to LOG IN!!</p>
             </div> -->
-            <nut-button class="loginbutton" size="large" type="primary" plain @click="JumpLogin">Click here to Log in!</nut-button>
+            <nut-button class="loginbutton" size="large" type="primary" plain @click="JumpLogin">CLick here to Log in!</nut-button>
         </div>
     </div>
 </template>
