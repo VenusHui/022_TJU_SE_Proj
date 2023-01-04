@@ -34,7 +34,7 @@
             <nut-cell title="学院" :desc= institute ></nut-cell>
         </nut-cell-group>
         <nut-cell-group title="口味偏好">
-            <nut-cell title="地区" desc="不限"></nut-cell>
+            <nut-cell title="地区" desc="华东"></nut-cell>
             <nut-cell title="酸">
                 <template v-slot:link>
                     <nut-rate active-color="yellow" v-model="value1" readonly />
@@ -69,10 +69,10 @@ export default {
             userName:'',
             studentId:'',
             avatar:'',
-            value1:0, 
-            value2:0, 
-            value3:0, 
-            value4:0,
+            value1:2, 
+            value2:4, 
+            value3:4, 
+            value4:5,
             lightTheme: false,
             grade:'',
             institute:''
@@ -86,7 +86,7 @@ export default {
     },
     methods: {
         JumpBack() {
-            this.$router.back()
+            this.$router.push('/home')
         },
         RevisePassword() {
             this.$router.push('/revisePassword')

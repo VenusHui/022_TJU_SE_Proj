@@ -189,7 +189,7 @@ export default {
             // }, error => {
             //     console.log('错误', error.message)
             // })
-            this.$router.back();
+            this.$router.push('/info')
         }
     }
 }

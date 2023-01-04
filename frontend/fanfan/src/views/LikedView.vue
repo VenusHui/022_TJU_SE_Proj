@@ -9,7 +9,7 @@
             <!-- <nut-list :listData="likeditems" height="260" container-height="530"> -->
             <nut-list :listData="likedlist" height="260" container-height="530">
                 <template v-slot:default="{ index, item }">
-                    <nut-row v-if="index % 2 == 0" class="row" type="flex" justify="center" gutter="10">
+                    <nut-row class="row" type="flex" justify="center" gutter="10">
                         <nut-col :span="11">
                             <LikedCard :name="item.name" :imgUrl="item.url" :_id="item._id"></LikedCard>
                         </nut-col>
@@ -34,6 +34,16 @@ export default {
     data() {
         return {
             likedlist: [
+                {
+                    name: '同济月饼',
+                    url: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish15.jpg',
+                    _id:'63b40092397b4e6e97d5b2f5'
+                },
+                {
+                    name: '兰州牛肉面',
+                    url: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish10.jpg',
+                    _id:'63b43af84215fc121e4f476d'
+                },
                 {
                     name: '无骨鸡爪',
                     url: 'https://th.bing.com/th/id/OIP.QlzawUNOCC48hH-1paUAygHaLH?pid=ImgDet&rs=1',

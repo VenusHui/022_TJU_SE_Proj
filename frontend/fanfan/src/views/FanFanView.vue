@@ -32,7 +32,7 @@
         <nut-tabpane title="已评价">
             <div class="ListCommented" v-for="(item, index) in this.ListCommented" :key="index">
                 <nut-card :img-url="item.imgUrl" :title="item.title" :price="item.price"
-                    :shopName="item.shopName">
+                    :shopName="item.shopName" >
                     <!-- <template #prolist>
                         <nut-tag color="#E9E9E9" textColor="#999999" plain>微辣</nut-tag>
                     </template> -->
@@ -88,7 +88,15 @@ export default {
                 shopName: '大食堂一楼',
                 price: 5,
                 rate: 4.5,
+                },
+                {
+                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish01.jpg',
+                title: '蔬菜沙拉',
+                shopName: '大食堂二楼',
+                price: 0.99,
+                rate: 3.5,
                 }
+                
             ],
             ListCommented : []
         }
@@ -129,5 +137,7 @@ export default {
     font-size: 10px;
 }
 
-
+.nut-card{
+    padding-bottom:5%;
+}
 </style>

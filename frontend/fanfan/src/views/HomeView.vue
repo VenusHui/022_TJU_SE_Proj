@@ -10,7 +10,7 @@
       </template>
       <template #right>
         <div @click="JumpFanFan()">
-          <nut-badge :value="8">
+          <nut-badge :dot="true">
             <nut-icon name="notice"></nut-icon>
           </nut-badge>
         </div>
