@@ -95,8 +95,14 @@ export default {
                 shopName: '大食堂二楼',
                 price: 0.99,
                 rate: 3.5,
-                }
-                
+                },
+                {
+                imgUrl: 'http://rntej2yad.hd-bkt.clouddn.com/assets/dish11.jpg',
+                title: '无骨凤爪',
+                shopName: '小食堂一楼',
+                price: 0.99,
+                rate: 3.5,
+                },                
             ],
             ListCommented : []
         }

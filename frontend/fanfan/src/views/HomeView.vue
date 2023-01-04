@@ -52,7 +52,7 @@
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[0].score" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{ cards[0].score }}</div>
+                    <div class="dishscore" style="margin-left:10px;padding-top:3px ;">{{ cards[0].score.toPrecision(2) }}</div>
                   </div>
                 </div>
                 <div @click="JumpDetail(cards[0]._id)" style="align-self: center;">
@@ -74,7 +74,7 @@
                   </div>
                   <div class="dishscorebox">
                     <nut-rate v-model="cards[1].score" active-color="#FFC800" readonly />
-                    <div class="dishscore" style="margin-left:10px">{{ cards[1].score }}</div>
+                    <div class="dishscore" style="margin-left:10px">{{ cards[1].score.toPrecision(2) }}</div>
                   </div>
                 </div>
                 <div @click="JumpDetail" style="align-self: center;">
@@ -108,6 +108,7 @@ import FlyCard from "../components/FlyCard.vue";
 import FanPop from '@/components/FanPop.vue';
 import { ref } from 'vue';
 import axios from 'axios';
+import { showNotify } from 'vant';
 export default {
   components: {
     FlyCard,
@@ -121,7 +122,7 @@ export default {
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
       avatar: '',
-      times: 9,
+      times: 5,
       fanPopFlag: false,//饭饭成功动画遮罩层显示标志
       fanPopItem: {
         name: '',
@@ -169,9 +170,8 @@ export default {
         this.times = this.times - 1;
       }
       else {
-        this.times = 9;
-        console.log('您已经滑了很多啦！快下决定赶紧饭饭吧！');
-        // showNotify('您已经滑了很多啦！快下决定赶紧饭饭吧！');
+        this.times = 5;//重新获取推荐卡片
+        showNotify('您已经滑了很多啦！快下决定赶紧饭饭吧！');
       }
     },
     ActiveDecide() {//主动决策函数,后端返回一个菜品帮助用户饭饭
@@ -203,7 +203,6 @@ export default {
         that.windowWidth = window.fullWidth; // 宽
       })()
     };
-
     axios({
       method: 'get',
       headers: { 'Authorization': 'Bearer ' + localStorage.token },
@@ -214,7 +213,6 @@ export default {
     }, error => {
       console.log('错误', error.message)
     })
-
     // get all dishes 
     axios({
       method: 'get',

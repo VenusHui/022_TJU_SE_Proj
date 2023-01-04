@@ -16,7 +16,7 @@
                         <template #shop-tag>
                             <nut-rate active-color="#FFC800" v-model="item.score" readonly spacing="10"
                                 style="height:20px" />
-                            <div style="color: gray;font-size: small;">{{ item.score }} ({{ item.comments == null ? 0 :
+                            <div style="color: gray;font-size: small;">{{ item.score.toPrecision(2) }} ({{ item.comments == null ? 0 :
         item.comments.length
                                 }})</div>
                         </template>
@@ -52,7 +52,7 @@ export default {
         // console.log(this.$route.query, 7777);
         // this.dishId = this.$route.query.dishId;
         // this.$route.query.position
-        // get dishes 
+        // get dishes
         if (this.$route.query.kind == 'position') {
             this.title = this.$route.query.param;
             axios({
@@ -66,10 +66,9 @@ export default {
             }).then((res) => {
                 console.log('dish info:', res)
                 this.menuresults = res.data.data.dishes.content
-                // this.$data.cards = res.data.data.dishes;
             }, error => {
                 console.log('错误', error.message)
-            })
+            });
         }
         if (this.$route.query.kind == 'name') {
             this.title = '搜索';

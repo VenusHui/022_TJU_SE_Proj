@@ -15,7 +15,7 @@
                         <div style="margin-right:20px">￥{{ this.price }}</div>
                         <div style="display: flex;align-items: center;">
                             <nut-icon name="star-fill" color="" size="10px" style="margin-right:5px"></nut-icon>
-                            <div>{{ score }}</div>
+                            <div>{{ score.toPrecision(2) }}</div>
                         </div>
                     </div>
                     <div style="display: flex; font-size: small;color:grey; padding-top:4%">
@@ -41,11 +41,10 @@
             <!-- <li v-for="(item,index) in topbook " :key="item.bookName"> -->
             <div v-for="(item) in comments" :key="item._id" class="commentitem marginbottom">
                 <div class="commentleftbox">
-                    <nut-avatar size="normal" style="margin-right:0"
-                    icon="my">
+                    <nut-avatar size="normal" style="margin-right:0" icon="my">
                     </nut-avatar>
                     <div style="font-size: small;width: 65px;display: flex;justify-content: center;">
-                        {{item.userName}}
+                        {{ item.userName }}
                     </div>
                 </div>
                 <div class="commentrightbox">
@@ -76,19 +75,19 @@ export default {
             dishname: '',
             dishimg: '',
             isliked: true,
-            place:'',
-            price:'',
-            dishId:'',
-            description:'',
-            score:0,
-            comments:[
+            place: '',
+            price: '',
+            dishId: '',
+            description: '',
+            score: 0,
+            comments: [
                 {
-                
+
                 }
             ]
         }
     },
-    mounted(){
+    mounted() {
         console.log(this.$route.query, 7777);
         this.dishId = this.$route.query.dishId;
         axios({
@@ -96,6 +95,7 @@ export default {
             headers: { 'Authorization': 'Bearer ' + localStorage.token },
             url: `http://124.220.158.211:7000/dishes/${this.dishId}/`,
         }).then((res) => {
+            console.log('dishid', this.dishId)
             console.log('dish info:', res.data.data.dish)
             this.dishimg = res.data.data.dish.photoUrl
             this.dishname = res.data.data.dish.dishName
@@ -187,7 +187,7 @@ export default {
     flex-direction: column;
 }
 
-.nut-icon__img{
-  object-fit: cover;
+.nut-icon__img {
+    object-fit: cover;
 }
 </style>
